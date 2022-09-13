@@ -1,0 +1,29 @@
+{
+  "@context": "https://www.w3.org/ns/did/v1",
+  "id": "did:ppld:zQmZ8DEGQtJcpoQDMKYJkTiQn9dQLM2QzvmDQXuj8vCfvdj",
+  "verificationMethod": [
+    {
+      "id": "did:ppld:zQmZ8DEGQtJcpoQDMKYJkTiQn9dQLM2QzvmDQXuj8vCfvdj",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "did:ppld:zQmZ8DEGQtJcpoQDMKYJkTiQn9dQLM2QzvmDQXuj8vCfvdj",
+      "publicKeyBase58": "zJ28iS4E3c1vVwvxnVFqdpxvw8kA6bZVz6PqaWCg3d96F"
+    }
+  ],
+  "keyAgreement": [
+    {
+      "id": "did:ppld:zQmZ8DEGQtJcpoQDMKYJkTiQn9dQLM2QzvmDQXuj8vCfvdj",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "did:ppld:zQmZ8DEGQtJcpoQDMKYJkTiQn9dQLM2QzvmDQXuj8vCfvdj",
+      "publicKeyBase58": "z5NewiTaFLojX1VehgZKpNNKFKt7TpfF55iHE4cKhZCCH"
+    }
+  ],
+  "service": [
+    {
+      "services": [
+        {
+          "foo": "bar"
+        }
+      ]
+    }
+  ]
+}

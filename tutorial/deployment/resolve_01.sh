@@ -1,0 +1,1 @@
+curl http://ppldid.peopledata.org.cn:3000/1.0/identifiers/:

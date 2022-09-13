@@ -1,0 +1,19 @@
+# run pytest locally in ppldid/cli/pytest
+export PPLDIDCMD='../ppldid.rb'
+pytest
+
+# run pytest in CLI image
+docker run -it --rm -w /usr/src/pytest -e PPLDIDCMD=ppldid peopledataorg/ppld-cli pytest
+
+
+# demonstrating update without passwords
+
+```bash
+`echo '{"state": "initial"}' | $PPLDIDCMD create --doc-pwd pwd1 --rev-pwd pwd2 --return_secrets --json-output`
+```
+output could be:
+```bash
+created did:ppld:zQmViBbfvc9zkSv2L6UDGbvaHsb4mP17HPyURH6ajGF2Mkr
+```
+
+echo '{"state": "new"}' | $PPLDIDCMD update $(echo '{"state": "initial"}' | $PPLDIDCMD create --doc-pwd pwd1 --rev-pwd pwd2 --ts 30 --return_secrets --json-output | jq -r '.did') --simulate --old-doc-pwd pwd1 --old-rev-pwd pwd2 --doc-pwd pwd3 --rev-pwd pwd4 --ts 31 | jq '{identifier: .did_old, options: {log_revoke: .log_revoke_old, log_update: .log_update, log_terminate: .log_terminate}, didDocument: .doc}' | curl -H "Content-Type: application/json" -d @- -X POST http://localhost:3000/1.0/update

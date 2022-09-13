@@ -1,0 +1,88 @@
+require 'ppldid'
+require 'rbnacl'
+require 'jwt'
+
+payload = { data: 'test' }
+
+# creating JWE ----------
+f = File.open("zQmcd1WLbr_private_key.b58")
+key_encoded = f.read
+f.close
+# key_encoded = "z1S5hN3SzvzugTSDnQ5mcKsAJpiDziXVa6RZavdsgQHjHQRt"
+code, length, digest = ppldid.decode(key_encoded).unpack('SCa*')
+private_key = RbNaCl::Signatures::Ed25519::SigningKey.new(digest)
+# public_key = private_key.verify_key
+token = JWT.encode payload, private_key, 'ED25519'
+puts token
+# eyJhbGciOiJFRDI1NTE5In0.eyJkYXRhIjoidGVzdCJ9.HvqQlU3qguSkDPm6jOiz_Bl06FVhGi90TafpOYo26oLcV2jyuAklqiuHbL85o79A2NNViwOYmSCRY5TJEzDYDw
+
+# reading JWE ----------
+f = File.open("zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux.did")
+did_json = f.read
+f.close
+didDoc = JSON.parse(did_json)
+public_key_encoded = didDoc["verificationMethod"].first["publicKeyBase58"]
+code, length, digest = ppldid.decode(public_key_encoded).unpack('CCa*')
+public_key = RbNaCl::Signatures::Ed25519::VerifyKey.new(digest)
+decoded_token = JWT.decode token, public_key, true, { algorithm: 'ED25519' }
+puts decoded_token
+# {"data"=>"test"}
+# {"alg"=>"ED25519"}
+
+
+# PPLDID examples ===============================================
+
+# create plain text message (in ppldid/cli/didcomm) -------------
+echo '{"my":"message"}' | ../ppldid.rb message --type https://ppldid.peopledata.org.cn/ppldid/0.1/example --to did:ppld:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
+
+# output:
+{
+  "id": 171665990236413,
+  "type": "https://ppldid.peopledata.org.cn/ppldid/0.1/example",
+  "to": [
+    "did:ppld:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux"
+  ],
+  "created_time": 1655274664,
+  "body": {
+    "my": "message"
+  }
+}
+
+# msg to file:
+echo '{"my":"message"}' | ../ppldid.rb message --type https://ppldid.peopledata.org.cn/ppldid/0.1/example --to did:ppld:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux > test.dcpm
+
+
+# sign plain text message and generate JWS ---------------------
+cat test.dcpm | ../ppldid.rb jws --type my-protocol/0.1 --sign-did did:ppld:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
+
+# to file:
+cat test.dcpm | ../ppldid.rb jws --type my-protocol/0.1 --sign-did did:ppld:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux > test.dcsm
+
+# verify JWS ---------------------------------------------------
+cat test.dcsm | ../ppldid.rb verify-jws
+
+
+# encrypt plain text message -----------------------------------
+echo '{"id":528784186798112,"type":"https://ppldid.peopledata.org.cn/ppldid/0.1/example","to":["did:ppld:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux"],"created_time":1655244533,"body":{"my":"message"}}' | ../ppldid.rb encrypt  --from did:ppld:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
+
+# short: 
+cat test.dcpm | ../ppldid.rb encrypt-message  --from did:ppld:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux 
+
+# to file:
+cat test.dcpm | ../ppldid.rb encrypt-message  --from did:ppld:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux > test_crypt.jwt
+
+
+# decrypt plain text message -----------------------------------
+cat test_crypt.jwt | ../ppldid.rb decrypt-jwt  --from did:ppld:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
+
+
+# create JWS ---------------------------------------------------
+cat test.dcpm | ../ppldid.rb sign-message --hmac_secret secret
+
+# to file:
+cat test.dcpm | ../ppldid.rb sign-message --hmac_secret secret > test.dcsm
+
+# verify JWS ---------------------------------------------------
+cat test.dcsm | ../ppldid.rb verify-signed-message --hmac_secret secret
+
+

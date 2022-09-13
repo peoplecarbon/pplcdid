@@ -1,0 +1,13 @@
+
+Welcome to PPLDID
+
+Installed components:
+* ppldid - version: ${ppldid}
+* jq - version: ${jq}
+
+More information: https://github.com/peopledata/ppldid/
+
+Example:
+$ ppldid read did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
+
+For a listing of options, use /usr/local/bin/ppldid --help.

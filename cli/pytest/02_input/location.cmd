@@ -1,0 +1,1 @@
+curl -s https://ppld-resolver.data-container.net/1.0/identifiers/did:ppld:zQmNauTUUdkpi5TcrTZ2524SKM8dJAzuuw4xfW13iHrtY1W@did2.data-container.net

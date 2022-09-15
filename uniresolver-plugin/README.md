@@ -17,7 +17,7 @@ did:ppld:zQmNauTUUdkpi5TcrTZ2524SKM8dJAzuuw4xfW13iHrtY1W
 ## Build and Run (Docker)
 
 ```
-docker build -f ./docker/Dockerfile . -t peopledataorg/ppl-resolver
+docker build -f ./docker/Dockerfile . -t peopledataorg/ppld-resolver
 docker run -p 8080:3000 peopledataorg/ppld-resolver
 curl -X GET http://localhost:8080/1.0/identifiers/did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
 ```

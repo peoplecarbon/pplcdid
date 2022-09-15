@@ -1,7 +1,7 @@
 {
-  "name": "ppldid-did-resolver",
+  "name": "ppld-did-resolver",
   "description": "PPLDID resolver for did-resolve",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "jerry zhang",
   "license": "MIT",
   "main": "dist/index.js",

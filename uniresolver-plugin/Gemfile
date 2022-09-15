@@ -15,7 +15,7 @@ gem 'multibases'
 gem 'multihashes'
 gem 'multicodecs'
 gem 'json-canonicalization', '~> 0.2.1'
-gem 'bootsnap'
+gem 'bootsnap', require: false
 gem 'ppldid'
 
 group :development, :test do

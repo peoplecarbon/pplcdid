@@ -6,6 +6,6 @@ const resolver = new Resolver({
 });
 
 // resolve test-did
-resolver.resolve('did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh').then(data =>
+resolver.resolve('did:ppld:zQmXHoFQCpFSvKAh3p1vZk3qXmNMNgoukEEXLkKRN5mbAKn').then(data =>
   console.log(JSON.stringify(data, undefined, 2))
 );

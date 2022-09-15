@@ -26,7 +26,7 @@ To package ppldid-cli with additional tools ([jq](https://stedolan.github.io/jq/
 ./build.sh
 ```
 
-The current `peopledataorg/ppldid-cli` Docker image is available here: https://hub.docker.com/peopledataorg/ppldid-cli
+The current `peopledataorg/ppld-cli` Docker image is available here: https://hub.docker.com/peopledataorg/ppldid-cli
 
 ### Verify with automated tests    
 

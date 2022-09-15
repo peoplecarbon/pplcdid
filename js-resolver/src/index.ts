@@ -13,7 +13,7 @@ export function getResolver(
    * 
    * Default: https://ppld-resolver.peopledata.org.cn
    */
-  baseUrl: string = 'http://ppld-resolver.peopledata.org.cn',
+  baseUrl: string = 'http://ppldid.peopledata.org.cn:3000',
 ) {
   async function resolve(
     did: string,

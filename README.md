@@ -11,7 +11,7 @@ Peopledata DID (ppld-did) provides a self-sustained environment for managing dig
     * Tutorial and examples: https://github.com/peopledata/ppldid/tree/main/tutorial
 * host ppld-dids yourself in a repository:    
     * Sources: https://github.com/peopledata/ppld-did/tree/main/repository    
-    * use the `peopledata/ppld-did-base` image on Dockerhub: https://hub.docker.com/r/peopledata/ppld-base    
+    * use the `peopledataorg/ppld-base` image on Dockerhub: https://hub.docker.com/r/peopledataorg/ppld-base    
     * API documentation is available here: https://peopledata.github.io/docs/   
 * Universal Resolver driver: https://github.com/peopledata/ppldid/tree/main/uniresolver-plugin    
 * Universal Registrar driver : https://github.com/peopledata/ppldid/tree/main/uni-registrar-driver-did-ppld    

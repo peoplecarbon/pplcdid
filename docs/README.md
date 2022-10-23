@@ -3,11 +3,9 @@
 This repository contains the `did:ppld` Decentralized Identifier Method
 Specification. You can access the latest version of this specification here:
 
-https://peopledata.github.io/ppldid/
+https://peopledata.github.io
 
 ## Editing and building the specification
-
-This specification uses [Bikeshed](https://tabatkins.github.io/bikeshed). Just edit `index.bs` and the draft will be rendered correctly.
 
 If you want to contribute, please follow these steps:
 

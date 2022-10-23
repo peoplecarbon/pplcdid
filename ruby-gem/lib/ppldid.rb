@@ -16,9 +16,10 @@ require './ppldid/didcomm'
 
 class Ppldid
 
-    LOCATION_PREFIX = "@"
-    DEFAULT_LOCATION = "https://ppldid.peopledata.org.cn"
+    # ppldid-base server 
 
+    LOCATION_PREFIX = "@"
+    DEFAULT_LOCATION = "http://ppldid.peopledata.org.cn:3000" 
 
     # expected DID format: did:ppld:123
     def self.read(did, options)

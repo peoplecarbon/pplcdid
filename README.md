@@ -2,6 +2,42 @@
 
 Peoplecarbon DID (pplc-did) provides a self-sustained environment for managing digital identifiers (DIDs). The `did:pplc` method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document.
 
+## Quick Start
+
+1. Build `pplcid` gem
+
+```bash
+$ cd ruby-gem
+```
+Change or update `Gemfile` and build.
+
+```bash
+$ gem build pplcid.gemspec
+```
+Then, `pplcid-1.2.3.gem` has built. After Test it, then push it to Gemhub.
+```bash
+$ gem push pplcid-1.2.3.gem
+  email:
+  pass:
+```
+
+2. Publish `PPLCID` Docker images
+
+```bash
+$ cd cli
+$ ./build.sh
+```
+After Docker images is build, then push it to hub.
+```bash
+$ docker login --username=<your_username> --password=<your_password>
+$ docker tag <your_image>:<tag> <your_username>/<image_name>:<tag>
+$ docker push <your_username>/<image_name>:<tag>
+```
+
+
+
+
+
 ## Resources
 * Read about the concept and examples: [pplc-didintro.pdf] 
 * W3C conform DID Method Specification: https://peoplecarbon.github.io/docs/peoplecarbon-did/did-overview    

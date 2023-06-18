@@ -9,7 +9,7 @@ from pathlib import Path
 # run in pytest/
 # export PPLDIDCMD='../pplcid.rb'; pytest
 
-service = "http://pplcid.peoplecarbon.org:3000"
+service = "http://pplcid.peoplecarbon.org"
 # service = "https://www.peoplecarbon.org"
 
 def test_service():

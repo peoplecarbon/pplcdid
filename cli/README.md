@@ -11,7 +11,7 @@ sh -c "curl -fsSL https://raw.githubusercontent.com/peoplecarbon/pplcid/main/cli
 ## Run via Docker
 To use the dockerized version of pplcid run:
 ```bash
-docker run -it --rm peoplecarbon/pplc-cli
+docker run -it --rm peoplecarbon/pplcid-cli
 ```
 
 Often it makes sense to keep private keys and revocation information beyond a Docker session:
@@ -33,7 +33,7 @@ The current `peoplecarbon/pplc-cli` Docker image is available here: https://hub.
 Use the following command to run the automated tests in the `peoplecarbon/pplc-cli` Docker image:    
 
 ```bash
-docker run -it --rm -w /usr/src/pytest -e PPLDIDCMD=pplcid peoplecarbon/pplcid-cli pytest
+docker run -it --rm -w /usr/src/pytest -e PPLCIDCMD=pplcid peoplecarbon/pplcid-cli pytest
 ```
 
 ## Example

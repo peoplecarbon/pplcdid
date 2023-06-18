@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER="pplc-cli"
+CONTAINER="pplcid-cli"
 REPOSITORY="peoplecarbon"
 TAG="latest"
 

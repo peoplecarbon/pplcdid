@@ -1,5 +1,5 @@
 # run pytest locally in pplcid/cli/pytest
-export PPLDIDCMD='../pplcid.rb'
+export PPLCIDCMD='../pplcid.rb'
 pytest
 
 # run pytest in CLI image

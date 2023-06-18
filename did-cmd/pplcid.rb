@@ -13,7 +13,7 @@ require 'dag'
 require 'uri'
 
 LOCATION_PREFIX = "@"
-DEFAULT_LOCATION = "http://pplcid.peopledata.org.cn:3000"
+DEFAULT_LOCATION = "http://pplcid.peoplecarbon.org"
 
 def ppld_encode(message)
     Multibases.pack("base58btc", message).to_s

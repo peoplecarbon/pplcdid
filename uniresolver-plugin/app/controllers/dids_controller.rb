@@ -11,7 +11,7 @@ class DidsController < ApplicationController
     def resolve
         options = {}
         did = params[:did]
-        result = Ppldid.read(did, options).first rescue nil
+        result = Pplcid.read(did, options).first rescue nil
         if result.nil? || result["error"] != 0
             result = resolve_did_legacy(did, options)
         end
@@ -28,10 +28,10 @@ class DidsController < ApplicationController
 
         retVal = {
             "didResolutionMetadata":{},
-            "didDocument": Ppldid.w3c(result, {}),
+            "didDocument": Pplcid.w3c(result, {}),
             "didDocumentMetadata": {
                 "did": "did:pplc:" + result["did"].to_s,
-                "registry": Ppldid.get_location(result["did"].to_s),
+                "registry": Pplcid.get_location(result["did"].to_s),
                 "log_hash": result["doc"]["log"].to_s,
                 "log": result["log"],
                 "document_log_id": result["doc_log_id"].to_i,

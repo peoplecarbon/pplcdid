@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 # frozen_string_literal: true
 
-class Ppldid
+class Pplcid
 
     # DIDComm Plain Message ---------------------
     def self.dcpm(payload, options)

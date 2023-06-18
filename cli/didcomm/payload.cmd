@@ -1,1 +1,1 @@
-echo '{"my":"message"}' | ../pplcid.rb didcomm plain --type http://pplcid.peopledata.org.cn:3000 --to did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux 
+echo '{"my":"message"}' | ../pplcid.rb didcomm plain --type http://pplcid.peoplecarbon.org:3000 --to did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux 

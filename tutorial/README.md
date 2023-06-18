@@ -1,4 +1,4 @@
-# PPLDID Tutorial
+# PPLCID Tutorial
 
 *latest update: 2 September 2022*
 
@@ -15,9 +15,9 @@ This tutorial introduces the use of `did:pplc` DIDs with the following sections:
 
 ### Local Deployment
 
-If you just want to try PPLDID locally, start a Docker container with the following command:
+If you just want to try PPLCID locally, start a Docker container with the following command:
 ```console
-docker run -d --name did_repo -e DID_DB=local -p 3000:3000 peopledataorg/pplc-base
+docker run -d --name did_repo -e DID_DB=local -p 3000:3000 peoplecarbon/pplc-base
 ```
 
 Check if the repository is up and running by showing the *Repository Status* page at http://localhost:3000
@@ -53,13 +53,13 @@ docker rm -f did_repo
 
 ### Persisting DIDs in PostgreSQL
 
-For a more serious evaluation of PPLDID you might want to persist DIDs, associated DID Documents, and accompanying DID Logs in a database outside the DID Repository. The following `docker-compose.yml` provides an example for such a setup with a persistent volume for the PostgreSQL data directory:
+For a more serious evaluation of PPLCID you might want to persist DIDs, associated DID Documents, and accompanying DID Logs in a database outside the DID Repository. The following `docker-compose.yml` provides an example for such a setup with a persistent volume for the PostgreSQL data directory:
 
 ```yaml
 version: "3"
 services:
   pplcid:
-    image: peopledata/pplc-base:latest
+    image: peoplecarbon/pplc-base:latest
     environment:
       DID_DB: "external"
       RAILS_ENV: "production"
@@ -82,9 +82,9 @@ Start with:
 docker-compose -f docker-compose.yml up -d
 ```
 
-The status page is again available at http://localhost:3000 and you can use the `peopledataorg/pplc-cli` instead of curl commands to interact with the repo - use the following command to start the CLI:
+The status page is again available at http://localhost:3000 and you can use the `peoplecarbon/pplc-cli` instead of curl commands to interact with the repo - use the following command to start the CLI:
 ```console
-docker run -it --rm --network host peopledataorg/pplc-cli
+docker run -it --rm --network host peoplecarbon/pplc-cli
 ```
 
 Create a new DID: 
@@ -130,46 +130,46 @@ with the output:
 }
 ```
 
-To clean up the environment close the PPLDID CLI (just type `exit` on the command line) and stop the containers:
+To clean up the environment close the PPLCID CLI (just type `exit` on the command line) and stop the containers:
 ```console
 docker-compose -f docker-compose.yml down
 ```
 
 [back to top](#)
 
-### Run an PPLDID Repository on a Kubernetes Cluster
+### Run an PPLCID Repository on a Kubernetes Cluster
 
-The production site for the [default PPLDID repository](https://pplcid.pplcid.peopledata.org.cn) (at https://pplcid.pplcid.peopledata.org.cn) is hosted on a Kubernetes cluster with a dedicated PostreSQL cluster. The follwing files were used as setup on this Kubernetes cluster (currently at v1.91.2):
+The production site for the [default PPLCID repository](https://pplcid.pplcid.peoplecarbon.org) (at https://pplcid.pplcid.peoplecarbon.org) is hosted on a Kubernetes cluster with a dedicated PostreSQL cluster. The follwing files were used as setup on this Kubernetes cluster (currently at v1.91.2):
 * [deplyoment.yaml](res/deployment.yaml)    
 * [service.yaml](res/service.yaml)
 * [ingress.yaml](res/ingress.yaml)
 * [cert.yaml](res/cert.yaml)
 * [secrets.yaml](res/secrets.yaml)
 
-If you have any questions about setting up an PPLDID repository on Kubernetes don't hesitate to [contact us](mailto:support@pplcid.peopledata.org.cn)!
+If you have any questions about setting up an PPLCID repository on Kubernetes don't hesitate to [contact us](mailto:support@pplcid.peoplecarbon.org)!
 
 [back to top](#)
 
 ## DID Life-cycle
 
 This section describes the typical life-cycle of a DID using concrete and simple examples of entities exchanging information and parties trying to interfere or manipulate this exchange. The following actors and roles are used:    
-* Alice (A) wants to share information using PPLDID    
+* Alice (A) wants to share information using PPLCID    
 * Bob (B) receives information and validates the sender    
 * Dave (D) is trusted by Alice (A) and acts as a delegate for her    
 * Eve (E) is a malicious party and tries to manipulate the information exchange unnoticed    
 
-Each step describes a task performed by one of the actors and provides commands (to be run on a command line like bash) demonstrating working with PPLDID.
+Each step describes a task performed by one of the actors and provides commands (to be run on a command line like bash) demonstrating working with PPLCID.
 
 ### Prerequisites
 
 To execute commands in the steps below make sure to have the following tools installed:    
-* `pplcid`: download and installation instructions [available here](https://github.com/peopledata/pplcid/tree/main/cli)    
+* `pplcid`: download and installation instructions [available here](https://github.com/peoplecarbon/pplcid/tree/main/cli)    
 * `jq`: download and installation instructions [available here](https://stedolan.github.io/jq/download/)    
 
-Alternatively, you can use a ready-to-use Docker image with all tools pre-installed: [https://hub.docker.com/r/peopledata/pplc-base](https://hub.docker.com/r/peopledata/pplc-base). Use the following command to start the image:    
+Alternatively, you can use a ready-to-use Docker image with all tools pre-installed: [https://hub.docker.com/r/peoplecarbon/pplc-base](https://hub.docker.com/r/peoplecarbon/pplc-base). Use the following command to start the image:    
 
 ```console
-docker run -it --rm --network host -v ~/.pplcid:/home/pplcid peopledata/pplcid-cli
+docker run -it --rm --network host -v ~/.pplcid:/home/pplcid peoplecarbon/pplcid-cli
 ```
 
 *Note:* since it makes sense to keep private keys and revocation information beyond a Docker session a directory is mounted in the container to persist files; create a local directory, `mkdir ~/.pplcid`
@@ -228,9 +228,9 @@ pplcid revoke 456aBz
 
 &nbsp;    
 
-## PPLDID Tutorial
+## PPLCID Tutorial
 
-Please report bugs and suggestions for new features using the [GitHub Issue-Tracker](https://github.com/peopledata/pplcid/issues) and follow the [Contributor Guidelines](https://github.com/twbs/ratchet/blob/master/CONTRIBUTING.md).
+Please report bugs and suggestions for new features using the [GitHub Issue-Tracker](https://github.com/peoplecarbon/pplcid/issues) and follow the [Contributor Guidelines](https://github.com/twbs/ratchet/blob/master/CONTRIBUTING.md).
 
 If you want to contribute, please follow these steps:
 

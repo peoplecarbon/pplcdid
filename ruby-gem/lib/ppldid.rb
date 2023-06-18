@@ -14,12 +14,12 @@ require './pplcid/basic'
 require './pplcid/log'
 require './pplcid/didcomm'
 
-class Ppldid
+class Pplcid
 
     # pplcid-base server 
 
     LOCATION_PREFIX = "@"
-    DEFAULT_LOCATION = "http://pplcid.peopledata.org.cn:3000" 
+    DEFAULT_LOCATION = "http://pplcid.peoplecarbon.org:3000" 
 
     # expected DID format: did:pplc:123
     def self.read(did, options)

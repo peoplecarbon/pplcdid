@@ -8,10 +8,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - pplcid.pplcid.peopledata.org.cn
+    - pplcid.pplcid.peoplecarbon.org
     secretName: pplcid-tls
   rules:
-  - host: pplcid.pplcid.peopledata.org.cn
+  - host: pplcid.pplcid.peoplecarbon.org
     http:
       paths:
       - path: /

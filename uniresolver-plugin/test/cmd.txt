@@ -1,6 +1,6 @@
 # https://github.com/decentralized-identity/universal-registrar/blob/main/docs/driver-development.md
 
-docker run -d --name=resolver -p 3000:3000 peopledataorg/pplc-resolver
+docker run -d --name=resolver -p 3000:3000 peoplecarbon/pplc-resolver
 
 docker rm -f resolver
 
@@ -8,7 +8,7 @@ curl http://localhost:3000/1.0/identifiers/asdf
 
 curl -s http://localhost:3000/1.0/identifiers/did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh | jq
 
-https://pplc-resolver.peopledata.org.cn/1.0/identifiers/did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
+https://pplc-resolver.peoplecarbon.org/1.0/identifiers/did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
 
 
 curl -s http://localhost:3000/1.0/identifiers/did:pplc:zQmdXNRiMWEYTiYF58a9BaiUkfB2xWUgL7G7ozyCCNPqjKV | jq

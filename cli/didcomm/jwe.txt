@@ -30,15 +30,15 @@ puts decoded_token
 # {"alg"=>"ED25519"}
 
 
-# PPLDID examples ===============================================
+# PPLCID examples ===============================================
 
 # create plain text message (in pplcid/cli/didcomm) -------------
-echo '{"my":"message"}' | ../pplcid.rb message --type https://pplcid.peopledata.org.cn/pplcid/0.1/example --to did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
+echo '{"my":"message"}' | ../pplcid.rb message --type https://pplcid.peoplecarbon.org/pplcid/0.1/example --to did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
 
 # output:
 {
   "id": 171665990236413,
-  "type": "https://pplcid.peopledata.org.cn/pplcid/0.1/example",
+  "type": "https://pplcid.peoplecarbon.org/pplcid/0.1/example",
   "to": [
     "did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux"
   ],
@@ -49,7 +49,7 @@ echo '{"my":"message"}' | ../pplcid.rb message --type https://pplcid.peopledata.
 }
 
 # msg to file:
-echo '{"my":"message"}' | ../pplcid.rb message --type https://pplcid.peopledata.org.cn/pplcid/0.1/example --to did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux > test.dcpm
+echo '{"my":"message"}' | ../pplcid.rb message --type https://pplcid.peoplecarbon.org/pplcid/0.1/example --to did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux > test.dcpm
 
 
 # sign plain text message and generate JWS ---------------------
@@ -63,7 +63,7 @@ cat test.dcsm | ../pplcid.rb verify-jws
 
 
 # encrypt plain text message -----------------------------------
-echo '{"id":528784186798112,"type":"https://pplcid.peopledata.org.cn/pplcid/0.1/example","to":["did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux"],"created_time":1655244533,"body":{"my":"message"}}' | ../pplcid.rb encrypt  --from did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
+echo '{"id":528784186798112,"type":"https://pplcid.peoplecarbon.org/pplcid/0.1/example","to":["did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux"],"created_time":1655244533,"body":{"my":"message"}}' | ../pplcid.rb encrypt  --from did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
 
 # short: 
 cat test.dcpm | ../pplcid.rb encrypt-message  --from did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux 

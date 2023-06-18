@@ -1,13 +1,13 @@
 {
   "name": "pplc-did-resolver",
-  "description": "PPLDID resolver for did-resolve",
+  "description": "PPLCID resolver for did-resolve",
   "version": "1.1.0",
   "author": "jerry zhang",
   "license": "MIT",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com/peopledata/pplcid"
+    "url": "git@github.com/peoplecarbon/pplcid"
   },
   "files": [
     "dist"
@@ -18,7 +18,7 @@
     "DID document",
     "resolver",
     "pplcid",
-    "peopledata",
+    "peoplecarbon",
     "registry"
   ],
   "scripts": {

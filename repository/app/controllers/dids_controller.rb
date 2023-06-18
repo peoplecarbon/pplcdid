@@ -108,7 +108,7 @@ class DidsController < ApplicationController
                    status: 412
             return
         end
-        if didHash != Ppldid.hash(Ppldid.canonical(didDocument))
+        if didHash != Pplcid.hash(Pplcid.canonical(didDocument))
             render json: {"error": "DID does not match did-document"},
                    status: 400
             return
@@ -127,7 +127,7 @@ class DidsController < ApplicationController
         log_entry_hash = ""
         logs.each do |item|
             if item["op"] == 0 # TERMINATE
-                log_entry_hash = Ppldid.hash(Ppldid.canonical(item))
+                log_entry_hash = Pplcid.hash(Pplcid.canonical(item))
             end
         end
         if log_entry_hash != ""
@@ -146,13 +146,13 @@ class DidsController < ApplicationController
         end
         logs.each do |item|
             if item["op"] == 1 # REVOKE
-                my_hash = Ppldid.hash(Ppldid.canonical(item.except("previous")))
+                my_hash = Pplcid.hash(Pplcid.canonical(item.except("previous")))
                 @log = Log.find_by_oyd_hash(my_hash)
                 if @log.nil?
                     Log.new(did: didHash, item: item.to_json, oyd_hash: my_hash, ts: Time.now.to_i).save
                 end
             else
-                my_hash = Ppldid.hash(Ppldid.canonical(item))
+                my_hash = Pplcid.hash(Pplcid.canonical(item))
                 @log = Log.find_by_oyd_hash(my_hash)
                 if @log.nil?
                     Log.new(did: didHash, item: item.to_json, oyd_hash: my_hash, ts: Time.now.to_i).save
@@ -176,15 +176,15 @@ class DidsController < ApplicationController
         public_rev_key = keys.split(":")[1]
         private_doc_key = params[:dockey]
         private_rev_key = params[:revkey]
-        if public_doc_key == Ppldid.public_key(private_doc_key).first &&
-           public_rev_key == Ppldid.public_key(private_rev_key).first
+        if public_doc_key == Pplcid.public_key(private_doc_key).first &&
+           public_rev_key == Pplcid.public_key(private_rev_key).first
                 Log.where(did: params[:did].to_s).destroy_all
                 Did.where(did: params[:did].to_s).destroy_all
                 render plain: "",
                        status: 200
         else
-            puts "Doc key: " + public_doc_key.to_s + " <=> " + Ppldid.public_key(private_doc_key).first.to_s
-            puts "Rev key: " + public_rev_key.to_s + " <=> " + Ppldid.public_key(private_rev_key).first.to_s
+            puts "Doc key: " + public_doc_key.to_s + " <=> " + Pplcid.public_key(private_doc_key).first.to_s
+            puts "Rev key: " + public_rev_key.to_s + " <=> " + Pplcid.public_key(private_rev_key).first.to_s
             render json: {"error": "invalid keys"},
                    status: 403
         end
@@ -199,7 +199,7 @@ class DidsController < ApplicationController
             render json: {"error": result["message"].to_s}.to_json,
                    status: result["error"]
         else
-            w3c_did = Ppldid.w3c(result, options)
+            w3c_did = Pplcid.w3c(result, options)
             render plain: w3c_did.to_json,
                    mime_type: Mime::Type.lookup("application/ld+json"),
                    content_type: 'application/ld+json',
@@ -264,7 +264,7 @@ class DidsController < ApplicationController
         did_obj = JSON.parse(doc.to_json) rescue nil
         if !did_obj.nil? && did_obj.is_a?(Hash)
             if did_obj["@context"] == "https://www.w3.org/ns/did/v1"
-                doc = Ppldid.fromW3C(didDocument, options)
+                doc = Pplcid.fromW3C(didDocument, options)
             end
         end
         
@@ -277,7 +277,7 @@ class DidsController < ApplicationController
 
                     # perform sanity checks on input data
                     # is doc in log create record == Hash(did_document)
-                    if Ppldid.hash(Ppldid.canonical(did_obj)) != options[:log_create]["doc"]
+                    if Pplcid.hash(Pplcid.canonical(did_obj)) != options[:log_create]["doc"]
                         render json: {"error": "invalid input data (create log does not match DID document)"},
                                status: 400
                         return
@@ -285,7 +285,7 @@ class DidsController < ApplicationController
 
                     # check valid signature in log create record
                     doc_pubkey = did_obj["key"].split(":").first.to_s
-                    success, msg = Ppldid.verify(options[:log_create]["doc"], options[:log_create]["sig"], doc_pubkey)
+                    success, msg = Pplcid.verify(options[:log_create]["doc"], options[:log_create]["sig"], doc_pubkey)
                     if !success
                         render json: {"error": "invalid input data (create log has invalid signature)"},
                                status: 400
@@ -293,7 +293,7 @@ class DidsController < ApplicationController
                     end
 
                     # check valid signature in terminate record
-                    success, msg = Ppldid.verify(options[:log_terminate]["doc"], options[:log_terminate]["sig"], doc_pubkey)
+                    success, msg = Pplcid.verify(options[:log_terminate]["doc"], options[:log_terminate]["sig"], doc_pubkey)
                     if !success
                         render json: {"error": "invalid input data (terminate log has invalid signature)"},
                                status: 400
@@ -301,9 +301,9 @@ class DidsController < ApplicationController
                     end
 
                     # create DID
-                    did = "did:pplc:" + Ppldid.hash(Ppldid.canonical(did_obj))
+                    did = "did:pplc:" + Pplcid.hash(Pplcid.canonical(did_obj))
                     logs = [options[:log_create], options[:log_terminate]]
-                    success, msg = Ppldid.publish(did, did_obj, logs, options)
+                    success, msg = Pplcid.publish(did, did_obj, logs, options)
                     if success
                         w3c_input = {
                             "did" => did,
@@ -312,7 +312,7 @@ class DidsController < ApplicationController
                         status = {
                             "did" => did,
                             "doc" => didDocument,
-                            "doc_w3c" => Ppldid.w3c(w3c_input, options),
+                            "doc_w3c" => Pplcid.w3c(w3c_input, options),
                             "log" => logs,
                             "private_key" => "",
                             "revocation_key" => "",
@@ -325,7 +325,7 @@ class DidsController < ApplicationController
             end
         end
         if !preprocessed
-            status, msg = Ppldid.create(doc, options)
+            status, msg = Pplcid.create(doc, options)
         end
         if status.nil?
             render json: {"error": msg},
@@ -333,7 +333,7 @@ class DidsController < ApplicationController
         else
             retVal = {
                 "didState": {
-                    "did": Ppldid.percent_encode(status["did"]),
+                    "did": Pplcid.percent_encode(status["did"]),
                     "state": "finished",
                     "secret": {
                         "documentKey": status["private_key"],
@@ -344,8 +344,8 @@ class DidsController < ApplicationController
                 },
                 "didRegistrationMetadata": {},
                 "didDocumentMetadata": {
-                    "did": Ppldid.percent_encode(status["did"]),
-                    "registry": Ppldid.get_location(status["did"].to_s),
+                    "did": Pplcid.percent_encode(status["did"]),
+                    "registry": Pplcid.get_location(status["did"].to_s),
                     "log_hash": status["doc"]["log"].to_s,
                     "log": status["log"]
                 }
@@ -388,7 +388,7 @@ class DidsController < ApplicationController
         did_obj = JSON.parse(didDocument.to_json) rescue nil
         if !did_obj.nil? && did_obj.is_a?(Hash)
             if did_obj["@context"] == "https://www.w3.org/ns/did/v1"
-                did_obj = Ppldid.fromW3C(did_obj, options)
+                did_obj = Pplcid.fromW3C(did_obj, options)
             end
         end
 
@@ -402,10 +402,10 @@ class DidsController < ApplicationController
 
                 # check valid signature in update create record
                 doc_pubkey = did_obj["key"].split(":").first.to_s
-                old_doc_location = Ppldid.get_location(old_did)
-                old_didDocument = Ppldid.retrieve_document_raw(old_did, "", old_doc_location, {})
+                old_doc_location = Pplcid.get_location(old_did)
+                old_didDocument = Pplcid.retrieve_document_raw(old_did, "", old_doc_location, {})
                 old_doc_pubkey = old_didDocument.first["doc"]["key"].split(":").first.to_s
-                success, msg = Ppldid.verify(options[:log_update]["doc"], options[:log_update]["sig"], old_doc_pubkey)
+                success, msg = Pplcid.verify(options[:log_update]["doc"], options[:log_update]["sig"], old_doc_pubkey)
                 if !success
                     render json: {"error": "invalid input data (update log has invalid signature)"},
                            status: 400
@@ -413,9 +413,9 @@ class DidsController < ApplicationController
                 end
 
                 # update DID
-                did = "did:pplc:" + Ppldid.hash(Ppldid.canonical(did_obj))
+                did = "did:pplc:" + Pplcid.hash(Pplcid.canonical(did_obj))
                 logs = [options[:log_revoke], options[:log_update], options[:log_terminate]]
-                success, msg = Ppldid.publish(did, did_obj, logs, options)
+                success, msg = Pplcid.publish(did, did_obj, logs, options)
                 if success
                     w3c_input = {
                         "did" => did,
@@ -424,7 +424,7 @@ class DidsController < ApplicationController
                     status = {
                         "did" => did,
                         "doc" => did_obj,
-                        "doc_w3c" => Ppldid.w3c(w3c_input, options),
+                        "doc_w3c" => Pplcid.w3c(w3c_input, options),
                         "log" => logs,
                         "private_key" => "",
                         "revocation_key" => "",
@@ -437,7 +437,7 @@ class DidsController < ApplicationController
         end
 
         if !preprocessed
-            status, msg = Ppldid.update(did_obj, old_did, options)
+            status, msg = Pplcid.update(did_obj, old_did, options)
         end
         if status.nil?
             render json: {"error": msg},
@@ -445,7 +445,7 @@ class DidsController < ApplicationController
         else
             retVal = {
                 "didState": {
-                    "did": Ppldid.percent_encode(status["did"]),
+                    "did": Pplcid.percent_encode(status["did"]),
                     "state": "finished",
                     "secret": {
                         "documentKey": status["private_key"],
@@ -456,8 +456,8 @@ class DidsController < ApplicationController
                 },
                 "didRegistrationMetadata": {},
                 "didDocumentMetadata": {
-                    "did": Ppldid.percent_encode(status["did"]),
-                    "registry": Ppldid.get_location(status["did"].to_s),
+                    "did": Pplcid.percent_encode(status["did"]),
+                    "registry": Pplcid.get_location(status["did"].to_s),
                     "log_hash": status["doc"]["log"].to_s,
                     "log": status["log"]
                 }
@@ -508,7 +508,7 @@ class DidsController < ApplicationController
 
         end
         if !preprocessed
-            status, msg = Ppldid.revoke(did, options)
+            status, msg = Pplcid.revoke(did, options)
         end
 
         if status.nil?
@@ -517,13 +517,13 @@ class DidsController < ApplicationController
         else
             retVal = {
                 "didState": {
-                    "did": Ppldid.percent_encode(did),
+                    "did": Pplcid.percent_encode(did),
                     "state": "finished",
                 },
                 "didRegistrationMetadata": {},
                 "didDocumentMetadata": {
-                    "did": Ppldid.percent_encode(status["did"]),
-                    "registry": Ppldid.get_location(status["did"].to_s)
+                    "did": Pplcid.percent_encode(status["did"]),
+                    "registry": Pplcid.get_location(status["did"].to_s)
                 }
             }
             render json: retVal.to_json,

@@ -11,4 +11,4 @@ spec:
     name: letsencrypt-prod
     kind: Issuer
   dnsNames:
-  - 'pplcid.peopledata.org.cn'
+  - 'pplcid.peoplecarbon.org'

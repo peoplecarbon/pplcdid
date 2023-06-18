@@ -1,9 +1,9 @@
 openapi: 3.0.0
 info:
-  title: PPLDID API
+  title: PPLCID API
   version: v1
   description: >-
-     PPLDID provides a self-sustained environment for managing digital identifiers (DIDs). The pplc:did method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document.
+     PPLCID provides a self-sustained environment for managing digital identifiers (DIDs). The pplc:did method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document.
   contact:
     email: jerry.zhang
   license:
@@ -11,7 +11,7 @@ info:
     url: https://opensource.org/licenses/MIT
 
 servers:
-- url: https://pplcid.peopledata.org.cn/
+- url: https://pplcid.peoplecarbon.org/
   description: Official production system hosted by Peoplecarbon.
 security:
   - BearerAuth: []

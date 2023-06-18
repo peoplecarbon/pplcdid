@@ -6,8 +6,8 @@ import requests
 import subprocess
 from pathlib import Path
 
-service = "http://pplcid.peopledata.org.cn:3000"
-# service = "https://www.peopledata.org.cn"
+service = "http://pplcid.peoplecarbon.org:3000"
+# service = "https://www.peoplecarbon.org"
 
 def test_service():
     response = requests.get(service + "/version")

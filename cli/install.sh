@@ -13,7 +13,7 @@ if ! hash ruby > /dev/null 2>&1; then
 fi
 
 mkdir -p ~/bin
-wget https://github.com/peopledata/pplcid/blob/main/did-cmd/pplcid.rb -O ~/bin/pplcid
+wget https://github.com/peoplecarbon/pplcid/blob/main/did-cmd/pplcid.rb -O ~/bin/pplcid
 chmod +x ~/bin/pplcid
 
 if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then

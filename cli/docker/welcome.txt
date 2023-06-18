@@ -1,11 +1,11 @@
 
-Welcome to PPLDID
+Welcome to PPLCID
 
 Installed components:
 * pplcid - version: ${pplcid}
 * jq - version: ${jq}
 
-More information: https://github.com/peopledata/pplcid/
+More information: https://github.com/peoplecarbon/pplcid/
 
 Example:
 $ pplcid read did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh

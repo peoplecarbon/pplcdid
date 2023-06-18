@@ -1,1 +1,1 @@
-curl -s http://pplcid.peopledata.org.cn:3000/1.0/identifiers/did:pplc:zQmNauTUUdkpi5TcrTZ2524SKM8dJAzuuw4xfW13iHrtY1W@did2.data-container.net
+curl -s http://pplcid.peoplecarbon.org:3000/1.0/identifiers/did:pplc:zQmNauTUUdkpi5TcrTZ2524SKM8dJAzuuw4xfW13iHrtY1W@did2.data-container.net

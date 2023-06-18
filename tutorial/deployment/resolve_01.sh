@@ -1,1 +1,1 @@
-curl http://pplcid.peopledata.org.cn:3000/1.0/identifiers/:
+curl http://pplcid.peoplecarbon.org:3000/1.0/identifiers/:

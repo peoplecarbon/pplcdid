@@ -3,7 +3,7 @@ PPLDIDCMD='../pplcid.rb'
 #PPLDIDCMD='pplcid'
 
 # install current version
-# sh -c "curl -fsSL https://raw.githubusercontent.com/peopledata/did-cmd/main/install.sh | sh"
+# sh -c "curl -fsSL https://raw.githubusercontent.com/peoplecarbon/did-cmd/main/install.sh | sh"
 
 CLEAN=true
 while [ $# -gt 0 ]; do
@@ -187,13 +187,13 @@ if ! cmp -s tmp.doc c1/pplcid.did ; then
 	exit 1
 fi
 rm tmp.doc
-echo "converting between PPLDID and W3C successful"
+echo "converting between PPLCID and W3C successful"
 
 
-# test public PPLDID resolver
+# test public PPLCID resolver
 curl -s -k https://pplc-resolver.data-container.net/1.0/identifiers/did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh | jq ".didDocument" > tmp.doc
 if ! cmp -s tmp.doc c1/uni1_new.doc ; then
-	echo "resolving DID with public PPLDID resolver failed"
+	echo "resolving DID with public PPLCID resolver failed"
 	rm tmp.doc
 	exit 1
 fi
@@ -201,7 +201,7 @@ rm tmp.doc
 
 curl -s -k https://pplc-resolver.data-container.net/1.0/identifiers/did:pplc:zQmNauTUUdkpi5TcrTZ2524SKM8dJAzuuw4xfW13iHrtY1W@did2.data-container.net | jq ".didDocument" > tmp.doc
 if ! cmp -s tmp.doc c1/uni2_new.doc ; then
-	echo "resolving DID at non-default location with PPLDID resolver failed"
+	echo "resolving DID at non-default location with PPLCID resolver failed"
 	rm tmp.doc
 	exit 1
 fi
@@ -209,7 +209,7 @@ rm tmp.doc
 
 # curl -s -k https://pplc-resolver.data-container.net/1.0/identifiers/did:pplc:zQmZ8DEGQtJcpoQDMKYJkTiQn9dQLM2QzvmDQXuj8vCfvdj | jq ".didDocument" > tmp.doc
 # if ! cmp -s tmp.doc c1/uni1.doc ; then
-# 	echo "resolving legacy DID with public PPLDID resolver failed"
+# 	echo "resolving legacy DID with public PPLCID resolver failed"
 # 	rm tmp.doc
 # 	exit 1
 # fi
@@ -217,13 +217,13 @@ rm tmp.doc
 
 # curl -s -k https://pplc-resolver.data-container.net/1.0/identifiers/did:pplc:zQmbbgEXLq96rHSRfydhsSQ9HCs6p7Cf4R98Qn7NdXig1Vk%40https%3A%2F%2Fdid2.data-container.net | jq ".didDocument" > tmp.doc
 # if ! cmp -s tmp.doc c1/uni2.doc ; then
-# 	echo "resolving legacy DID at non-default location with PPLDID resolver failed"
+# 	echo "resolving legacy DID at non-default location with PPLCID resolver failed"
 # 	rm tmp.doc
 # 	exit 1
 # fi
 # rm tmp.doc
 
-echo "testing public PPLDID resolver successful"
+echo "testing public PPLCID resolver successful"
 
 # test Uniresolver
 curl -s https://dev.uniresolver.io/1.0/identifiers/did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh | jq ".didDocument" > tmp.doc

@@ -26,17 +26,17 @@ class ApplicationController < ActionController::API
     end
 
     def home
-        output = "<html><head><title>PPLDID - DID for People</title>"
+        output = "<html><head><title>PPLCID - DID for People</title>"
         output +="</head><body>"
-        output +="<h1>PPLDID Repository</h1>"
+        output +="<h1>PPLCID Repository</h1>"
         output +="<p>Version: " + VERSION.to_s + " (pplcid gem v" + Gem.loaded_specs["pplcid"].version.to_s + ")</p>"
         output +="<p><strong>Statistics</strong> for this repository:</p><ul>"
         output +="<li>DIDs: " + Did.count.to_s + "</li>"
         output +="<li>Logs: " + Log.count.to_s + "</li>"
         output +="</ul><p>Find more information here:</p><ul>"
-        output +='<li>Swagger: <a href="/api-docs">PPLDID API Documentation</a></li>'
-        output +='<li>Specification: <a href="https://peopledata.github.io/pplcid">https://peopledata.github.io/pplcid/</a></li>'
-        output +='<li>Github: <a href="https://github.com/peopledata/pplcid/">https://github.com/peopledata/pplcid/</a></li>'
+        output +='<li>Swagger: <a href="/api-docs">PPLCID API Documentation</a></li>'
+        output +='<li>Specification: <a href="https://peoplecarbon.github.io/pplcid">https://peoplecarbon.github.io/pplcid/</a></li>'
+        output +='<li>Github: <a href="https://github.com/peoplecarbon/pplcid/">https://github.com/peoplecarbon/pplcid/</a></li>'
         output +="</ul></body></html>" 
         render html: output.html_safe, 
                status: 200

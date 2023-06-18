@@ -1,8 +1,8 @@
-# Peopledata DID
+# Peoplecarbon DID
 
 ## Abstract
 
-PPLDID provides a self-sustained environment for managing digital identifiers (DIDs). The `ppld:did` method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document.
+PPLDID provides a self-sustained environment for managing digital identifiers (DIDs). The `pplc:did` method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document.
 
 ## Status of This Document
 
@@ -11,7 +11,7 @@ Version 1.0 - 10, Sep, 2022(initial public release)
 ## Table of Contents
 
 - [1.    Introduction](#1introduction)
-- [2.    The `did:ppld` Format](#2the-ppldid-format)
+- [2.    The `did:pplc` Format](#2the-ppldid-format)
 - [3.    DID Operations](#3did-operations)
   * [3.1  Create (Register)](#31create-register)
   * [3.2  Read (Resolve)](#32read-resolve)
@@ -29,18 +29,18 @@ Decentralized Identifiers (DIDs) [1] are a new type of identifier for verifiable
 
 While DLT-based DID Methods have great decentralization characteristics, and some of the more centralized DID Methods provide strong system control guarantees, the general approaches tend to be expensive to set up and operate. PPLDID takes the approach to not maintain DID and DID Document on a public ledger but on one or more local storages (that might be publicly available). Through cryptographically linking the DID Identifier to the DID Document, and furthermore linking the DID Document to a chained provenance trail the same security and validation properties as a traditional DID can be maintained while avoiding highly redundant storage and also works in settings without general public access.
 
-The rest of this document outlines the syntax for the `did:ppld` method, the operations it supports, and some security and privacy considerations as well as ehtical aspects that implementers might want to be aware of when using this DID method.
+The rest of this document outlines the syntax for the `did:pplc` method, the operations it supports, and some security and privacy considerations as well as ehtical aspects that implementers might want to be aware of when using this DID method.
 
 
-## 2.	The `did:ppld` Format
+## 2.	The `did:pplc` Format
 
-The format for the `did:ppld` method conforms to the DID core specification [1] as outlined by W3C. It consists of the `did:ppld` prefix, followed by a Multibase [2] (default: `base58-btc`) encoded value that is a Multihash [3] (default: `sha2-256`) value of composed of information from the payload, keys, and log.
+The format for the `did:pplc` method conforms to the DID core specification [1] as outlined by W3C. It consists of the `did:pplc` prefix, followed by a Multibase [2] (default: `base58-btc`) encoded value that is a Multihash [3] (default: `sha2-256`) value of composed of information from the payload, keys, and log.
 
 The detailed calculation of the DID identifier from the internal document and log information via ABNF is described here:
 
 ```
 ; !syntax("abnf")
-did-ppld-format                = "did:ppld:" identifier
+did-ppld-format                = "did:pplc:" identifier
 identifier                    = MULTIBASE ( base-identifier did-information-hash )
 did-information-hash          = MULTIHASH ( hash-identifier did-information )
 did-information               = "{doc:" payload ",key:" key-value ",log:" log-value "}"
@@ -75,10 +75,10 @@ hash-identifier               = DEFAULT sha2-256
   <em>Figure 1: Visualization of calculating DID Identifier</em>
 </p>
 
-An example of a valid did:ppld DID is given below:
+An example of a valid did:pplc DID is given below:
 
 ```
-did:ppld:zQmePyZvw1NuZ39qg3LX2cdYpR7JxJYkcjnKv83K59VHLwC
+did:pplc:zQmePyZvw1NuZ39qg3LX2cdYpR7JxJYkcjnKv83K59VHLwC
 ```
 
 Additionally, an optional location (separated with an "@") can be provided after the identifier. A resolver can use this information as a starting point to retrieve the DID Document and Log. However, it is important to verify locally if the hash value of the DID Document and associated Log entries (including hash values and signatures) are coherent to confirm that a DID was resolved correctly no matter where the information was retrieved from.
@@ -86,16 +86,16 @@ Additionally, an optional location (separated with an "@") can be provided after
 
 ## 3.	DID Operations
 
-The following section outlines the DID operations for the `did:ppld` method.
+The following section outlines the DID operations for the `did:pplc` method.
 
 ### 3.1	Create (Register)
 
-Creating a `did:ppld` identifier requires a payload (e.g., service endpoints) as JSON document and two ED25519 cryptographic key pairs using the format provided in Section 2.
+Creating a `did:pplc` identifier requires a payload (e.g., service endpoints) as JSON document and two ED25519 cryptographic key pairs using the format provided in Section 2.
 
 The DID document and associated log entries are stored in a registry accessible by relevant stakeholders. An example is given below (*EXAMPLE 1*) listing a payload, internal and W3C conform DID document, log entries, private keys, and private revocation document.
 
 *EXAMPLE 1: An example DID with all associated information and representations*
-DID: `did:ppld:zQmZ8DEGQtJcpoQDMKYJkTiQn9dQLM2QzvmDQXuj8vCfvdj`
+DID: `did:pplc:zQmZ8DEGQtJcpoQDMKYJkTiQn9dQLM2QzvmDQXuj8vCfvdj`
 
 Payload:
 ```
@@ -119,17 +119,17 @@ W3C conform DID document:
 ```
 {
     "@context": "https://www.w3.org/ns/did/v1",
-    "id": "did:ppld:zQmaV8M4Pazau8WWwsVeyMQWmmckHXr1L2UPtyEjqfy6wXe",
+    "id": "did:pplc:zQmaV8M4Pazau8WWwsVeyMQWmmckHXr1L2UPtyEjqfy6wXe",
     "verificationMethod": [{
-        "id": "did:ppld:zQmaV8M4Pazau8WWwsVeyMQWmmckHXr1L2UPtyEjqfy6wXe",
+        "id": "did:pplc:zQmaV8M4Pazau8WWwsVeyMQWmmckHXr1L2UPtyEjqfy6wXe",
         "type": "Ed25519VerificationKey2018",
-        "controller": "did:ppld:zQmaV8M4Pazau8WWwsVeyMQWmmckHXr1L2UPtyEjqfy6wXe",
+        "controller": "did:pplc:zQmaV8M4Pazau8WWwsVeyMQWmmckHXr1L2UPtyEjqfy6wXe",
         "publicKeyBase58": "z2MC8dVTmUN5sR4pf5H8CiEPJiqqsdyTSp8Jd8YZ8MBR3"
     }],
     "keyAgreement": [{
-        "id": "did:ppld:zQmaV8M4Pazau8WWwsVeyMQWmmckHXr1L2UPtyEjqfy6wXe",
+        "id": "did:pplc:zQmaV8M4Pazau8WWwsVeyMQWmmckHXr1L2UPtyEjqfy6wXe",
         "type": "X25519KeyAgreementKey2019",
-        "controller": "did:ppld:zQmaV8M4Pazau8WWwsVeyMQWmmckHXr1L2UPtyEjqfy6wXe",
+        "controller": "did:pplc:zQmaV8M4Pazau8WWwsVeyMQWmmckHXr1L2UPtyEjqfy6wXe",
         "publicKeyBase58": "zBD5cx11PaXDLG7vUmhKBzDeZnXFPAaNTqpWFZsAQom2M"
     }],
     "service": [{
@@ -171,7 +171,7 @@ Private revocation document:
 
 ### 3.2	Read (Resolve)
 
-Reading a `did:ppld` is a matter of searching for a DID document that either can be directly linked (through hashing and encoding) to the provided identifier or through traversing through the log to unambiguously link the provided identifier to the latest version of the DID document. Cryptographic proof for the link between DID Identifier and DID Document, ownership, and completeness is performed in the following steps (here the example for a newly created DID without any updates so far):
+Reading a `did:pplc` is a matter of searching for a DID document that either can be directly linked (through hashing and encoding) to the provided identifier or through traversing through the log to unambiguously link the provided identifier to the latest version of the DID document. Cryptographic proof for the link between DID Identifier and DID Document, ownership, and completeness is performed in the following steps (here the example for a newly created DID without any updates so far):
 
 1. the identifier is the encoded hash value of the internal DID document (the hashing algorithm is encoded in the identifier using MULTIHASH, default: `SHA2-256`, the encoding algorithm is also encoded in the identifier using MULTIBASE, default: `base58-btc`)
 
@@ -205,7 +205,7 @@ Note: it is in the interest of the owner to publish revocation entries and make 
 
 ### 3.3	Update
 
-Updating `did:ppld` is providing a new DID document (and/or new keys for key rotation) while also publishing the revocation document and original keys to prove ownership. An example is given below (*EXAMPLE 3*) of all log entries for an updated DID.
+Updating `did:pplc` is providing a new DID document (and/or new keys for key rotation) while also publishing the revocation document and original keys to prove ownership. An example is given below (*EXAMPLE 3*) of all log entries for an updated DID.
 
 *EXAMPLE 3: An example DID with all associated information and representations*
 
@@ -265,7 +265,7 @@ docker run -it --rm peopledata/ppldid
 
 *EXAMPLE 4: Various DIDs and useful commands*
 
-* `did:ppld:zQmZ8DEGQtJcpoQDMKYJkTiQn9dQLM2QzvmDQXuj8vCfvdj` (new DID)
+* `did:pplc:zQmZ8DEGQtJcpoQDMKYJkTiQn9dQLM2QzvmDQXuj8vCfvdj` (new DID)
 
 	→ show information with:
 
@@ -273,7 +273,7 @@ docker run -it --rm peopledata/ppldid
 	ppldid read zQmZ8DEGQtJcpoQDMKYJkTiQn9dQLM2QzvmDQXuj8vCfvdj
 	```
 
-* `did:ppld:zQmNUV1MJ5xKkFm6Lc9EKqAauGzbKP7amvbyxsx79mKwqPB` (updated DID)
+* `did:pplc:zQmNUV1MJ5xKkFm6Lc9EKqAauGzbKP7amvbyxsx79mKwqPB` (updated DID)
 
 	→ show DID document using old DID
 
@@ -281,7 +281,7 @@ docker run -it --rm peopledata/ppldid
 	ppldid read zQmdxfGRfFEnLoJ9RTiyzG9TPBhK7q6zsqrGFVzuxVPv4dq
 	```
 
-* `did:ppld:zQmTbKdyF3661TB92683hiqEBzo44eNJU8HNDwt4hAt69K1` (deactivated DID)
+* `did:pplc:zQmTbKdyF3661TB92683hiqEBzo44eNJU8HNDwt4hAt69K1` (deactivated DID)
 
 	→ DID cannot be resolved
 

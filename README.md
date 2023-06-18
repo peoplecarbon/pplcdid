@@ -7,7 +7,7 @@ Peoplecarbon DID (pplc-did) provides a self-sustained environment for managing d
 * W3C conform DID Method Specification: https://peoplecarbon.github.io/docs/peoplecarbon-did/did-overview    
 * `pplc-did` commandline tool:    
     * Sources: https://github.com/peoplecarbon/pplc-did/tree/main/cli    
-    * run in a Docker image: https://hub.docker.com/peopledataorg/pplc-did-cli     
+    * run in a Docker image: https://hub.docker.com/peoplecarbon/pplc-did-cli     
     * Tutorial and examples: https://github.com/peoplecarbon/pplcid/tree/main/tutorial
 * host pplc-dids yourself in a repository:    
     * Sources: https://github.com/peoplecarbon/pplc-did/tree/main/repository    

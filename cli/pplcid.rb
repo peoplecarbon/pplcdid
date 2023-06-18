@@ -8,7 +8,7 @@ require 'uri'
 require 'pplcid'
 
 LOCATION_PREFIX = "@"
-DEFAULT_LOCATION = "http://pplcid.peopledata.org.cn:3000"
+DEFAULT_LOCATION = "https://pplcid.peoplecarbon.org"
 VERSION = "1.3.0"
 
 # internal functions -------------------------------
@@ -39,10 +39,10 @@ def delete(did, options)
             end
             exit 1
         else
-            privateKey, msg = Ppldid.generate_private_key(options[:doc_pwd].to_s, 'ed25519-priv')
+            privateKey, msg = Pplcid.generate_private_key(options[:doc_pwd].to_s, 'ed25519-priv')
         end
     else
-        privateKey, msg = Ppldid.read_private_key(options[:doc_key].to_s)
+        privateKey, msg = Pplcid.read_private_key(options[:doc_key].to_s)
         if privateKey.nil?
             if options[:silent].nil? || !options[:silent]
                 if options[:json].nil? || !options[:json]
@@ -65,10 +65,10 @@ def delete(did, options)
             end
             exit 1
         else
-            revocationKey, msg = Ppldid.generate_private_key(options[:rev_pwd].to_s, 'ed25519-priv')
+            revocationKey, msg = Pplcid.generate_private_key(options[:rev_pwd].to_s, 'ed25519-priv')
         end
     else
-        revocationKey, msg = Ppldid.read_private_key(options[:rev_key].to_s)
+        revocationKey, msg = Pplcid.read_private_key(options[:rev_key].to_s)
         if revocationKey.nil?
             if options[:silent].nil? || !options[:silent]
                 if options[:json].nil? || !options[:json]
@@ -86,7 +86,7 @@ def delete(did, options)
         "revkey": revocationKey
     }
     ppldid_url = doc_location.to_s + "/doc/" + did.to_s
-    retVal = HTTParty.delete(Ppldid_url,
+    retVal = HTTParty.delete(Pplcid_url,
         headers: { 'Content-Type' => 'application/json' },
         body: did_data.to_json )
     if retVal.code != 200
@@ -125,7 +125,7 @@ def sc_init(options)
     sc_options[:doc_location] = sc_options[:location]
     sc_options[:log_location] = sc_options[:location]
     sc_options[:silent] = true
-    did, msg = Ppldid.write([content.to_json], nil, "create", sc_options)
+    did, msg = Pplcid.write([content.to_json], nil, "create", sc_options)
     if did.nil?
         if options[:silent].nil? || !options[:silent]
             if options[:json].nil? || !options[:json]
@@ -137,7 +137,7 @@ def sc_init(options)
         return [nil, ""]
     end
 
-    did_info, msg = Ppldid.read(did, options)
+    did_info, msg = Pplcid.read(did, options)
     if did_info.nil?
         return [nil, "cannot resolve DID (on sc_init)"]
     end
@@ -173,10 +173,10 @@ def sc_token(did, options)
             end
             exit 1
         else
-            privateKey, msg = Ppldid.generate_private_key(options[:doc_pwd].to_s, 'ed25519-priv')
+            privateKey, msg = Pplcid.generate_private_key(options[:doc_pwd].to_s, 'ed25519-priv')
         end
     else
-        privateKey, msg = Ppldid.read_private_key(options[:doc_key].to_s)
+        privateKey, msg = Pplcid.read_private_key(options[:doc_key].to_s)
         if privateKey.nil?
             if options[:silent].nil? || !options[:silent]
                 if options[:json].nil? || !options[:json]
@@ -194,14 +194,14 @@ def sc_token(did, options)
     end
 
     # check if provided private key matches pubkey in DID document
-    did_info, msg = Ppldid.read(did, options)
+    did_info, msg = Pplcid.read(did, options)
     if did_info.nil?
         return [nil, "cannot resolve DID (on sc_token)"]
     end
     if did_info["error"] != 0
         return [nil, did_info["message"].to_s]
     end
-    if did_info["doc"]["key"].split(":")[0].to_s != Ppldid.public_key(privateKey).first
+    if did_info["doc"]["key"].split(":")[0].to_s != Pplcid.public_key(privateKey).first
         if options[:silent].nil? || !options[:silent]
             puts "Error: private key does not match DID document"
             if options[:json].nil? || !options[:json]
@@ -214,13 +214,13 @@ def sc_token(did, options)
     end
 
     # authenticate against container
-    init_url = doc_location + "/api/Ppldid/init"
+    init_url = doc_location + "/api/Pplcid/init"
     sid = SecureRandom.hex(20).to_s
 
     response = HTTParty.post(init_url,
         headers: { 'Content-Type' => 'application/json' },
         body: { "session_id": sid, 
-                "public_key": Ppldid.public_key(privateKey).first }.to_json ).parsed_response rescue {}
+                "public_key": Pplcid.public_key(privateKey).first }.to_json ).parsed_response rescue {}
     if response["challenge"].nil?
         if options[:silent].nil? || !options[:silent]
             if options[:json].nil? || !options[:json]
@@ -234,11 +234,11 @@ def sc_token(did, options)
     challenge = response["challenge"].to_s
 
     # sign challenge and request token
-    token_url = doc_location + "/api/Ppldid/token"
+    token_url = doc_location + "/api/Pplcid/token"
     response = HTTParty.post(token_url,
         headers: { 'Content-Type' => 'application/json' },
         body: { "session_id": sid, 
-                "signed_challenge": Ppldid.sign(challenge, privateKey).first }.to_json).parsed_response rescue {}
+                "signed_challenge": Pplcid.sign(challenge, privateKey).first }.to_json).parsed_response rescue {}
     puts response.to_json
 
 end
@@ -264,7 +264,7 @@ def sc_create(content, did, options)
     end
 
     # get Semantic Container location from DID
-    did_info, msg = Ppldid.read(did, options)
+    did_info, msg = Pplcid.read(did, options)
     if did_info.nil?
         return [nil, "cannot resolve DID (on sc_create)"]
     end
@@ -279,7 +279,7 @@ def sc_create(content, did, options)
     sc_options[:doc_location] = sc_options[:location]
     sc_options[:log_location] = sc_options[:location]
     sc_options[:silent] = true
-    new_did, msg = Ppldid.write([c.to_json], nil, "create", sc_options)
+    new_did, msg = Pplcid.write([c.to_json], nil, "create", sc_options)
     if new_did.nil?
         if options[:silent].nil? || !options[:silent]
             if options[:json].nil? || !options[:json]
@@ -291,7 +291,7 @@ def sc_create(content, did, options)
         return [nil, ""]
     end
 
-    did_info, msg = Ppldid.read(new_did, sc_options)
+    did_info, msg = Pplcid.read(new_did, sc_options)
     if did_info.nil?
         return [nil, "cannot resolve DID (on sc_create - new_did)"]
     end
@@ -556,7 +556,7 @@ end
 case operation.to_s
 when "create"
     if options[:simulate]
-        did, didDocument, revoc_log, l1, l2, r1, privateKey, revocationKey, did_old, log_old, msg = Ppldid.generate_base(content, "", "create", options)
+        did, didDocument, revoc_log, l1, l2, r1, privateKey, revocationKey, did_old, log_old, msg = Pplcid.generate_base(content, "", "create", options)
         if did.nil?
             if msg.to_s != ""
                 if options[:silent].nil? || !options[:silent]
@@ -570,14 +570,14 @@ when "create"
             exit(-1)
         end
         retVal = {}
-        retVal["did"] = Ppldid.percent_encode(did.to_s)
+        retVal["did"] = Pplcid.percent_encode(did.to_s)
         retVal["doc"] = didDocument
         retVal["log_create"] = l1
         retVal["log_terminate"] = l2
         retVal["log_revoke"] = r1
         puts retVal.to_json
     else
-        retVal, msg = Ppldid.create(content,options)
+        retVal, msg = Pplcid.create(content,options)
         if retVal.nil?
             if msg.to_s != ""
                 if options[:silent].nil? || !options[:silent]
@@ -592,16 +592,16 @@ when "create"
         else
             if options[:silent].nil? || !options[:silent]
                 if options[:json].nil? || !options[:json]
-                    puts "created " + Ppldid.percent_encode(retVal["did"].to_s)
+                    puts "created " + Pplcid.percent_encode(retVal["did"].to_s)
                 else
-                    puts '{"did": "' + Ppldid.percent_encode(retVal["did"].to_s) + '", "operation": "create"}'
+                    puts '{"did": "' + Pplcid.percent_encode(retVal["did"].to_s) + '", "operation": "create"}'
                 end
             end
         end
     end
 when "update"
     if options[:simulate]
-        did, didDocument, revoc_log, l1, l2, r1, privateKey, revocationKey, did_old, log_old, msg = Ppldid.generate_base(content, input_did, "update", options)
+        did, didDocument, revoc_log, l1, l2, r1, privateKey, revocationKey, did_old, log_old, msg = Pplcid.generate_base(content, input_did, "update", options)
         if did.nil?
             if msg.to_s != ""
                 if options[:silent].nil? || !options[:silent]
@@ -615,8 +615,8 @@ when "update"
             exit(-1)
         end
         retVal = {}
-        retVal["did"] = Ppldid.percent_encode(did.to_s)
-        retVal["did_old"] = Ppldid.percent_encode(input_did.to_s)
+        retVal["did"] = Pplcid.percent_encode(did.to_s)
+        retVal["did_old"] = Pplcid.percent_encode(input_did.to_s)
         retVal["doc"] = didDocument
         retVal["log_revoke_old"] = revoc_log
         retVal["log_update"] = l1
@@ -624,7 +624,7 @@ when "update"
         retVal["log_revoke"] = r1
         puts retVal.to_json
     else
-        retVal, msg = Ppldid.update(content, input_did, options)
+        retVal, msg = Pplcid.update(content, input_did, options)
         if retVal.nil?
             if msg.to_s != ""
                 if options[:silent].nil? || !options[:silent]
@@ -639,15 +639,15 @@ when "update"
         else
             if options[:silent].nil? || !options[:silent]
                 if options[:json].nil? || !options[:json]
-                    puts "updated " + Ppldid.percent_encode(retVal["did"].to_s)
+                    puts "updated " + Pplcid.percent_encode(retVal["did"].to_s)
                 else
-                    puts '{"did": "' + Ppldid.percent_encode(retVal["did"].to_s) + '", "operation": "update"}'
+                    puts '{"did": "' + Pplcid.percent_encode(retVal["did"].to_s) + '", "operation": "update"}'
                 end
             end
         end
     end
 when "read"
-    result, msg = Ppldid.read(input_did, options)
+    result, msg = Pplcid.read(input_did, options)
     if result.nil?
         if options[:silent].nil? || !options[:silent]
             if options[:json].nil? || !options[:json]
@@ -675,7 +675,7 @@ when "read"
     end
     if !options[:trace]
         if options[:w3cdid]
-            w3c_did = Ppldid.w3c(result, options)
+            w3c_did = Pplcid.w3c(result, options)
             if options[:silent].nil? || !options[:silent]
                 puts w3c_did.to_json
             end
@@ -691,7 +691,7 @@ when "read"
         end
     end
 when "clone"
-    retVal, msg = Ppldid.clone(input_did, options)
+    retVal, msg = Pplcid.clone(input_did, options)
     if retVal.nil?
         if msg.to_s != ""
             if options[:silent].nil? || !options[:silent]
@@ -706,9 +706,9 @@ when "clone"
     else
         if options[:silent].nil? || !options[:silent]
             if options[:json].nil? || !options[:json]
-                puts "cloned " + Ppldid.percent_encode(retVal["did"].to_s)
+                puts "cloned " + Pplcid.percent_encode(retVal["did"].to_s)
             else
-                puts '{"did": "' + Ppldid.percent_encode(retVal["did"].to_s) + '", "operation": "clone"}'
+                puts '{"did": "' + Pplcid.percent_encode(retVal["did"].to_s) + '", "operation": "clone"}'
             end
         end
     end
@@ -734,7 +734,7 @@ when "fromW3C"
         end
         exit(-1)
     end
-    retVal, msg = Ppldid.retrieve_document_raw(content["id"].to_s, Ppldid.get_location(content["id"].to_s), "", options)
+    retVal, msg = Pplcid.retrieve_document_raw(content["id"].to_s, Pplcid.get_location(content["id"].to_s), "", options)
     if retVal.nil?
         if options[:silent].nil? || !options[:silent]
             if options[:json].nil? || !options[:json]
@@ -758,11 +758,11 @@ when "toW3C"
         end
         exit(-1)
     end
-    did = Ppldid.hash(Ppldid.canonical(content.to_json_c14n))
+    did = Pplcid.hash(Pplcid.canonical(content.to_json_c14n))
     did_info = {}
-    did_info["did"] = Ppldid.percent_encode(did)
+    did_info["did"] = Pplcid.percent_encode(did)
     did_info["doc"] = content
-    retVal, msg = Ppldid.w3c(did_info, options)
+    retVal, msg = Pplcid.w3c(did_info, options)
     if retVal.nil?
         if msg.to_s == ""
             if options[:silent].nil? || !options[:silent]
@@ -790,7 +790,7 @@ when "log", "logs"
         options[:log_complete] = true
     end
     log_hash = input_did
-    result, msg = Ppldid.read(input_did, options)
+    result, msg = Pplcid.read(input_did, options)
     if result.nil?
         if options[:log_location].nil?
             if input_did.include?(LOCATION_PREFIX)
@@ -813,7 +813,7 @@ when "log", "logs"
         if options[:silent].nil? || !options[:silent]
             result = JSON.parse(result.to_s)
             if options[:show_hash]
-                result = Ppldid.add_hash(result)
+                result = Pplcid.add_hash(result)
             end
             puts result.to_json
         end
@@ -830,7 +830,7 @@ when "log", "logs"
             if options[:silent].nil? || !options[:silent]
                 result = result["log"]
                 if options[:show_hash]
-                    result = Ppldid.add_hash(result)
+                    result = Pplcid.add_hash(result)
                 end
                 puts result.to_json
             end
@@ -838,7 +838,7 @@ when "log", "logs"
     end
 when "dag"
     options[:trace] = true
-    result, msg = Ppldid.read(input_did, options)
+    result, msg = Pplcid.read(input_did, options)
     if result.nil?
         if options[:silent].nil? || !options[:silent]
             if options[:json].nil? || !options[:json]
@@ -869,7 +869,7 @@ when "revoke"
     end
     did = input_did.delete_prefix("did:pplc:")
     if options[:simulate]
-        result, msg = Ppldid.revoke_base(did, options)
+        result, msg = Pplcid.revoke_base(did, options)
         if result.nil?
             if msg.to_s != ""
                 if options[:silent].nil? || !options[:silent]
@@ -883,12 +883,12 @@ when "revoke"
             exit(-1)
         end
         retVal = {
-            "did": Ppldid.percent_encode(input_did.to_s),
+            "did": Pplcid.percent_encode(input_did.to_s),
             "log": result
         }
         puts retVal.to_json
     else
-        did, msg = Ppldid.revoke(did, options)
+        did, msg = Pplcid.revoke(did, options)
         if did.nil?
             if msg.to_s != ""
                 if options[:silent].nil? || !options[:silent]
@@ -903,9 +903,9 @@ when "revoke"
         else
             if options[:silent].nil? || !options[:silent]
                 if options[:json].nil? || !options[:json]
-                    puts "revoked " + Ppldid.percent_encode(did.to_s)
+                    puts "revoked " + Pplcid.percent_encode(did.to_s)
                 else
-                    puts '{"did": "did:pplc:"' + Ppldid.percent_encode(did.to_s) + '", "operation": "revoke"}'
+                    puts '{"did": "did:pplc:"' + Pplcid.percent_encode(did.to_s) + '", "operation": "revoke"}'
                 end
             end
         end
@@ -927,26 +927,26 @@ when "delete"
     else
         if options[:silent].nil? || !options[:silent]
             if options[:json].nil? || !options[:json]
-                puts "deleted " + Ppldid.percent_encode(did.to_s)
+                puts "deleted " + Pplcid.percent_encode(did.to_s)
             else
-                puts '{"did": "did:pplc:"' + Ppldid.percent_encode(did.to_s) + '", "operation": "delete"}'
+                puts '{"did": "did:pplc:"' + Pplcid.percent_encode(did.to_s) + '", "operation": "delete"}'
             end
         end
     end
 
 # DIDComm Functions =============
 when "message"
-    didcomm_message, err_msg = Ppldid.dcpm(content, options)
+    didcomm_message, err_msg = Pplcid.dcpm(content, options)
     puts JSON.pretty_generate(didcomm_message)
 when "jws"
     did10 = options[:sign_did].to_s.delete_prefix("did:pplc:")[0,10]
     f = File.open(did10 + "_private_key.b58")
     private_key_encoded = f.read
     f.close
-    didcomm_signed_message, err_msg = Ppldid.dcsm(content, private_key_encoded, options)
+    didcomm_signed_message, err_msg = Pplcid.dcsm(content, private_key_encoded, options)
     puts didcomm_signed_message.to_s
 when "verify-jws"
-    msg_verified, err_msg = Ppldid.dcsm_verify(content, options)
+    msg_verified, err_msg = Pplcid.dcsm_verify(content, options)
     if !msg_verified.nil?
         if options[:json].nil? || !options[:json]
             puts "✅ Signature verified for: "
@@ -968,19 +968,19 @@ when "encrypt-message"
     f = File.open(did10 + "_private_key.b58")
     key_encoded = f.read
     f.close
-    msg_encrypted, msg = Ppldid.msg_encrypt(content, key_encoded, from_did)
+    msg_encrypted, msg = Pplcid.msg_encrypt(content, key_encoded, from_did)
     puts msg_encrypted.to_s
 when "decrypt-jwt"
     from_did = options[:didcomm_from_did].to_s
-    result, msg = Ppldid.read(from_did, options)
+    result, msg = Pplcid.read(from_did, options)
     public_key_encoded = result["doc"]["key"].split(':').first
-    msg_decrypted, msg = Ppldid.msg_decrypt(content, public_key_encoded)
+    msg_decrypted, msg = Pplcid.msg_decrypt(content, public_key_encoded)
     puts JSON.pretty_generate(msg_decrypted.first)
 when "sign-message"
-    msg_signed, msg = Ppldid.msg_sign(content, options[:hmac_secret].to_s)
+    msg_signed, msg = Pplcid.msg_sign(content, options[:hmac_secret].to_s)
     puts msg_signed.to_s
 when "verify-signed-message"
-    msg_verified, msg = Ppldid.msg_verify_jws(content, options[:hmac_secret].to_s)
+    msg_verified, msg = Pplcid.msg_verify_jws(content, options[:hmac_secret].to_s)
     if !msg_verified.nil?
         if options[:json].nil? || !options[:json]
             puts "✅ Signature verified for: "

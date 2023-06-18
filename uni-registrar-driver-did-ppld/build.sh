@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CONTAINER="pplc-registrar"
-REPOSITORY="peopledataorg"
+REPOSITORY="peoplecarbon"
 TAG="latest"
 
 # read commandline options

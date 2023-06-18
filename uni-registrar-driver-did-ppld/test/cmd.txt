@@ -1,4 +1,4 @@
-docker run -d --name=registrar -p 3000:3000 peopledataorg/pplc-registrar
+docker run -d --name=registrar -p 3000:3000 peoplecarbon/pplc-registrar
 
 docker rm -f registrar
 

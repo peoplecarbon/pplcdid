@@ -2,12 +2,12 @@
 
 *latest update: 2 September 2022*
 
-This tutorial introduces the use of `did:ppld` DIDs with the following sections:
+This tutorial introduces the use of `did:pplc` DIDs with the following sections:
 
 1) **[Deployment:](#deployment)** various options to run a DID repository locally, with a PostgreSQL DB backend, or on a Kubernetes cluster    
 	a) [Local Deployment](#local-deployment)    
 	b) [PostgreSQL Backend](#persisting-dids-in-postgresql)    
-	c) [Kubernetes Cluster](#run-an-ppldid-repository-on-a-kubernetes-cluster)    
+	c) [Kubernetes Cluster](#run-an-pplcid-repository-on-a-kubernetes-cluster)    
 2) **[DID Life-cycle:](#did-life-cycle)** describes the typical life-cycle of a DID using concrete and simple examples of entities exchanging information
 
 
@@ -17,7 +17,7 @@ This tutorial introduces the use of `did:ppld` DIDs with the following sections:
 
 If you just want to try PPLDID locally, start a Docker container with the following command:
 ```console
-docker run -d --name did_repo -e DID_DB=local -p 3000:3000 peopledataorg/ppld-base
+docker run -d --name did_repo -e DID_DB=local -p 3000:3000 peopledataorg/pplc-base
 ```
 
 Check if the repository is up and running by showing the *Repository Status* page at http://localhost:3000
@@ -33,7 +33,7 @@ As a result you will see a JSON document that starts with:
 ```json
 {
   "didState":{
-    "did":"did:ppld:zQmXaUXEZBYXkNgYd4WEzisw1RGfsCyAVk91QssvsVc4jwM%40http://localhost:3000",
+    "did":"did:pplc:zQmXaUXEZBYXkNgYd4WEzisw1RGfsCyAVk91QssvsVc4jwM%40http://localhost:3000",
     "state":"finished" 
     ...
 ```
@@ -58,8 +58,8 @@ For a more serious evaluation of PPLDID you might want to persist DIDs, associat
 ```yaml
 version: "3"
 services:
-  ppldid:
-    image: peopledata/ppld-base:latest
+  pplcid:
+    image: peopledata/pplc-base:latest
     environment:
       DID_DB: "external"
       RAILS_ENV: "production"
@@ -82,45 +82,45 @@ Start with:
 docker-compose -f docker-compose.yml up -d
 ```
 
-The status page is again available at http://localhost:3000 and you can use the `peopledataorg/ppld-cli` instead of curl commands to interact with the repo - use the following command to start the CLI:
+The status page is again available at http://localhost:3000 and you can use the `peopledataorg/pplc-cli` instead of curl commands to interact with the repo - use the following command to start the CLI:
 ```console
-docker run -it --rm --network host peopledataorg/ppld-cli
+docker run -it --rm --network host peopledataorg/pplc-cli
 ```
 
 Create a new DID: 
 ```console
-echo '{"my":"test"}' | ppldid create -l http://localhost:3000
+echo '{"my":"test"}' | pplcid create -l http://localhost:3000
 ```
 Output:
-`created did:ppld:zQmUogZxErEgXgzEMv9zXK9qnBBYzZfiHvQ4FJiXhZsdFqH%40http%3A%2F%2Flocalhost:3000`
+`created did:pplc:zQmUogZxErEgXgzEMv9zXK9qnBBYzZfiHvQ4FJiXhZsdFqH%40http%3A%2F%2Flocalhost:3000`
 
 
 Resolve the DID:
 ```console
-ppldid read did:ppld:zQmUogZxErEgXgzEMv9zXK9qnBBYzZfiHvQ4FJiXhZsdFqH%40http%3A%2F%2Flocalhost:3000
+pplcid read did:pplc:zQmUogZxErEgXgzEMv9zXK9qnBBYzZfiHvQ4FJiXhZsdFqH%40http%3A%2F%2Flocalhost:3000
 ```
 
 and show the DID in the W3C-conform representation:
 ```console
-ppldid read --w3c-did did:ppld:zQmUogZxErEgXgzEMv9zXK9qnBBYzZfiHvQ4FJiXhZsdFqH%40http%3A%2F%2Flocalhost:3000 | jq
+pplcid read --w3c-did did:pplc:zQmUogZxErEgXgzEMv9zXK9qnBBYzZfiHvQ4FJiXhZsdFqH%40http%3A%2F%2Flocalhost:3000 | jq
 ```
 
 with the output:
 ```json
 {
   "@context": "https://www.w3.org/ns/did/v1",
-  "id": "did:ppld:zQmSkd6VwTDGFnLtxg6uaqjSAan8JJCAkFYWDnHLXKPethi@http://localhost:3000",
+  "id": "did:pplc:zQmSkd6VwTDGFnLtxg6uaqjSAan8JJCAkFYWDnHLXKPethi@http://localhost:3000",
   "verificationMethod": [
     {
-      "id": "did:ppld:zQmSkd6VwTDGFnLtxg6uaqjSAan8JJCAkFYWDnHLXKPethi@http://localhost:3000#key-doc",
+      "id": "did:pplc:zQmSkd6VwTDGFnLtxg6uaqjSAan8JJCAkFYWDnHLXKPethi@http://localhost:3000#key-doc",
       "type": "Ed25519VerificationKey2020",
-      "controller": "did:ppld:zQmSkd6VwTDGFnLtxg6uaqjSAan8JJCAkFYWDnHLXKPethi@http://localhost:3000",
+      "controller": "did:pplc:zQmSkd6VwTDGFnLtxg6uaqjSAan8JJCAkFYWDnHLXKPethi@http://localhost:3000",
       "publicKeyMultibase": "z6MuxmgB9AzyQNpDLVVs9C911zrtDGEetXaS4DfDiFMMpxFQ"
     },
     {
-      "id": "did:ppld:zQmSkd6VwTDGFnLtxg6uaqjSAan8JJCAkFYWDnHLXKPethi@http://localhost:3000#key-rev",
+      "id": "did:pplc:zQmSkd6VwTDGFnLtxg6uaqjSAan8JJCAkFYWDnHLXKPethi@http://localhost:3000#key-rev",
       "type": "Ed25519VerificationKey2020",
-      "controller": "did:ppld:zQmSkd6VwTDGFnLtxg6uaqjSAan8JJCAkFYWDnHLXKPethi@http://localhost:3000",
+      "controller": "did:pplc:zQmSkd6VwTDGFnLtxg6uaqjSAan8JJCAkFYWDnHLXKPethi@http://localhost:3000",
       "publicKeyMultibase": "z6Muxj69maMeBaKYw9jPUFLDTVWe7eRPuegdZxYyyAnxcydX"
     }
   ],
@@ -139,14 +139,14 @@ docker-compose -f docker-compose.yml down
 
 ### Run an PPLDID Repository on a Kubernetes Cluster
 
-The production site for the [default PPLDID repository](https://ppldid.ppldid.peopledata.org.cn) (at https://ppldid.ppldid.peopledata.org.cn) is hosted on a Kubernetes cluster with a dedicated PostreSQL cluster. The follwing files were used as setup on this Kubernetes cluster (currently at v1.91.2):
+The production site for the [default PPLDID repository](https://pplcid.pplcid.peopledata.org.cn) (at https://pplcid.pplcid.peopledata.org.cn) is hosted on a Kubernetes cluster with a dedicated PostreSQL cluster. The follwing files were used as setup on this Kubernetes cluster (currently at v1.91.2):
 * [deplyoment.yaml](res/deployment.yaml)    
 * [service.yaml](res/service.yaml)
 * [ingress.yaml](res/ingress.yaml)
 * [cert.yaml](res/cert.yaml)
 * [secrets.yaml](res/secrets.yaml)
 
-If you have any questions about setting up an PPLDID repository on Kubernetes don't hesitate to [contact us](mailto:support@ppldid.peopledata.org.cn)!
+If you have any questions about setting up an PPLDID repository on Kubernetes don't hesitate to [contact us](mailto:support@pplcid.peopledata.org.cn)!
 
 [back to top](#)
 
@@ -163,16 +163,16 @@ Each step describes a task performed by one of the actors and provides commands 
 ### Prerequisites
 
 To execute commands in the steps below make sure to have the following tools installed:    
-* `ppldid`: download and installation instructions [available here](https://github.com/peopledata/ppldid/tree/main/cli)    
+* `pplcid`: download and installation instructions [available here](https://github.com/peopledata/pplcid/tree/main/cli)    
 * `jq`: download and installation instructions [available here](https://stedolan.github.io/jq/download/)    
 
-Alternatively, you can use a ready-to-use Docker image with all tools pre-installed: [https://hub.docker.com/r/peopledata/ppld-base](https://hub.docker.com/r/peopledata/ppld-base). Use the following command to start the image:    
+Alternatively, you can use a ready-to-use Docker image with all tools pre-installed: [https://hub.docker.com/r/peopledata/pplc-base](https://hub.docker.com/r/peopledata/pplc-base). Use the following command to start the image:    
 
 ```console
-docker run -it --rm --network host -v ~/.ppldid:/home/ppldid peopledata/ppldid-cli
+docker run -it --rm --network host -v ~/.pplcid:/home/pplcid peopledata/pplcid-cli
 ```
 
-*Note:* since it makes sense to keep private keys and revocation information beyond a Docker session a directory is mounted in the container to persist files; create a local directory, `mkdir ~/.ppldid`
+*Note:* since it makes sense to keep private keys and revocation information beyond a Docker session a directory is mounted in the container to persist files; create a local directory, `mkdir ~/.pplcid`
 
 
 ### Alice creates a DID to document an available service endpoint
@@ -181,17 +181,17 @@ Alice provides a service endpoint and wants to share this information in a DID d
 
 run the following command:    
 ```console
-echo '{"service":"https://business.data-container.net/api/data"}' | ppldid create
+echo '{"service":"https://business.data-container.net/api/data"}' | pplcid create
 ```
 
 
 ### Bob resolves the DID
 
-Bob receives the DID (e.g., `did:ppld:123aBz`) and wants to resolve the linked DID document to get access to the service endpoint provided by Alice.
+Bob receives the DID (e.g., `did:pplc:123aBz`) and wants to resolve the linked DID document to get access to the service endpoint provided by Alice.
 
 run the following command:    
 ```console
-ppldid read 123aBz
+pplcid read 123aBz
 ```
 
 
@@ -201,7 +201,7 @@ Alice moves her data to another service and wants to update the service endpoint
 
 run the following command:    
 ```console
-echo '{"service":"https://biz2.data-container.net/api/data"}' | ppldid update 123aBz
+echo '{"service":"https://biz2.data-container.net/api/data"}' | pplcid update 123aBz
 ```
 
 
@@ -211,7 +211,7 @@ Bob has a stake in the DID document published by Alice and therefore, wants to m
 
 run the following command:    
 ```console
-ppldid clone 456aBz -l https://did2.data-container.net
+pplcid clone 456aBz -l https://did2.data-container.net
 ```
 
 
@@ -221,7 +221,7 @@ Alice wants to publish the information that the previously released DID document
 
 run the following command:    
 ```console
-ppldid revoke 456aBz
+pplcid revoke 456aBz
 ```
 
 [back to top](#)
@@ -230,7 +230,7 @@ ppldid revoke 456aBz
 
 ## PPLDID Tutorial
 
-Please report bugs and suggestions for new features using the [GitHub Issue-Tracker](https://github.com/peopledata/ppldid/issues) and follow the [Contributor Guidelines](https://github.com/twbs/ratchet/blob/master/CONTRIBUTING.md).
+Please report bugs and suggestions for new features using the [GitHub Issue-Tracker](https://github.com/peopledata/pplcid/issues) and follow the [Contributor Guidelines](https://github.com/twbs/ratchet/blob/master/CONTRIBUTING.md).
 
 If you want to contribute, please follow these steps:
 

@@ -1,1 +1,1 @@
-$PPLDIDCMD create --doc-pwd pwd1 --rev-pwd pwd2 --json-output --return-secrets | jq '{identifier: .did, secret:{doc_pwd: "pwd1", rev_pwd:"pwd2"}}' | curl -H "Content-Type: application/json" -d @- -X POST https://ppldid-registrar.data-container.net/1.0/deactivate
+$PPLDIDCMD create --doc-pwd pwd1 --rev-pwd pwd2 --json-output --return-secrets | jq '{identifier: .did, secret:{doc_pwd: "pwd1", rev_pwd:"pwd2"}}' | curl -H "Content-Type: application/json" -d @- -X POST https://pplcid-registrar.data-container.net/1.0/deactivate

@@ -150,7 +150,7 @@ module ApplicationHelperLegacy
             when 2,3 # CREATE, UPDATE
                 doc_did = el["doc"]
                 doc_location = get_location_legacy(doc_did)
-                did_hash = doc_did.delete_prefix("did:ppld:")
+                did_hash = doc_did.delete_prefix("did:pplc:")
                 did10 = did_hash[0,10]
                 doc = retrieve_document_legacy(doc_did, did10 + ".doc", doc_location, {})
                 if match_log_did_legacy?(el, doc)
@@ -312,7 +312,7 @@ module ApplicationHelperLegacy
         return doc
     end
 
-    # expected DID format: did:ppld:123
+    # expected DID format: did:pplc:123
     def resolve_did_legacy(did, options)
         # setup
         currentDID = {
@@ -324,7 +324,7 @@ module ApplicationHelperLegacy
             "error": 0,
             "message": ""
         }.transform_keys(&:to_s)
-        did_hash = did.delete_prefix("did:ppld:")
+        did_hash = did.delete_prefix("did:pplc:")
         did10 = did_hash[0,10]
 
         # get did location
@@ -422,17 +422,17 @@ module ApplicationHelperLegacy
 
         wd = {}
         wd["@context"] = "https://www.w3.org/ns/did/v1"
-        wd["id"] = "did:ppld:" + did_info["did"]
+        wd["id"] = "did:pplc:" + did_info["did"]
         wd["verificationMethod"] = [{
-            "id": "did:ppld:" + did_info["did"],
+            "id": "did:pplc:" + did_info["did"],
             "type": "Ed25519VerificationKey2018",
-            "controller": "did:ppld:" + did_info["did"],
+            "controller": "did:pplc:" + did_info["did"],
             "publicKeyBase58": pubDocKey
         }]
         wd["keyAgreement"] = [{
-            "id": "did:ppld:" + did_info["did"],
+            "id": "did:pplc:" + did_info["did"],
             "type": "X25519KeyAgreementKey2019",
-            "controller": "did:ppld:" + did_info["did"],
+            "controller": "did:pplc:" + did_info["did"],
             "publicKeyBase58": pubRevKey
         }]
         if did_info["doc"]["doc"].is_a?(Array)

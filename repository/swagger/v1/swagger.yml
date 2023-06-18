@@ -3,7 +3,7 @@ info:
   title: PPLDID API
   version: v1
   description: >-
-     PPLDID provides a self-sustained environment for managing digital identifiers (DIDs). The ppld:did method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document.
+     PPLDID provides a self-sustained environment for managing digital identifiers (DIDs). The pplc:did method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document.
   contact:
     email: jerry.zhang
   license:
@@ -11,8 +11,8 @@ info:
     url: https://opensource.org/licenses/MIT
 
 servers:
-- url: https://ppldid.peopledata.org.cn/
-  description: Official production system hosted by Peopledata.
+- url: https://pplcid.peopledata.org.cn/
+  description: Official production system hosted by Peoplecarbon.
 security:
   - BearerAuth: []
 paths:
@@ -105,8 +105,8 @@ paths:
           description: The DID to be resolved.
           examples:
             example1:
-              value: did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
-              description: A DID using the `ppld` method.
+              value: did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
+              description: A DID using the `pplc` method.
         - in: header
           required: false
           name: Accept
@@ -176,7 +176,7 @@ paths:
           schema:
             type: string
           description: The requested DID method for the operation.
-          example: ppld
+          example: pplc
       requestBody:
         content:
           application/json:
@@ -234,7 +234,7 @@ paths:
           schema:
             type: string
           description: The requested DID method for the operation.
-          example: ppld
+          example: pplc
       requestBody:
         content:
           application/json:
@@ -284,7 +284,7 @@ paths:
           schema:
             type: string
           description: The requested DID method for the operation.
-          example: ppld
+          example: pplc
       requestBody:
         content:
           application/json:
@@ -408,7 +408,7 @@ components:
           description:
             This input field indicates the DID that is the target of the DID update operation.
           type: string
-          example: "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
+          example: "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
         options:
           description:
             This input field contains an object with various options for the DID update operation.
@@ -450,7 +450,7 @@ components:
           description:
             This input field indicates the DID that is the target of the DID deactivation operation.
           type: string
-          example: "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
+          example: "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
         options:
           description:
             This input field contains an object with various options for the DID deactivate operation.
@@ -519,7 +519,7 @@ components:
           example: "finished"
         did:
           type: string
-          example: "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
+          example: "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
         secret:
           type: object
         didDocument:

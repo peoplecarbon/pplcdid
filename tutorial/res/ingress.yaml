@@ -1,23 +1,23 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ppldid
+  name: pplcid
   annotations:
     kubernetes.io/ingress.class: "nginx"
     certmanager.io/issuer: "letsencrypt-prod"
 spec:
   tls:
   - hosts:
-    - ppldid.ppldid.peopledata.org.cn
-    secretName: ppldid-tls
+    - pplcid.pplcid.peopledata.org.cn
+    secretName: pplcid-tls
   rules:
-  - host: ppldid.ppldid.peopledata.org.cn
+  - host: pplcid.pplcid.peopledata.org.cn
     http:
       paths:
       - path: /
         pathType: ImplementationSpecific
         backend:
           service:
-            name: ppldid
+            name: pplcid
             port:
               number: 80

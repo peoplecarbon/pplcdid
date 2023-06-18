@@ -26,7 +26,7 @@ class ApplicationController < ActionController::API
     end
 
     def version
-        render json: {"service": "ppldid uniregistrar plugin", "version": VERSION.to_s, "ppldid-gem": Gem.loaded_specs["ppldid"].version.to_s}.to_json,
+        render json: {"service": "pplcid uniregistrar plugin", "version": VERSION.to_s, "pplcid-gem": Gem.loaded_specs["pplcid"].version.to_s}.to_json,
                status: 200
     end
 

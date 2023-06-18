@@ -1,19 +1,19 @@
 {
   "@context": "https://www.w3.org/ns/did/v1",
-  "id": "did:ppld:zQmbbgEXLq96rHSRfydhsSQ9HCs6p7Cf4R98Qn7NdXig1Vk@https://did2.data-container.net",
+  "id": "did:pplc:zQmbbgEXLq96rHSRfydhsSQ9HCs6p7Cf4R98Qn7NdXig1Vk@https://did2.data-container.net",
   "verificationMethod": [
     {
-      "id": "did:ppld:zQmbbgEXLq96rHSRfydhsSQ9HCs6p7Cf4R98Qn7NdXig1Vk@https://did2.data-container.net",
+      "id": "did:pplc:zQmbbgEXLq96rHSRfydhsSQ9HCs6p7Cf4R98Qn7NdXig1Vk@https://did2.data-container.net",
       "type": "Ed25519VerificationKey2020",
-      "controller": "did:ppld:zQmbbgEXLq96rHSRfydhsSQ9HCs6p7Cf4R98Qn7NdXig1Vk@https://did2.data-container.net",
+      "controller": "did:pplc:zQmbbgEXLq96rHSRfydhsSQ9HCs6p7Cf4R98Qn7NdXig1Vk@https://did2.data-container.net",
       "publicKeyBase58": "zAQGiMD6RZUR63M3D3PAAP5ZL9MaGn8k6N2Lu7R9ZvzkX"
     }
   ],
   "keyAgreement": [
     {
-      "id": "did:ppld:zQmbbgEXLq96rHSRfydhsSQ9HCs6p7Cf4R98Qn7NdXig1Vk@https://did2.data-container.net",
+      "id": "did:pplc:zQmbbgEXLq96rHSRfydhsSQ9HCs6p7Cf4R98Qn7NdXig1Vk@https://did2.data-container.net",
       "type": "Ed25519VerificationKey2020",
-      "controller": "did:ppld:zQmbbgEXLq96rHSRfydhsSQ9HCs6p7Cf4R98Qn7NdXig1Vk@https://did2.data-container.net",
+      "controller": "did:pplc:zQmbbgEXLq96rHSRfydhsSQ9HCs6p7Cf4R98Qn7NdXig1Vk@https://did2.data-container.net",
       "publicKeyBase58": "zDuB4PbDpC8MSL5RWyUcHj5KLR9WWPgHjHVDFK7rdtAZR"
     }
   ],

@@ -172,7 +172,7 @@ class Ppldid
                 return [nil, "unsupported key codec"]
             end
             length = private_key.bytesize
-            return [ppldid.encode([code, length, private_key].pack("SCa#{length}")), ""]
+            return [pplcid.encode([code, length, private_key].pack("SCa#{length}")), ""]
         rescue
             return [nil, "invalid key"]
         end

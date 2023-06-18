@@ -1,18 +1,18 @@
 {
   "didDocument": {
     "@context": "https://www.w3.org/ns/did/v1",
-    "id": "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh",
+    "id": "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh",
     "verificationMethod": [
       {
-        "id": "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh#key-doc",
+        "id": "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh#key-doc",
         "type": "Ed25519VerificationKey2020",
-        "controller": "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh",
+        "controller": "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh",
         "publicKeyMultibase": "z6MusYB5iT5krCHYsZ76EzBaTdRwGKsaBhMcSbrXaPJgkuRQ"
       },
       {
-        "id": "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh#key-rev",
+        "id": "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh#key-rev",
         "type": "Ed25519VerificationKey2020",
-        "controller": "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh",
+        "controller": "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh",
         "publicKeyMultibase": "z6Mv7EYihbAat6Wq7GsjNsjcxt58dZT8fmsRjQGTkYamYrjB"
       }
     ],
@@ -21,8 +21,8 @@
     }
   },
   "didDocumentMetadata": {
-    "did": "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh",
-    "registry": "https://ppldid.ppldid.peopledata.org.cn",
+    "did": "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh",
+    "registry": "https://pplcid.pplcid.peopledata.org.cn",
     "log_hash": "zQmVwMvovLy5KNYHHVHQ1wv8J7y9L6UPE8eyU4tzypFWtYe",
     "log": [
       {

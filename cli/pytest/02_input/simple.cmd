@@ -1,1 +1,1 @@
-curl -s https://ppld.peopledata.org.cn:3000/1.0/identifiers/did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
+curl -s https://pplc.peopledata.org.cn:3000/1.0/identifiers/did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh

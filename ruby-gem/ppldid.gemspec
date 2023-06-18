@@ -5,16 +5,16 @@ Gem::Specification.new do |gem|
     gem.version               = File.read('VERSION').chomp
     gem.date                  = File.mtime('VERSION').strftime('%Y-%m-%d')
 
-    gem.name                  = "ppldid"
-    gem.homepage              = "http://github.com/peopledata/ppldid"
+    gem.name                  = "pplcid"
+    gem.homepage              = "http://github.com/peopledata/pplcid"
     gem.license               = 'Apache'
     gem.summary               = "Decentralized IDentifier for People."
-    gem.description           = "This gem provides the basic methods for managing did:ppld."
+    gem.description           = "This gem provides the basic methods for managing did:pplc."
     gem.metadata           = {
-        "documentation_uri" => "https://peopledata.github.io/ppldid",
-        "bug_tracker_uri"   => "https://github.com/peopledata/ppldid/issues",
-        "homepage_uri"      => "http://github.com/peopledata/ppldid",
-        "source_code_uri"   => "http://github.com/peopledata/ppldid/tree/main/ruby-gem",
+        "documentation_uri" => "https://peopledata.github.io/pplcid",
+        "bug_tracker_uri"   => "https://github.com/peopledata/pplcid/issues",
+        "homepage_uri"      => "http://github.com/peopledata/pplcid",
+        "source_code_uri"   => "http://github.com/peopledata/pplcid/tree/main/ruby-gem",
     }
 
     gem.authors               = ['Jerry Zhang']

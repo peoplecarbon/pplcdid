@@ -1,5 +1,5 @@
 {
-  "name": "ppld-did-resolver",
+  "name": "pplc-did-resolver",
   "description": "PPLDID resolver for did-resolve",
   "version": "1.1.0",
   "author": "jerry zhang",
@@ -7,17 +7,17 @@
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com/peopledata/ppldid"
+    "url": "git@github.com/peopledata/pplcid"
   },
   "files": [
     "dist"
   ],
   "keywords": [
-    "did:ppld",
+    "did:pplc",
     "DID",
     "DID document",
     "resolver",
-    "ppldid",
+    "pplcid",
     "peopledata",
     "registry"
   ],

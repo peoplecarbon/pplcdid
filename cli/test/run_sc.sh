@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-PPLDIDCMD='../ppldid.rb'
-# export PPLDIDCMD='ppldid'
+PPLDIDCMD='../pplcid.rb'
+# export PPLDIDCMD='pplcid'
 
 # CONTAINER_NAME=test_sc_1
-export CONTAINER_NAME=ppldid
+export CONTAINER_NAME=pplcid
 
 # start local Semantic Container and get access token
 export SEMCON_URL='http://localhost:4000'
 # SEMCON_URL='https://demo.data-container.net'
-docker rm -f ppldid
+docker rm -f pplcid
 IMAGE=semcon/sc-base:latest; docker run -d --name $CONTAINER_NAME -p 4000:3000 -e AUTH=true \
     -e IMAGE_SHA256="$(docker image ls --no-trunc -q $IMAGE | tail -1)" \
     -e IMAGE_NAME=$IMAGE \

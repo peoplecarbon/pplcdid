@@ -1,1 +1,1 @@
-$PPLDIDCMD read --w3c-did did:ppld:zQmSGdgg9jqBRZ6swpet9UK6bWxQfMoG9aQrqsmJpP4wA2A
+$PPLDIDCMD read --w3c-did did:pplc:zQmSGdgg9jqBRZ6swpet9UK6bWxQfMoG9aQrqsmJpP4wA2A

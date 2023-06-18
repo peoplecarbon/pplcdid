@@ -5,7 +5,7 @@ include ApplicationHelper
         id = params[:id]
         location = id.split(LOCATION_PREFIX)[1] rescue ""
         id = id.split(LOCATION_PREFIX)[0] rescue id
-        id = id.delete_prefix("did:ppld:")
+        id = id.delete_prefix("did:pplc:")
 
         @log = Log.find_by_oyd_hash(id)
         if @log.nil?
@@ -21,7 +21,7 @@ include ApplicationHelper
 
     def create
         did = params[:did]
-        my_hash = ppldid.hash(ppldid.canonical(params[:log]))
+        my_hash = pplcid.hash(pplcid.canonical(params[:log]))
         if Log.find_by_oyd_hash(my_hash).nil?
             @log = Log.new(did: did, item: params[:log].to_json, oyd_hash: my_hash, ts: Time.now.to_i)
             if @log.save

@@ -9,11 +9,11 @@ import axios from "axios";
 export function getResolver(
   /**
    * Base URL of the PPLDID resolver
-   * Resolver implementation can be found at https://github.com/peopledata/ppldid
+   * Resolver implementation can be found at https://github.com/peopledata/pplcid
    * 
-   * Default: https://ppld-resolver.peopledata.org.cn
+   * Default: https://pplc-resolver.peopledata.org.cn
    */
-  baseUrl: string = 'http://ppldid.peopledata.org.cn:3000',
+  baseUrl: string = 'http://pplcid.peopledata.org.cn:3000',
 ) {
   async function resolve(
     did: string,
@@ -30,5 +30,5 @@ export function getResolver(
     return (didDoc.data as DIDResolutionResult);
   }
 
-  return { ppld: resolve }
+  return { pplc: resolve }
 }

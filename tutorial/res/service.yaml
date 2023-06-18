@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: ppldid
+  name: pplcid
 spec:
   selector:
-    app: ppldid
+    app: pplcid
   type: LoadBalancer
   ports:
   - name: http

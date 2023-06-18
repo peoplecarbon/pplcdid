@@ -1,7 +1,7 @@
 version: "3"
 services:
-  ppldid:
-    image: peopledataorg/ppld-base:arm64v8
+  pplcid:
+    image: peopledataorg/pplc-base:arm64v8
     environment:
       DID_DB: "external"
       RAILS_ENV: "production"

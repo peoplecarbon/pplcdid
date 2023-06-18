@@ -1,1 +1,1 @@
-$PPLDIDCMD read did:ppld:zQmNauTUUdkpi5TcrTZ2524SKM8dJAzuuw4xfW13iHrtY1W%40did2.data-container.net
+$PPLDIDCMD read did:pplc:zQmNauTUUdkpi5TcrTZ2524SKM8dJAzuuw4xfW13iHrtY1W%40did2.data-container.net

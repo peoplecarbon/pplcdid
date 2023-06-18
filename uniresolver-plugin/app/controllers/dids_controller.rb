@@ -30,7 +30,7 @@ class DidsController < ApplicationController
             "didResolutionMetadata":{},
             "didDocument": Ppldid.w3c(result, {}),
             "didDocumentMetadata": {
-                "did": "did:ppld:" + result["did"].to_s,
+                "did": "did:pplc:" + result["did"].to_s,
                 "registry": Ppldid.get_location(result["did"].to_s),
                 "log_hash": result["doc"]["log"].to_s,
                 "log": result["log"],
@@ -41,7 +41,7 @@ class DidsController < ApplicationController
         equivalentIds = []
         result["log"].each do |log|
             if log["op"] == 2 || log["op"] == 3
-                equivalentIds << "did:ppld:" + log["doc"]
+                equivalentIds << "did:pplc:" + log["doc"]
             end
         end unless result["log"].nil?
 

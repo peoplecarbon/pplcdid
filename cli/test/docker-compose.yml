@@ -1,5 +1,5 @@
 sc:
-  hostname: ppldid
+  hostname: pplcid
   image: semcon/sc-base
   environment:
     RAILS_LOG_TO_STDOUT: "true"
@@ -16,4 +16,4 @@ sc:
 db:
   image: postgres:12.1
   volumes:
-    - ppldid-postgres:/var/lib/postgresql/data
+    - pplcid-postgres:/var/lib/postgresql/data

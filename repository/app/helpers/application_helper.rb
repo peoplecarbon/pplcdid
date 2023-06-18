@@ -22,7 +22,7 @@ module ApplicationHelper
             "message": "",
             "verification": ""
         }.transform_keys(&:to_s)
-        did_hash = did.delete_prefix("did:ppld:")
+        did_hash = did.delete_prefix("did:pplc:")
 
         # get did location
         did_location = ""
@@ -45,14 +45,14 @@ module ApplicationHelper
         currentDID["log"] = log_array
 
         # traverse log to get current DID state
-        dag, create_index, terminate_index, msg = ppldid.dag_did(log_array, options)
+        dag, create_index, terminate_index, msg = pplcid.dag_did(log_array, options)
         if dag.nil?
             currentDID["error"] = 1
             currentDID["message"] = msg
             return currentDID
         end
 
-        ordered_log_array = ppldid.dag2array(dag, log_array, create_index, [], options)
+        ordered_log_array = pplcid.dag2array(dag, log_array, create_index, [], options)
         ordered_log_array << log_array[terminate_index]
         currentDID["log"] = ordered_log_array
         currentDID = dag_update(currentDID, options)
@@ -62,7 +62,7 @@ module ApplicationHelper
     def dag_update(currentDID, options)
         i = 0
         initial_did = currentDID["did"].to_s
-        initial_did = initial_did.delete_prefix("did:ppld:")
+        initial_did = initial_did.delete_prefix("did:pplc:")
         initial_did = initial_did.split("@").first
         current_public_doc_key = ""
         verification_output = false
@@ -70,8 +70,8 @@ module ApplicationHelper
             case el["op"]
             when 2,3 # CREATE, UPDATE
                 doc_did = el["doc"]
-                doc_location = ppldid.get_location(doc_did)
-                did_hash = doc_did.delete_prefix("did:ppld:")
+                doc_location = pplcid.get_location(doc_did)
+                did_hash = doc_did.delete_prefix("did:pplc:")
                 did_hash = did_hash.split("@").first
                 did10 = did_hash[0,10]
                 doc = local_retrieve_document(did_hash)
@@ -82,7 +82,7 @@ module ApplicationHelper
                     return currentDID
                 end
                 if el["op"] == 2 # CREATE
-                    if !ppldid.match_log_did?(el, doc)
+                    if !pplcid.match_log_did?(el, doc)
                         currentDID["error"] = 1
                         currentDID["message"] = "Signatures in log don't match"
                         return currentDID
@@ -97,15 +97,15 @@ module ApplicationHelper
                     currentDID["verification"] += "identifier: " + did_hash.to_s + "\n"
                     currentDID["verification"] += "✅ is hash of DID Document:" + "\n"
                     currentDID["verification"] += JSON.pretty_generate(doc) + "\n"
-                    currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#calculate_hash)" + "\n\n"
+                    currentDID["verification"] += "(Details: https://peopledata.github.io/pplcid/#calculate_hash)" + "\n\n"
                 end
                 current_public_doc_key = currentDID["doc"]["key"].split(":").first rescue ""
             when 0 # TERMINATE
                 currentDID["termination_log_id"] = i
 
                 doc_did = currentDID["did"]
-                doc_location = ppldid.get_location(doc_did)
-                did_hash = doc_did.delete_prefix("did:ppld:")
+                doc_location = pplcid.get_location(doc_did)
+                did_hash = doc_did.delete_prefix("did:pplc:")
                 did_hash = did_hash.split("@").first
                 did10 = did_hash[0,10]
                 doc = local_retrieve_document(did_hash)
@@ -115,14 +115,14 @@ module ApplicationHelper
                     log_location = DEFAULT_LOCATION
                 end
                 term = term.split("@").first
-                if ppldid.hash(ppldid.canonical(el)) != term
+                if pplcid.hash(pplcid.canonical(el)) != term
                     currentDID["error"] = 1
                     currentDID["message"] = "Log reference and record don't match"
                     if verification_output
                         currentDID["verification"] += "'log' reference in DID Document: " + term.to_s + "\n"
                         currentDID["verification"] += "⛔ does not match TERMINATE log record:" + "\n"
                         currentDID["verification"] += JSON.pretty_generate(el) + "\n"
-                        currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#calculate_hash)" + "\n\n"
+                        currentDID["verification"] += "(Details: https://peopledata.github.io/pplcid/#calculate_hash)" + "\n\n"
                     end
                     return currentDID
                 end
@@ -130,7 +130,7 @@ module ApplicationHelper
                     currentDID["verification"] += "'log' reference in DID Document: " + term.to_s + "\n"
                     currentDID["verification"] += "✅ is hash of TERMINATE log record:" + "\n"
                     currentDID["verification"] += JSON.pretty_generate(el) + "\n"
-                    currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#calculate_hash)" + "\n\n"
+                    currentDID["verification"] += "(Details: https://peopledata.github.io/pplcid/#calculate_hash)" + "\n\n"
                 end
 
                 # check if there is a revocation entry
@@ -144,14 +144,14 @@ module ApplicationHelper
                     if log_el["op"].to_i == 1 # TERMINATE
                         log_el_structure.delete("previous")
                     end
-                    if ppldid.hash(ppldid.canonical(log_el_structure)) == revoc_term
+                    if pplcid.hash(pplcid.canonical(log_el_structure)) == revoc_term
                         revoc_term_found = true
                         revocation_record = log_el.dup
                         if verification_output
                             currentDID["verification"] += "'doc' reference in TERMINATE log record: " + revoc_term.to_s + "\n"
                             currentDID["verification"] += "✅ is hash of REVOCATION log record (without 'previous' attribute):" + "\n"
                             currentDID["verification"] += JSON.pretty_generate(log_el) + "\n"
-                            currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#calculate_hash)" + "\n\n"
+                            currentDID["verification"] += "(Details: https://peopledata.github.io/pplcid/#calculate_hash)" + "\n\n"
                         end
                         break
                     end
@@ -161,13 +161,13 @@ module ApplicationHelper
                     update_term_found = false
                     log_array.each do |log_el|
                         if log_el["op"] == 3
-                            if log_el["previous"].include?(ppldid.hash(ppldid.canonical(revocation_record)))
+                            if log_el["previous"].include?(pplcid.hash(pplcid.canonical(revocation_record)))
                                 update_term_found = true
                                 message = log_el["doc"].to_s
 
                                 signature = log_el["sig"]
                                 public_key = current_public_doc_key.to_s
-                                signature_verification = ppldid.verify(message, signature, public_key).first
+                                signature_verification = pplcid.verify(message, signature, public_key).first
                                 if signature_verification
                                     if verification_output
                                         currentDID["verification"] += "found UPDATE log record:" + "\n"
@@ -175,11 +175,11 @@ module ApplicationHelper
                                         currentDID["verification"] += "✅ public key from last DID Document: " + current_public_doc_key.to_s + "\n"
                                         currentDID["verification"] += "verifies 'doc' reference of new DID Document: " + log_el["doc"].to_s + "\n"
                                         currentDID["verification"] += log_el["sig"].to_s + "\n"
-                                        currentDID["verification"] += "of next DID Document (Details: https://peopledata.github.io/ppldid/#verify_signature)" + "\n"
+                                        currentDID["verification"] += "of next DID Document (Details: https://peopledata.github.io/pplcid/#verify_signature)" + "\n"
 
                                         next_doc_did = log_el["doc"].to_s
-                                        next_doc_location = ppldid.get_location(next_doc_did)
-                                        next_did_hash = next_doc_did.delete_prefix("did:ppld:")
+                                        next_doc_location = pplcid.get_location(next_doc_did)
+                                        next_did_hash = next_doc_did.delete_prefix("did:pplc:")
                                         next_did_hash = next_did_hash.split("@").first
                                         next_did10 = next_did_hash[0,10]
                                         next_doc = local_retrieve_document(next_did_hash)
@@ -198,8 +198,8 @@ module ApplicationHelper
                                     currentDID["message"] = "Signature does not match"
                                     if verification_output
                                         new_doc_did = log_el["doc"].to_s
-                                        new_doc_location = ppldid.get_location(new_doc_did)
-                                        new_did_hash = new_doc_did.delete_prefix("did:ppld:")
+                                        new_doc_location = pplcid.get_location(new_doc_did)
+                                        new_did_hash = new_doc_did.delete_prefix("did:pplc:")
                                         new_did_hash = new_did_hash.split("@").first
                                         new_did10 = new_did_hash[0,10]
                                         new_doc = local_retrieve_document(new_did_hash)
@@ -208,7 +208,7 @@ module ApplicationHelper
                                         currentDID["verification"] += "⛔ public key from last DID Document: " + current_public_doc_key.to_s + "\n"
                                         currentDID["verification"] += "does not verify 'doc' reference of new DID Document: " + log_el["doc"].to_s + "\n"
                                         currentDID["verification"] += log_el["sig"].to_s + "\n"
-                                        currentDID["verification"] += "next DID Document (Details: https://peopledata.github.io/ppldid/#verify_signature)" + "\n"
+                                        currentDID["verification"] += "next DID Document (Details: https://peopledata.github.io/pplcid/#verify_signature)" + "\n"
                                         currentDID["verification"] += JSON.pretty_generate(new_doc) + "\n\n"
                                     end
                                     return currentDID
@@ -226,7 +226,7 @@ module ApplicationHelper
                         if !options.transform_keys(&:to_s)["log_location"].nil?
                             currentDID["verification"] += "- " + options.transform_keys(&:to_s)["log_location"].to_s + "\n"
                         end
-                        currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#retrieve_log)" + "\n\n"
+                        currentDID["verification"] += "(Details: https://peopledata.github.io/pplcid/#retrieve_log)" + "\n\n"
                     end
                     break
                 end
@@ -308,7 +308,7 @@ module ApplicationHelper
     def remove_location(id)
         location = id.split(LOCATION_PREFIX)[1] rescue ""
         id = id.split(LOCATION_PREFIX)[0] rescue id
-        id.delete_prefix("did:ppld:")
+        id.delete_prefix("did:pplc:")
 
     end
 end

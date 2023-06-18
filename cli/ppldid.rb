@@ -5,10 +5,10 @@ require 'securerandom'
 require 'httparty'
 require 'optparse'
 require 'uri'
-require 'ppldid'
+require 'pplcid'
 
 LOCATION_PREFIX = "@"
-DEFAULT_LOCATION = "http://ppldid.peopledata.org.cn:3000"
+DEFAULT_LOCATION = "http://pplcid.peopledata.org.cn:3000"
 VERSION = "1.3.0"
 
 # internal functions -------------------------------
@@ -26,7 +26,7 @@ def delete(did, options)
     if doc_location.to_s == ""
         doc_location = DEFAULT_LOCATION
     end
-    did = did.delete_prefix("did:ppld:")
+    did = did.delete_prefix("did:pplc:")
 
     if options[:doc_key].nil?
         if options[:doc_pwd].nil?
@@ -320,13 +320,13 @@ end
 # user info -------------------------------
 
 def print_version()
-    puts VERSION.to_s + " (ppldid gem: v" + Gem.loaded_specs["ppldid"].version.to_s + ")"
+    puts VERSION.to_s + " (pplcid gem: v" + Gem.loaded_specs["pplcid"].version.to_s + ")"
 end
 
 def print_help()
-    puts "ppldid - manage DIDs using the ppld:did method [version " + VERSION + "]"
+    puts "pplcid - manage DIDs using the pplc:did method [version " + VERSION + "]"
     puts ""
-    puts "Usage: ppld-cli [OPERATION] [OPTION]"
+    puts "Usage: pplc-cli [OPERATION] [OPTION]"
     puts ""
     puts "OPERATION"
     puts "  create     - new DID, reads doc from STDIN"
@@ -503,7 +503,7 @@ opt_parser.parse!
 
 operation = ARGV.shift rescue ""
 input_did = ARGV.shift rescue ""
-if input_did.to_s == "" && operation.to_s.start_with?("did:ppld:")
+if input_did.to_s == "" && operation.to_s.start_with?("did:pplc:")
     input_did = operation
     operation = "read"
 end
@@ -724,12 +724,12 @@ when "fromW3C"
         end
         exit(-1)
     end
-    if !content["id"].to_s.start_with?("did:ppld:")
+    if !content["id"].to_s.start_with?("did:pplc:")
         if options[:silent].nil? || !options[:silent]
             if options[:json].nil? || !options[:json]
-                puts "Error: invalid input (non did:ppld method)"
+                puts "Error: invalid input (non did:pplc method)"
             else
-                puts '{"error": "invalid input (non did:ppld method)"}'
+                puts '{"error": "invalid input (non did:pplc method)"}'
             end
         end
         exit(-1)
@@ -747,7 +747,7 @@ when "fromW3C"
     end
     puts retVal["doc"].to_json
 when "toW3C"
-    # check if valif did:ppld document
+    # check if valif did:pplc document
     if content["doc"].to_s == "" || content["key"].to_s == "" || content["log"].to_s == ""
         if options[:silent].nil? || !options[:silent]
             if options[:json].nil? || !options[:json]
@@ -867,7 +867,7 @@ when "revoke"
     if options[:old_rev_pwd].nil? && !options[:rev_pwd].nil?
         options[:old_rev_pwd] = options[:rev_pwd]
     end
-    did = input_did.delete_prefix("did:ppld:")
+    did = input_did.delete_prefix("did:pplc:")
     if options[:simulate]
         result, msg = Ppldid.revoke_base(did, options)
         if result.nil?
@@ -905,7 +905,7 @@ when "revoke"
                 if options[:json].nil? || !options[:json]
                     puts "revoked " + Ppldid.percent_encode(did.to_s)
                 else
-                    puts '{"did": "did:ppld:"' + Ppldid.percent_encode(did.to_s) + '", "operation": "revoke"}'
+                    puts '{"did": "did:pplc:"' + Ppldid.percent_encode(did.to_s) + '", "operation": "revoke"}'
                 end
             end
         end
@@ -929,7 +929,7 @@ when "delete"
             if options[:json].nil? || !options[:json]
                 puts "deleted " + Ppldid.percent_encode(did.to_s)
             else
-                puts '{"did": "did:ppld:"' + Ppldid.percent_encode(did.to_s) + '", "operation": "delete"}'
+                puts '{"did": "did:pplc:"' + Ppldid.percent_encode(did.to_s) + '", "operation": "delete"}'
             end
         end
     end
@@ -939,7 +939,7 @@ when "message"
     didcomm_message, err_msg = Ppldid.dcpm(content, options)
     puts JSON.pretty_generate(didcomm_message)
 when "jws"
-    did10 = options[:sign_did].to_s.delete_prefix("did:ppld:")[0,10]
+    did10 = options[:sign_did].to_s.delete_prefix("did:pplc:")[0,10]
     f = File.open(did10 + "_private_key.b58")
     private_key_encoded = f.read
     f.close
@@ -964,7 +964,7 @@ when "verify-jws"
 
 when "encrypt-message"
     from_did = options[:didcomm_from_did].to_s
-    did10 = from_did.delete_prefix("did:ppld:")[0,10]
+    did10 = from_did.delete_prefix("did:pplc:")[0,10]
     f = File.open(did10 + "_private_key.b58")
     key_encoded = f.read
     f.close

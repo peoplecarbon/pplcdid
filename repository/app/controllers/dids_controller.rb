@@ -68,14 +68,14 @@ class DidsController < ApplicationController
                    status: 400
             return
         end
-        if did[0,8] != "did:ppld:"
+        if did[0,8] != "did:pplc:"
             render json: {"error": "invalid DID"},
                    stauts: 412
             return
         end
         didLocation = did.split(LOCATION_PREFIX)[1] rescue ""
         didHash = did.split(LOCATION_PREFIX)[0] rescue did
-        didHash = didHash.delete_prefix("did:ppld:")
+        didHash = didHash.delete_prefix("did:pplc:")
         if !Did.find_by_did(didHash).nil?
             render json: {"message": "DID already exists"},
                    status: 200
@@ -301,7 +301,7 @@ class DidsController < ApplicationController
                     end
 
                     # create DID
-                    did = "did:ppld:" + Ppldid.hash(Ppldid.canonical(did_obj))
+                    did = "did:pplc:" + Ppldid.hash(Ppldid.canonical(did_obj))
                     logs = [options[:log_create], options[:log_terminate]]
                     success, msg = Ppldid.publish(did, did_obj, logs, options)
                     if success
@@ -413,7 +413,7 @@ class DidsController < ApplicationController
                 end
 
                 # update DID
-                did = "did:ppld:" + Ppldid.hash(Ppldid.canonical(did_obj))
+                did = "did:pplc:" + Ppldid.hash(Ppldid.canonical(did_obj))
                 logs = [options[:log_revoke], options[:log_update], options[:log_terminate]]
                 success, msg = Ppldid.publish(did, did_obj, logs, options)
                 if success

@@ -1,2 +1,2 @@
 # PPLDID Gem
-Peopledata DID Gem packages.
+Peoplecarbon DID Gem packages.

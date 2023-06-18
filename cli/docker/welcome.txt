@@ -2,12 +2,12 @@
 Welcome to PPLCID
 
 Installed components:
-* pplcid - version: ${pplcid}
+* pplcdid - version: ${pplcdid}
 * jq - version: ${jq}
 
-More information: https://github.com/peoplecarbon/pplcid/
+More information: https://github.com/peoplecarbon/pplcdid/
 
 Example:
-$ pplcid read did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
+$ pplcdid read did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
 
-For a listing of options, use /usr/local/bin/pplcid --help.
+For a listing of options, use /usr/local/bin/pplcdid --help.

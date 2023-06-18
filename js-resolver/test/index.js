@@ -1,8 +1,8 @@
 const { Resolver } = require('did-resolver');
-const pplcid = require('../dist/index.js');
+const pplcdid = require('../dist/index.js');
 
 const resolver = new Resolver({
-  ...pplcid.getResolver()
+  ...pplcdid.getResolver()
 });
 
 // resolve test-did

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pplcid
+  name: pplcdid
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: pplcid
+      app: pplcdid
   template:
     metadata:
       labels:
-        app: pplcid
+        app: pplcdid
     spec:
       containers:
-      - name: pplcid
-        image: pplcid/did-base:latest
+      - name: pplcdid
+        image: pplcdid/did-base:latest
         ports:
         - containerPort: 3000
         env:
@@ -35,10 +35,10 @@ spec:
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: pplcid-secrets
+                name: pplcdid-secrets
                 key: db-passwd
           - name: SECRET_KEY_BASE
             valueFrom:
               secretKeyRef:
-                name: pplcid-secrets
+                name: pplcdid-secrets
                 key: secret-key-base

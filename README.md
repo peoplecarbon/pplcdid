@@ -4,7 +4,7 @@ Peoplecarbon DID (pplc-did) provides a self-sustained environment for managing d
 
 ## Quick Start
 
-1. Build `pplcid` gem
+1. Build `pplcdid` gem
 
 ```bash
 $ cd ruby-gem
@@ -12,11 +12,11 @@ $ cd ruby-gem
 Change or update `Gemfile` and build.
 
 ```bash
-$ gem build pplcid.gemspec
+$ gem build pplcdid.gemspec
 ```
-Then, `pplcid-1.2.3.gem` has built. After Test it, then push it to Gemhub.
+Then, `pplcdid-1.2.3.gem` has built. After Test it, then push it to Gemhub.
 ```bash
-$ gem push pplcid-1.2.3.gem
+$ gem push pplcdid-1.2.3.gem
   email:
   pass:
 ```
@@ -44,14 +44,14 @@ $ docker push <your_username>/<image_name>:<tag>
 * `pplc-did` commandline tool:    
     * Sources: https://github.com/peoplecarbon/pplc-did/tree/main/cli    
     * run in a Docker image: https://hub.docker.com/peoplecarbon/pplc-did-cli     
-    * Tutorial and examples: https://github.com/peoplecarbon/pplcid/tree/main/tutorial
+    * Tutorial and examples: https://github.com/peoplecarbon/pplcdid/tree/main/tutorial
 * host pplc-dids yourself in a repository:    
     * Sources: https://github.com/peoplecarbon/pplc-did/tree/main/repository    
     * use the `peoplecarbon/pplc-base` image on Dockerhub: https://hub.docker.com/r/peoplecarbon/pplc-base    
     * API documentation is available here: https://peoplecarbon.github.io/docs/   
-* Universal Resolver driver: https://github.com/peoplecarbon/pplcid/tree/main/uniresolver-plugin    
-* Universal Registrar driver : https://github.com/peoplecarbon/pplcid/tree/main/uni-registrar-driver-did-pplc    
-* JS library for [`did-resolver`](https://github.com/decentralized-identity/did-resolver): https://github.com/peoplecarbon/pplcid/tree/main/js-resolver
+* Universal Resolver driver: https://github.com/peoplecarbon/pplcdid/tree/main/uniresolver-plugin    
+* Universal Registrar driver : https://github.com/peoplecarbon/pplcdid/tree/main/uni-registrar-driver-did-pplc    
+* JS library for [`did-resolver`](https://github.com/decentralized-identity/did-resolver): https://github.com/peoplecarbon/pplcdid/tree/main/js-resolver
 
 
 

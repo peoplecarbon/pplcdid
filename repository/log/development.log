@@ -119,7 +119,7 @@ Started GET "/doc/did:pplc:zQmYNqkGmB89TapZfc9WPQjfVbLNWBCrMXh5K8UdhzPWrs6" for 
 SyntaxError - syntax error, unexpected ':', expecting '}'
 puts {"error": result["message"].to_s}.to_j...
              ^
-/Users/christoph/semcon/pplcid/repository/app/controllers/dids_controller.rb:44: syntax error, unexpected '}', expecting keyword_end
+/Users/christoph/semcon/pplcdid/repository/app/controllers/dids_controller.rb:44: syntax error, unexpected '}', expecting keyword_end
 ...error": result["message"].to_s}.to_json
 ...                              ^:
   app/controllers/dids_controller.rb:44:in `'
@@ -129,7 +129,7 @@ Started GET "/doc/did:pplc:zQmYNqkGmB89TapZfc9WPQjfVbLNWBCrMXh5K8UdhzPWrs6" for 
 SyntaxError - syntax error, unexpected =>, expecting '}'
 puts {"error" => result["message"].to_s}.to_j...
               ^~
-/Users/christoph/semcon/pplcid/repository/app/controllers/dids_controller.rb:44: syntax error, unexpected '}', expecting keyword_end
+/Users/christoph/semcon/pplcdid/repository/app/controllers/dids_controller.rb:44: syntax error, unexpected '}', expecting keyword_end
 ...ror" => result["message"].to_s}.to_json
 ...                              ^:
   app/controllers/dids_controller.rb:44:in `'
@@ -185,7 +185,7 @@ Started GET "/doc/did:pplc:zQmYNqkGmB89TapZfc9WPQjfVbLNWBCrMXh5K8UdhzPWrs6" for 
 SyntaxError - syntax error, unexpected ':', expecting '}'
 puts {"hello": "world"}.to_json
              ^
-/Users/christoph/semcon/pplcid/repository/app/controllers/dids_controller.rb:31: syntax error, unexpected '}', expecting keyword_end
+/Users/christoph/semcon/pplcdid/repository/app/controllers/dids_controller.rb:31: syntax error, unexpected '}', expecting keyword_end
 puts {"hello": "world"}.to_json
                       ^:
   app/controllers/dids_controller.rb:31:in `'

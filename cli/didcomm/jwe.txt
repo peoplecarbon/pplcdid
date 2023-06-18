@@ -1,4 +1,4 @@
-require 'pplcid'
+require 'pplcdid'
 require 'rbnacl'
 require 'jwt'
 
@@ -9,7 +9,7 @@ f = File.open("zQmcd1WLbr_private_key.b58")
 key_encoded = f.read
 f.close
 # key_encoded = "z1S5hN3SzvzugTSDnQ5mcKsAJpiDziXVa6RZavdsgQHjHQRt"
-code, length, digest = pplcid.decode(key_encoded).unpack('SCa*')
+code, length, digest = pplcdid.decode(key_encoded).unpack('SCa*')
 private_key = RbNaCl::Signatures::Ed25519::SigningKey.new(digest)
 # public_key = private_key.verify_key
 token = JWT.encode payload, private_key, 'ED25519'
@@ -22,7 +22,7 @@ did_json = f.read
 f.close
 didDoc = JSON.parse(did_json)
 public_key_encoded = didDoc["verificationMethod"].first["publicKeyBase58"]
-code, length, digest = pplcid.decode(public_key_encoded).unpack('CCa*')
+code, length, digest = pplcdid.decode(public_key_encoded).unpack('CCa*')
 public_key = RbNaCl::Signatures::Ed25519::VerifyKey.new(digest)
 decoded_token = JWT.decode token, public_key, true, { algorithm: 'ED25519' }
 puts decoded_token
@@ -32,13 +32,13 @@ puts decoded_token
 
 # PPLCID examples ===============================================
 
-# create plain text message (in pplcid/cli/didcomm) -------------
-echo '{"my":"message"}' | ../pplcid.rb message --type https://pplcid.peoplecarbon.org/pplcid/0.1/example --to did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
+# create plain text message (in pplcdid/cli/didcomm) -------------
+echo '{"my":"message"}' | ../pplcdid.rb message --type https://pplcdid.peoplecarbon.org/pplcdid/0.1/example --to did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
 
 # output:
 {
   "id": 171665990236413,
-  "type": "https://pplcid.peoplecarbon.org/pplcid/0.1/example",
+  "type": "https://pplcdid.peoplecarbon.org/pplcdid/0.1/example",
   "to": [
     "did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux"
   ],
@@ -49,40 +49,40 @@ echo '{"my":"message"}' | ../pplcid.rb message --type https://pplcid.peoplecarbo
 }
 
 # msg to file:
-echo '{"my":"message"}' | ../pplcid.rb message --type https://pplcid.peoplecarbon.org/pplcid/0.1/example --to did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux > test.dcpm
+echo '{"my":"message"}' | ../pplcdid.rb message --type https://pplcdid.peoplecarbon.org/pplcdid/0.1/example --to did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux > test.dcpm
 
 
 # sign plain text message and generate JWS ---------------------
-cat test.dcpm | ../pplcid.rb jws --type my-protocol/0.1 --sign-did did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
+cat test.dcpm | ../pplcdid.rb jws --type my-protocol/0.1 --sign-did did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
 
 # to file:
-cat test.dcpm | ../pplcid.rb jws --type my-protocol/0.1 --sign-did did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux > test.dcsm
+cat test.dcpm | ../pplcdid.rb jws --type my-protocol/0.1 --sign-did did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux > test.dcsm
 
 # verify JWS ---------------------------------------------------
-cat test.dcsm | ../pplcid.rb verify-jws
+cat test.dcsm | ../pplcdid.rb verify-jws
 
 
 # encrypt plain text message -----------------------------------
-echo '{"id":528784186798112,"type":"https://pplcid.peoplecarbon.org/pplcid/0.1/example","to":["did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux"],"created_time":1655244533,"body":{"my":"message"}}' | ../pplcid.rb encrypt  --from did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
+echo '{"id":528784186798112,"type":"https://pplcdid.peoplecarbon.org/pplcdid/0.1/example","to":["did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux"],"created_time":1655244533,"body":{"my":"message"}}' | ../pplcdid.rb encrypt  --from did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
 
 # short: 
-cat test.dcpm | ../pplcid.rb encrypt-message  --from did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux 
+cat test.dcpm | ../pplcdid.rb encrypt-message  --from did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux 
 
 # to file:
-cat test.dcpm | ../pplcid.rb encrypt-message  --from did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux > test_crypt.jwt
+cat test.dcpm | ../pplcdid.rb encrypt-message  --from did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux > test_crypt.jwt
 
 
 # decrypt plain text message -----------------------------------
-cat test_crypt.jwt | ../pplcid.rb decrypt-jwt  --from did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
+cat test_crypt.jwt | ../pplcdid.rb decrypt-jwt  --from did:pplc:zQmcd1WLbrMQSa3SGcb1Vx3skv9Ah2JWSnueaojp8K4Nbux
 
 
 # create JWS ---------------------------------------------------
-cat test.dcpm | ../pplcid.rb sign-message --hmac_secret secret
+cat test.dcpm | ../pplcdid.rb sign-message --hmac_secret secret
 
 # to file:
-cat test.dcpm | ../pplcid.rb sign-message --hmac_secret secret > test.dcsm
+cat test.dcpm | ../pplcdid.rb sign-message --hmac_secret secret > test.dcsm
 
 # verify JWS ---------------------------------------------------
-cat test.dcsm | ../pplcid.rb verify-signed-message --hmac_secret secret
+cat test.dcsm | ../pplcdid.rb verify-signed-message --hmac_secret secret
 
 

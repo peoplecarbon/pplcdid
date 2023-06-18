@@ -13,7 +13,7 @@ require 'dag'
 require 'uri'
 
 LOCATION_PREFIX = "@"
-DEFAULT_LOCATION = "http://pplcid.peoplecarbon.org"
+DEFAULT_LOCATION = "http://pplcdid.peoplecarbon.org"
 
 def ppld_encode(message)
     Multibases.pack("base58btc", message).to_s
@@ -1126,7 +1126,7 @@ def sc_token(did, options)
     end
 
     # authenticate against container
-    init_url = doc_location + "/api/pplcid/init"
+    init_url = doc_location + "/api/pplcdid/init"
     sid = SecureRandom.hex(20).to_s
 
     response = HTTParty.post(init_url,
@@ -1146,7 +1146,7 @@ def sc_token(did, options)
     challenge = response["challenge"].to_s
 
     # sign challenge and request token
-    token_url = doc_location + "/api/pplcid/token"
+    token_url = doc_location + "/api/pplcdid/token"
     response = HTTParty.post(token_url,
         headers: { 'Content-Type' => 'application/json' },
         body: { "session_id": sid, 
@@ -1208,7 +1208,7 @@ def sc_create(content, did, options)
 end
 
 def print_help()
-    puts "Usage: pplcid [OPERATION] [OPTION]"
+    puts "Usage: pplcdid [OPERATION] [OPTION]"
     puts "manage DIDs using the pplc:did method"
     puts ""
     puts "OPERATION"

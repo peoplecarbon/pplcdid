@@ -5,10 +5,10 @@ require 'securerandom'
 require 'httparty'
 require 'optparse'
 require 'uri'
-require 'pplcid'
+require 'pplcdid'
 
 LOCATION_PREFIX = "@"
-DEFAULT_LOCATION = "https://pplcid.peoplecarbon.org"
+DEFAULT_LOCATION = "https://pplcdid.peoplecarbon.org"
 VERSION = "1.3.0"
 
 # internal functions -------------------------------
@@ -320,11 +320,11 @@ end
 # user info -------------------------------
 
 def print_version()
-    puts VERSION.to_s + " (pplcid gem: v" + Gem.loaded_specs["pplcid"].version.to_s + ")"
+    puts VERSION.to_s + " (pplcdid gem: v" + Gem.loaded_specs["pplcdid"].version.to_s + ")"
 end
 
 def print_help()
-    puts "pplcid - manage DIDs using the pplc:did method [version " + VERSION + "]"
+    puts "pplcdid - manage DIDs using the pplc:did method [version " + VERSION + "]"
     puts ""
     puts "Usage: pplc-cli [OPERATION] [OPTION]"
     puts ""

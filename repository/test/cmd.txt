@@ -14,6 +14,6 @@ echo '[9]' | $PPLDIDCMD create --doc-pwd pwd1 --rev-pwd pwd2 --json-output | jq 
 
 
 echo '{"short": "lived"}' | \
-    ../pplcid.rb create --doc-pwd pwd1 --rev-pwd pwd2 --json-output | \
+    ../pplcdid.rb create --doc-pwd pwd1 --rev-pwd pwd2 --json-output | \
     jq '{identifier: .did, secret:{doc_pwd: "pwd1", rev_pwd:"pwd2"}}' | \
     curl -H "Content-Type: application/json" -d @- -X POST http://localhost:3000/1.0/deactivate

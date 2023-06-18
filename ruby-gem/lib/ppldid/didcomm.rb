@@ -37,10 +37,10 @@ class Pplcid
         error = ""
         decoded_payload = JWT.decode token, nil, false
         pubkey_did = decoded_payload.last["kid"]
-        result, msg = pplcid.read(pubkey_did, options)
-        public_key_encoded = pplcid.w3c(result, options)["authentication"].first["publicKeyMultibase"]
+        result, msg = pplcdid.read(pubkey_did, options)
+        public_key_encoded = pplcdid.w3c(result, options)["authentication"].first["publicKeyMultibase"]
         begin
-            code, length, digest = pplcid.decode(public_key_encoded).unpack('CCa*')
+            code, length, digest = pplcdid.decode(public_key_encoded).unpack('CCa*')
             case Multicodecs[code].name
             when 'ed25519-pub'
                 public_key = RbNaCl::Signatures::Ed25519::VerifyKey.new(digest)
@@ -72,7 +72,7 @@ class Pplcid
 
     def self.msg_decrypt(token, public_key_encoded)
         error = ""
-        code, length, digest = pplcid.decode(public_key_encoded).unpack('CCa*')
+        code, length, digest = pplcdid.decode(public_key_encoded).unpack('CCa*')
         case Multicodecs[code].name
         when 'ed25519-pub'
             public_key = RbNaCl::Signatures::Ed25519::VerifyKey.new(digest)
@@ -102,13 +102,13 @@ class Pplcid
     # DID Auth for data container with challenge ---
     def self.token_from_challenge(host, pwd)
         sid = SecureRandom.hex(20).to_s
-        retVal = HTTParty.post(host + "/pplcid/init",
+        retVal = HTTParty.post(host + "/pplcdid/init",
                     headers: { 'Content-Type' => 'application/json' },
                     body: { "session_id": sid }.to_json )
         challenge = retVal.parsed_response["challenge"]
-        signed_challenge = pplcid.sign(challenge, pplcid.generate_private_key(pwd).first).first
-        public_key = pplcid.public_key(pplcid.generate_private_key(pwd).first).first
-        retVal = HTTParty.post(host + "/pplcid/token",
+        signed_challenge = pplcdid.sign(challenge, pplcdid.generate_private_key(pwd).first).first
+        public_key = pplcdid.public_key(pplcdid.generate_private_key(pwd).first).first
+        retVal = HTTParty.post(host + "/pplcdid/token",
                     headers: { 'Content-Type' => 'application/json' },
                     body: {
                         "session_id": sid,

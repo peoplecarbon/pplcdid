@@ -11,7 +11,7 @@ info:
     url: https://opensource.org/licenses/MIT
 
 servers:
-- url: https://pplcid.peoplecarbon.org/
+- url: https://pplcdid.peoplecarbon.org/
   description: Official production system hosted by Peoplecarbon.
 security:
   - BearerAuth: []

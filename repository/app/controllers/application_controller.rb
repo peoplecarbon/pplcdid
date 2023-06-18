@@ -29,21 +29,21 @@ class ApplicationController < ActionController::API
         output = "<html><head><title>PPLCID - DID for People</title>"
         output +="</head><body>"
         output +="<h1>PPLCID Repository</h1>"
-        output +="<p>Version: " + VERSION.to_s + " (pplcid gem v" + Gem.loaded_specs["pplcid"].version.to_s + ")</p>"
+        output +="<p>Version: " + VERSION.to_s + " (pplcdid gem v" + Gem.loaded_specs["pplcdid"].version.to_s + ")</p>"
         output +="<p><strong>Statistics</strong> for this repository:</p><ul>"
         output +="<li>DIDs: " + Did.count.to_s + "</li>"
         output +="<li>Logs: " + Log.count.to_s + "</li>"
         output +="</ul><p>Find more information here:</p><ul>"
         output +='<li>Swagger: <a href="/api-docs">PPLCID API Documentation</a></li>'
-        output +='<li>Specification: <a href="https://peoplecarbon.github.io/pplcid">https://peoplecarbon.github.io/pplcid/</a></li>'
-        output +='<li>Github: <a href="https://github.com/peoplecarbon/pplcid/">https://github.com/peoplecarbon/pplcid/</a></li>'
+        output +='<li>Specification: <a href="https://peoplecarbon.github.io/pplcdid">https://peoplecarbon.github.io/pplcdid/</a></li>'
+        output +='<li>Github: <a href="https://github.com/peoplecarbon/pplcdid/">https://github.com/peoplecarbon/pplcdid/</a></li>'
         output +="</ul></body></html>" 
         render html: output.html_safe, 
                status: 200
     end
 
     def version
-        render json: {"service": "pplcid repository", "version": VERSION.to_s, "pplcid-gem": Gem.loaded_specs["pplcid"].version.to_s}.to_json,
+        render json: {"service": "pplcdid repository", "version": VERSION.to_s, "pplcdid-gem": Gem.loaded_specs["pplcdid"].version.to_s}.to_json,
                status: 200
     end    
 

@@ -21,7 +21,7 @@ include ApplicationHelper
 
     def create
         did = params[:did]
-        my_hash = pplcid.hash(pplcid.canonical(params[:log]))
+        my_hash = pplcdid.hash(pplcdid.canonical(params[:log]))
         if Log.find_by_oyd_hash(my_hash).nil?
             @log = Log.new(did: did, item: params[:log].to_json, oyd_hash: my_hash, ts: Time.now.to_i)
             if @log.save

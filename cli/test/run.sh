@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-PPLDIDCMD='../pplcid.rb'
-#PPLDIDCMD='pplcid'
+PPLDIDCMD='../pplcdid.rb'
+#PPLDIDCMD='pplcdid'
 
 # install current version
 # sh -c "curl -fsSL https://raw.githubusercontent.com/peoplecarbon/did-cmd/main/install.sh | sh"
@@ -172,7 +172,7 @@ fi
 rm tmp.doc
 
 # test to/fromW3C
-cat c1/pplcid.did | PPLDIDCMD toW3C > tmp.doc
+cat c1/pplcdid.did | PPLDIDCMD toW3C > tmp.doc
 if ! cmp -s tmp.doc c1/w3c.did ; then
 	echo "converting toW3C failed"
 	rm tmp.doc
@@ -181,7 +181,7 @@ fi
 rm tmp.doc
 
 cat c1/w3c.did | PPLDIDCMD fromW3C > tmp.doc
-if ! cmp -s tmp.doc c1/pplcid.did ; then
+if ! cmp -s tmp.doc c1/pplcdid.did ; then
 	echo "converting fromW3C failed"
 	rm tmp.doc
 	exit 1

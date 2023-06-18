@@ -1,9 +1,9 @@
-# run pytest locally in pplcid/cli/pytest
-export PPLCIDCMD='../pplcid.rb'
+# run pytest locally in pplcdid/cli/pytest
+export PPLCIDCMD='../pplcdid.rb'
 pytest
 
 # run pytest in CLI image
-docker run -it --rm -w /usr/src/pytest -e PPLDIDCMD=pplcid peoplecarbon/pplc-cli pytest
+docker run -it --rm -w /usr/src/pytest -e PPLDIDCMD=pplcdid peoplecarbon/pplc-cli pytest
 
 
 # demonstrating update without passwords

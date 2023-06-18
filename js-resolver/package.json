@@ -7,7 +7,7 @@
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com/peoplecarbon/pplcid"
+    "url": "git@github.com/peoplecarbon/pplcdid"
   },
   "files": [
     "dist"
@@ -17,7 +17,7 @@
     "DID",
     "DID document",
     "resolver",
-    "pplcid",
+    "pplcdid",
     "peoplecarbon",
     "registry"
   ],

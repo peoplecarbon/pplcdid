@@ -1,6 +1,6 @@
 version: "3"
 services:
-  pplcid:
+  pplcdid:
     image: peoplecarbon/pplc-base:arm64v8
     environment:
       DID_DB: "external"

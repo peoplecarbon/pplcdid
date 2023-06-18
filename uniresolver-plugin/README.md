@@ -5,7 +5,7 @@ This is a [Universal Resolver](https://github.com/decentralized-identity/univers
 ## Specifications
 
 * [Decentralized Identifiers](https://w3c.github.io/did-core/)
-* [PPLCID Method Specification](https://peoplecarbon.github.io/pplcid/)
+* [PPLCID Method Specification](https://peoplecarbon.github.io/pplcdid/)
 
 ## Example DIDs
 

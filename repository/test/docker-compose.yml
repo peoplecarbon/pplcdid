@@ -1,6 +1,6 @@
 version: "3"
 services:
-  pplcid:
+  pplcdid:
     image: peoplecarbon/pplc-base:latest
     environment:
       DID_DB: "external"

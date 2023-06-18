@@ -1,1 +1,1 @@
-curl http://pplcid.peoplecarbon.org:3000/1.0/identifiers/:
+curl http://pplcdid.peoplecarbon.org:3000/1.0/identifiers/:

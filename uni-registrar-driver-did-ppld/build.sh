@@ -22,7 +22,7 @@ while [ $# -gt 0 ]; do
         --local*)
             # setopt localoptions rmstarsilent
             rm -f docker/local-gem/*
-            cp ../ruby-gem/pkg/pplcid-`cat ../ruby-gem/VERSION`.gem docker/local-gem
+            cp ../ruby-gem/pkg/pplcdid-`cat ../ruby-gem/VERSION`.gem docker/local-gem
             BUILD_LOCAL=true
             DOCKERFILE="${DOCKERFILE}-local"
             ;;

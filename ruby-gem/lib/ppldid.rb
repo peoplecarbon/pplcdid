@@ -10,16 +10,16 @@ require 'multibases'
 require 'multihashes'
 require 'multicodecs'
 require 'json/canonicalization'
-require './pplcid/basic'
-require './pplcid/log'
-require './pplcid/didcomm'
+require './pplcdid/basic'
+require './pplcdid/log'
+require './pplcdid/didcomm'
 
 class Pplcid
 
-    # pplcid-base server 
+    # pplcdid-base server 
 
     LOCATION_PREFIX = "@"
-    DEFAULT_LOCATION = "http://pplcid.peoplecarbon.org:3000" 
+    DEFAULT_LOCATION = "http://pplcdid.peoplecarbon.org:3000" 
 
     # expected DID format: did:pplc:123
     def self.read(did, options)
@@ -141,7 +141,7 @@ class Pplcid
     end
 
     def self.simulate_did(content, did, mode, options)
-        user_did, didDocument, revoc_log, l1, l2, r1, privateKey, revocationKey, did_old, log_old, msg = pplcid.generate_base(content, did, mode, options)
+        user_did, didDocument, revoc_log, l1, l2, r1, privateKey, revocationKey, did_old, log_old, msg = pplcdid.generate_base(content, did, mode, options)
         return [user_did, msg]
     end
     

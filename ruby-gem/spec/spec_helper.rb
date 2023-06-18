@@ -23,7 +23,7 @@ begin
 rescue LoadError
 end
 
-require 'pplcid'
+require 'pplcdid'
 
 ::RSpec.configure do |c|
   c.filter_run focus: true

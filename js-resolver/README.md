@@ -1,16 +1,16 @@
 # `did:pplc` Resolver
 
-This library is intended to use [PPLCID](https://github.com/peoplecarbon/pplcid) as fully self-managed Decentralized Identifiers and wrap them in a DID Document
+This library is intended to use [PPLCID](https://github.com/peoplecarbon/pplcdid) as fully self-managed Decentralized Identifiers and wrap them in a DID Document
 
 It supports the proposed [Decentralized Identifiers](https://w3c.github.io/did-core/#identifier) spec from the [W3C Credentials Community Group](https://w3c-ccg.github.io/).
 
-It requires the [`did-resolver`](https://github.com/decentralized-identity/did-resolver) library, which is the primary interface for resolving DIDs. Also it is dependent on a hosted resolver that can resolve PPLCID DIDs. Such an implementation can be found here: https://github.com/peoplecarbon/pplcid
+It requires the [`did-resolver`](https://github.com/decentralized-identity/did-resolver) library, which is the primary interface for resolving DIDs. Also it is dependent on a hosted resolver that can resolve PPLCID DIDs. Such an implementation can be found here: https://github.com/peoplecarbon/pplcdid
 
 There is also a publicly available resolver at https://pplc-resolver.peoplecarbon.org, which is used as fallback resolver within this library.
 
 ## DID method
 
-The `did:pplc` method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document. Read more about PPLCID at https://github.com/peoplecarbon/pplcid
+The `did:pplc` method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document. Read more about PPLCID at https://github.com/peoplecarbon/pplcdid
 
 Example:    
 `did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh`
@@ -20,7 +20,7 @@ Example:
 Node.js and npm are prerequisites for installation.
 
 ```bash
-npm install pplcid-did-resolver
+npm install pplcdid-did-resolver
 ```
 
 ## Usage
@@ -29,10 +29,10 @@ The library presents a `resolve()` functions that returns a `Promise` returning 
 
 ```javascript
 const { Resolver } = require('did-resolver');
-const pplcid = require('pplcid-did-resolver');
+const pplcdid = require('pplcdid-did-resolver');
 
 const resolver = new Resolver({
-  ...pplcid.getResolver()
+  ...pplcdid.getResolver()
 });
 
 // resolve test-did
@@ -77,7 +77,7 @@ A minimal DID document using the above sample DID looks like this:
   },
   "didDocumentMetadata": {
     "did": "zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh",
-    "registry": "https://pplcid.peoplecarbon.org",
+    "registry": "https://pplcdid.peoplecarbon.org",
     "log_hash": "zQmVwMvovLy5KNYHHVHQ1wv8J7y9L6UPE8eyU4tzypFWtYe",
     "log": [
       {

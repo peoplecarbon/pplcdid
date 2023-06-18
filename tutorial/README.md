@@ -7,7 +7,7 @@ This tutorial introduces the use of `did:pplc` DIDs with the following sections:
 1) **[Deployment:](#deployment)** various options to run a DID repository locally, with a PostgreSQL DB backend, or on a Kubernetes cluster    
 	a) [Local Deployment](#local-deployment)    
 	b) [PostgreSQL Backend](#persisting-dids-in-postgresql)    
-	c) [Kubernetes Cluster](#run-an-pplcid-repository-on-a-kubernetes-cluster)    
+	c) [Kubernetes Cluster](#run-an-pplcdid-repository-on-a-kubernetes-cluster)    
 2) **[DID Life-cycle:](#did-life-cycle)** describes the typical life-cycle of a DID using concrete and simple examples of entities exchanging information
 
 
@@ -58,7 +58,7 @@ For a more serious evaluation of PPLCID you might want to persist DIDs, associat
 ```yaml
 version: "3"
 services:
-  pplcid:
+  pplcdid:
     image: peoplecarbon/pplc-base:latest
     environment:
       DID_DB: "external"
@@ -89,7 +89,7 @@ docker run -it --rm --network host peoplecarbon/pplc-cli
 
 Create a new DID: 
 ```console
-echo '{"my":"test"}' | pplcid create -l http://localhost:3000
+echo '{"my":"test"}' | pplcdid create -l http://localhost:3000
 ```
 Output:
 `created did:pplc:zQmUogZxErEgXgzEMv9zXK9qnBBYzZfiHvQ4FJiXhZsdFqH%40http%3A%2F%2Flocalhost:3000`
@@ -97,12 +97,12 @@ Output:
 
 Resolve the DID:
 ```console
-pplcid read did:pplc:zQmUogZxErEgXgzEMv9zXK9qnBBYzZfiHvQ4FJiXhZsdFqH%40http%3A%2F%2Flocalhost:3000
+pplcdid read did:pplc:zQmUogZxErEgXgzEMv9zXK9qnBBYzZfiHvQ4FJiXhZsdFqH%40http%3A%2F%2Flocalhost:3000
 ```
 
 and show the DID in the W3C-conform representation:
 ```console
-pplcid read --w3c-did did:pplc:zQmUogZxErEgXgzEMv9zXK9qnBBYzZfiHvQ4FJiXhZsdFqH%40http%3A%2F%2Flocalhost:3000 | jq
+pplcdid read --w3c-did did:pplc:zQmUogZxErEgXgzEMv9zXK9qnBBYzZfiHvQ4FJiXhZsdFqH%40http%3A%2F%2Flocalhost:3000 | jq
 ```
 
 with the output:
@@ -139,14 +139,14 @@ docker-compose -f docker-compose.yml down
 
 ### Run an PPLCID Repository on a Kubernetes Cluster
 
-The production site for the [default PPLCID repository](https://pplcid.pplcid.peoplecarbon.org) (at https://pplcid.pplcid.peoplecarbon.org) is hosted on a Kubernetes cluster with a dedicated PostreSQL cluster. The follwing files were used as setup on this Kubernetes cluster (currently at v1.91.2):
+The production site for the [default PPLCID repository](https://pplcdid.pplcdid.peoplecarbon.org) (at https://pplcdid.pplcdid.peoplecarbon.org) is hosted on a Kubernetes cluster with a dedicated PostreSQL cluster. The follwing files were used as setup on this Kubernetes cluster (currently at v1.91.2):
 * [deplyoment.yaml](res/deployment.yaml)    
 * [service.yaml](res/service.yaml)
 * [ingress.yaml](res/ingress.yaml)
 * [cert.yaml](res/cert.yaml)
 * [secrets.yaml](res/secrets.yaml)
 
-If you have any questions about setting up an PPLCID repository on Kubernetes don't hesitate to [contact us](mailto:support@pplcid.peoplecarbon.org)!
+If you have any questions about setting up an PPLCID repository on Kubernetes don't hesitate to [contact us](mailto:support@pplcdid.peoplecarbon.org)!
 
 [back to top](#)
 
@@ -163,16 +163,16 @@ Each step describes a task performed by one of the actors and provides commands 
 ### Prerequisites
 
 To execute commands in the steps below make sure to have the following tools installed:    
-* `pplcid`: download and installation instructions [available here](https://github.com/peoplecarbon/pplcid/tree/main/cli)    
+* `pplcdid`: download and installation instructions [available here](https://github.com/peoplecarbon/pplcdid/tree/main/cli)    
 * `jq`: download and installation instructions [available here](https://stedolan.github.io/jq/download/)    
 
 Alternatively, you can use a ready-to-use Docker image with all tools pre-installed: [https://hub.docker.com/r/peoplecarbon/pplc-base](https://hub.docker.com/r/peoplecarbon/pplc-base). Use the following command to start the image:    
 
 ```console
-docker run -it --rm --network host -v ~/.pplcid:/home/pplcid peoplecarbon/pplcid-cli
+docker run -it --rm --network host -v ~/.pplcdid:/home/pplcdid peoplecarbon/pplcdid-cli
 ```
 
-*Note:* since it makes sense to keep private keys and revocation information beyond a Docker session a directory is mounted in the container to persist files; create a local directory, `mkdir ~/.pplcid`
+*Note:* since it makes sense to keep private keys and revocation information beyond a Docker session a directory is mounted in the container to persist files; create a local directory, `mkdir ~/.pplcdid`
 
 
 ### Alice creates a DID to document an available service endpoint
@@ -181,7 +181,7 @@ Alice provides a service endpoint and wants to share this information in a DID d
 
 run the following command:    
 ```console
-echo '{"service":"https://business.data-container.net/api/data"}' | pplcid create
+echo '{"service":"https://business.data-container.net/api/data"}' | pplcdid create
 ```
 
 
@@ -191,7 +191,7 @@ Bob receives the DID (e.g., `did:pplc:123aBz`) and wants to resolve the linked D
 
 run the following command:    
 ```console
-pplcid read 123aBz
+pplcdid read 123aBz
 ```
 
 
@@ -201,7 +201,7 @@ Alice moves her data to another service and wants to update the service endpoint
 
 run the following command:    
 ```console
-echo '{"service":"https://biz2.data-container.net/api/data"}' | pplcid update 123aBz
+echo '{"service":"https://biz2.data-container.net/api/data"}' | pplcdid update 123aBz
 ```
 
 
@@ -211,7 +211,7 @@ Bob has a stake in the DID document published by Alice and therefore, wants to m
 
 run the following command:    
 ```console
-pplcid clone 456aBz -l https://did2.data-container.net
+pplcdid clone 456aBz -l https://did2.data-container.net
 ```
 
 
@@ -221,7 +221,7 @@ Alice wants to publish the information that the previously released DID document
 
 run the following command:    
 ```console
-pplcid revoke 456aBz
+pplcdid revoke 456aBz
 ```
 
 [back to top](#)
@@ -230,7 +230,7 @@ pplcid revoke 456aBz
 
 ## PPLCID Tutorial
 
-Please report bugs and suggestions for new features using the [GitHub Issue-Tracker](https://github.com/peoplecarbon/pplcid/issues) and follow the [Contributor Guidelines](https://github.com/twbs/ratchet/blob/master/CONTRIBUTING.md).
+Please report bugs and suggestions for new features using the [GitHub Issue-Tracker](https://github.com/peoplecarbon/pplcdid/issues) and follow the [Contributor Guidelines](https://github.com/twbs/ratchet/blob/master/CONTRIBUTING.md).
 
 If you want to contribute, please follow these steps:
 

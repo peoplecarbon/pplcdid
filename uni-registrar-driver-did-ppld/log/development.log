@@ -529,7 +529,7 @@ Completed 500 Internal Server Error in 4ms
 
 
 
-NoMethodError - undefined method `fromW3C' for pplcid:Class:
+NoMethodError - undefined method `fromW3C' for pplcdid:Class:
   app/controllers/dids_controller.rb:64:in `create'
 
 Started POST "/1.0/create" for ::1 at 2022-03-12 23:43:39 +0100
@@ -1036,7 +1036,7 @@ Completed 500 Internal Server Error in 4ms
 
 
 
-NoMethodError - undefined method `verfiy' for pplcid:Class
+NoMethodError - undefined method `verfiy' for pplcdid:Class
 Did you mean?  verify:
   app/controllers/dids_controller.rb:89:in `create'
 

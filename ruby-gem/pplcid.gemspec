@@ -5,16 +5,16 @@ Gem::Specification.new do |gem|
     gem.version               = File.read('VERSION').chomp
     gem.date                  = File.mtime('VERSION').strftime('%Y-%m-%d')
 
-    gem.name                  = "pplcid"
-    gem.homepage              = "http://github.com/peoplecarbon/pplcid"
+    gem.name                  = "pplcdid"
+    gem.homepage              = "http://github.com/peoplecarbon/pplcdid"
     gem.license               = 'Apache'
     gem.summary               = "Decentralized IDentifier for Carbon Dioxide Removal."
     gem.description           = "This gem provides the basic methods for managing did:pplc."
     gem.metadata           = {
-        "documentation_uri" => "https://peoplecarbon.github.io/pplcid",
-        "bug_tracker_uri"   => "https://github.com/peoplecarbon/pplcid/issues",
-        "homepage_uri"      => "http://github.com/peoplecarbon/pplcid",
-        "source_code_uri"   => "http://github.com/peoplecarbon/pplcid/tree/main/ruby-gem",
+        "documentation_uri" => "https://peoplecarbon.github.io/pplcdid",
+        "bug_tracker_uri"   => "https://github.com/peoplecarbon/pplcdid/issues",
+        "homepage_uri"      => "http://github.com/peoplecarbon/pplcdid",
+        "source_code_uri"   => "http://github.com/peoplecarbon/pplcdid/tree/main/ruby-gem",
     }
 
     gem.authors               = ['Jerry Zhang']

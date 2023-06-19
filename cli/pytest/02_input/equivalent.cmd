@@ -1,1 +1,1 @@
-curl -s https://ppld-resolver.data-container.net/1.0/identifiers/did:pplc:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR
+curl -s https://pplc-resolver.data-container.net/1.0/identifiers/did:pplc:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR

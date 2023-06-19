@@ -1,16 +1,16 @@
 # `did:pplc` Resolver
 
-This library is intended to use [PPLDID](https://github.com/peoplecarbon/pplcdid) as fully self-managed Decentralized Identifiers and wrap them in a DID Document
+This library is intended to use [PPLCDID](https://github.com/peoplecarbon/pplcdid) as fully self-managed Decentralized Identifiers and wrap them in a DID Document
 
 It supports the proposed [Decentralized Identifiers](https://w3c.github.io/did-core/#identifier) spec from the [W3C Credentials Community Group](https://w3c-ccg.github.io/).
 
-It requires the [`did-resolver`](https://github.com/decentralized-identity/did-resolver) library, which is the primary interface for resolving DIDs. Also it is dependent on a hosted resolver that can resolve PPLDID DIDs. Such an implementation can be found here: https://github.com/peoplecarbon/pplcdid
+It requires the [`did-resolver`](https://github.com/decentralized-identity/did-resolver) library, which is the primary interface for resolving DIDs. Also it is dependent on a hosted resolver that can resolve PPLCDID DIDs. Such an implementation can be found here: https://github.com/peoplecarbon/pplcdid
 
-There is also a publicly available resolver at https://ppld-resolver.peoplecarbon.org, which is used as fallback resolver within this library.
+There is also a publicly available resolver at https://pplc-resolver.peoplecarbon.org, which is used as fallback resolver within this library.
 
 ## DID method
 
-The `did:pplc` method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document. Read more about PPLDID at https://github.com/peoplecarbon/pplcdid
+The `did:pplc` method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document. Read more about PPLCDID at https://github.com/peoplecarbon/pplcdid
 
 Example:    
 `did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh`
@@ -43,7 +43,7 @@ resolver.resolve('did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh').the
 
 ## DID Document
 
-The did resolver takes the identifier and queries existing PPLDID repositories to retrieve a DID document with the hash representation of the given identifier.
+The did resolver takes the identifier and queries existing PPLCDID repositories to retrieve a DID document with the hash representation of the given identifier.
 
 A minimal DID document using the above sample DID looks like this:
 

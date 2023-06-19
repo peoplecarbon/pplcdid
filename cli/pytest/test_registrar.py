@@ -6,7 +6,7 @@ import requests
 import subprocess
 from pathlib import Path
 
-service = "https://ppld-registrar.peoplecarbon.org"
+service = "https://pplc-registrar.peoplecarbon.org"
 # service = "https://www.peoplecarbon.org"
 
 def test_service():

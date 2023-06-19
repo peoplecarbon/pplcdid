@@ -26,15 +26,15 @@ class ApplicationController < ActionController::API
     end
 
     def home
-        output = "<html><head><title>PPLDID - DID for People</title>"
+        output = "<html><head><title>PPLCDID - DID for People</title>"
         output +="</head><body>"
-        output +="<h1>PPLDID Repository</h1>"
+        output +="<h1>PPLCDID Repository</h1>"
         output +="<p>Version: " + VERSION.to_s + " (pplcdid gem v" + Gem.loaded_specs["pplcdid"].version.to_s + ")</p>"
         output +="<p><strong>Statistics</strong> for this repository:</p><ul>"
         output +="<li>DIDs: " + Did.count.to_s + "</li>"
         output +="<li>Logs: " + Log.count.to_s + "</li>"
         output +="</ul><p>Find more information here:</p><ul>"
-        output +='<li>Swagger: <a href="/api-docs">PPLDID API Documentation</a></li>'
+        output +='<li>Swagger: <a href="/api-docs">PPLCDID API Documentation</a></li>'
         output +='<li>Specification: <a href="https://peoplecarbon.github.io/pplcdid">https://peoplecarbon.github.io/pplcdid/</a></li>'
         output +='<li>Github: <a href="https://github.com/peoplecarbon/pplcdid/">https://github.com/peoplecarbon/pplcdid/</a></li>'
         output +="</ul></body></html>" 

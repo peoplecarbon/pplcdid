@@ -5,7 +5,7 @@ This is a [Universal Resolver](https://github.com/decentralized-identity/univers
 ## Specifications
 
 * [Decentralized Identifiers](https://w3c.github.io/did-core/)
-* [PPLDID Method Specification](https://peoplecarbon.github.io/pplcdid/)
+* [PPLCDID Method Specification](https://peoplecarbon.github.io/pplcdid/)
 
 ## Example DIDs
 
@@ -17,12 +17,12 @@ did:pplc:zQmNauTUUdkpi5TcrTZ2524SKM8dJAzuuw4xfW13iHrtY1W
 ## Build and Run (Docker)
 
 ```
-docker build -f ./docker/Dockerfile . -t peoplecarbon/ppld-resolver
-docker run -p 8080:3000 peoplecarbon/ppld-resolver
+docker build -f ./docker/Dockerfile . -t peoplecarbon/pplc-resolver
+docker run -p 8080:3000 peoplecarbon/pplc-resolver
 curl -X GET http://localhost:8080/1.0/identifiers/did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
 ```
 
-Docker images are available here: https://hub.docker.com/r/peoplecarbon/ppld-resolver
+Docker images are available here: https://hub.docker.com/r/peoplecarbon/pplc-resolver
 
 
 If you want to contribute, please follow these steps:

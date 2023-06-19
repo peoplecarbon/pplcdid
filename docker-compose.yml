@@ -1,7 +1,7 @@
 version: "3"
 services:
   pplcdid:
-    image: peoplecarbon/pplc-base:arm64v8
+    image: peoplecarbon/pplc-base:latest
     environment:
       DID_DB: "external"
       RAILS_ENV: "production"
@@ -10,10 +10,10 @@ services:
     depends_on:
       - "db"
   db:
-    image: arm64v8/postgres:12.10-alpine
+    image: postgres:12.1
     environment:
       POSTGRES_HOST_AUTH_METHOD: "trust"
     volumes:
-      - ppldid_data:/var/lib/postgresql/data
+      - pplcdid_data:/var/lib/postgresql/data
 volumes:
-  ppldid_data:
+  pplcdid_data:

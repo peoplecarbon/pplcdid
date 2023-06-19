@@ -8,7 +8,7 @@ Input W3C-DID
 # if it includes "@context" and value is "https://www.w3.org/ns/did/v1"
 # put the rest into doc, i.e., just remove "@context"
 
-Output PPLDID
+Output PPLCDID
 {
     "doc":{
         "authentication": [],

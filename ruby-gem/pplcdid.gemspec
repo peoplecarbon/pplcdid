@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
     gem.name                  = "pplcdid"
     gem.homepage              = "http://github.com/peoplecarbon/pplcdid"
     gem.license               = 'Apache'
-    gem.summary               = "Decentralized IDentifier for People."
+    gem.summary               = "Decentralized IDentifier for Carbon Dioxid Removal."
     gem.description           = "This gem provides the basic methods for managing did:pplc."
     gem.metadata           = {
         "documentation_uri" => "https://peoplecarbon.github.io/pplcdid",

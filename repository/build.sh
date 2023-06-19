@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER="ppld-base"
+CONTAINER="pplc-base"
 REPOSITORY="peoplecarbon"
 TAG="latest"
 

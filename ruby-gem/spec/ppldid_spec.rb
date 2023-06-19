@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-describe "PPLDID handling" do
+describe "PPLCDID handling" do
   # basic functions
   Dir.glob(File.expand_path("../input/basic/*_enc.doc", __FILE__)).each do |input|
     it "encodes #{input.split('/').last}" do

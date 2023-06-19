@@ -1,5 +1,5 @@
 
-Welcome to PPLDID
+Welcome to PPLCDID
 
 Installed components:
 * pplcdid - version: ${pplcdid}

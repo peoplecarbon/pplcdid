@@ -1,4 +1,4 @@
-# PPLDID Tutorial
+# PPLCDID Tutorial
 
 *latest update: 2 September 2022*
 
@@ -15,9 +15,9 @@ This tutorial introduces the use of `did:pplc` DIDs with the following sections:
 
 ### Local Deployment
 
-If you just want to try PPLDID locally, start a Docker container with the following command:
+If you just want to try PPLCDID locally, start a Docker container with the following command:
 ```console
-docker run -d --name did_repo -e DID_DB=local -p 3000:3000 peoplecarbon/ppld-base
+docker run -d --name did_repo -e DID_DB=local -p 3000:3000 peoplecarbon/pplc-base
 ```
 
 Check if the repository is up and running by showing the *Repository Status* page at http://localhost:3000
@@ -27,6 +27,12 @@ You can create a new DID with the following `curl` statement (using the Uniregis
 echo '{"didDocument": {"test": "my first DID"}, 
        "options": {"location":"http://localhost:3000"}}' | \
 curl -H "Content-Type: application/json" -d @- -X POST http://localhost:3000/1.0/create
+```
+
+```bash
+echo '{"didDocument": {"test": "my first DID"}, 
+       "options": {"location":"https://pplcdid.peoplecarbon.org"}}' | \
+curl -H "Content-Type: application/json" -d @- -X POST https://pplcdid.peoplecarbon.org/1.0/create
 ```
 
 As a result you will see a JSON document that starts with:
@@ -53,13 +59,13 @@ docker rm -f did_repo
 
 ### Persisting DIDs in PostgreSQL
 
-For a more serious evaluation of PPLDID you might want to persist DIDs, associated DID Documents, and accompanying DID Logs in a database outside the DID Repository. The following `docker-compose.yml` provides an example for such a setup with a persistent volume for the PostgreSQL data directory:
+For a more serious evaluation of PPLCDID you might want to persist DIDs, associated DID Documents, and accompanying DID Logs in a database outside the DID Repository. The following `docker-compose.yml` provides an example for such a setup with a persistent volume for the PostgreSQL data directory:
 
 ```yaml
 version: "3"
 services:
   pplcdid:
-    image: peoplecarbon/ppld-base:latest
+    image: peoplecarbon/pplc-base:latest
     environment:
       DID_DB: "external"
       RAILS_ENV: "production"
@@ -72,9 +78,9 @@ services:
     environment:
       POSTGRES_HOST_AUTH_METHOD: "trust"
     volumes:
-      - ppldid_data:/var/lib/postgresql/data
+      - pplcid_data:/var/lib/postgresql/data
 volumes:
-  ppldid_data:
+  pplcdid_data:
 ```
 
 Start with:
@@ -130,35 +136,35 @@ with the output:
 }
 ```
 
-To clean up the environment close the PPLDID CLI (just type `exit` on the command line) and stop the containers:
+To clean up the environment close the PPLCDID CLI (just type `exit` on the command line) and stop the containers:
 ```console
 docker-compose -f docker-compose.yml down
 ```
 
 [back to top](#)
 
-### Run an PPLDID Repository on a Kubernetes Cluster
+### Run an PPLCDID Repository on a Kubernetes Cluster
 
-The production site for the [default PPLDID repository](https://pplcdid.pplcdid.peoplecarbon.org) (at https://pplcdid.pplcdid.peoplecarbon.org) is hosted on a Kubernetes cluster with a dedicated PostreSQL cluster. The follwing files were used as setup on this Kubernetes cluster (currently at v1.91.2):
+The production site for the [default PPLCDID repository](https://pplcdid.pplcdid.peoplecarbon.org) (at https://pplcdid.pplcdid.peoplecarbon.org) is hosted on a Kubernetes cluster with a dedicated PostreSQL cluster. The follwing files were used as setup on this Kubernetes cluster (currently at v1.91.2):
 * [deplyoment.yaml](res/deployment.yaml)    
 * [service.yaml](res/service.yaml)
 * [ingress.yaml](res/ingress.yaml)
 * [cert.yaml](res/cert.yaml)
 * [secrets.yaml](res/secrets.yaml)
 
-If you have any questions about setting up an PPLDID repository on Kubernetes don't hesitate to [contact us](mailto:support@pplcdid.peoplecarbon.org)!
+If you have any questions about setting up an PPLCDID repository on Kubernetes don't hesitate to [contact us](mailto:support@pplcdid.peoplecarbon.org)!
 
 [back to top](#)
 
 ## DID Life-cycle
 
 This section describes the typical life-cycle of a DID using concrete and simple examples of entities exchanging information and parties trying to interfere or manipulate this exchange. The following actors and roles are used:    
-* Alice (A) wants to share information using PPLDID    
+* Alice (A) wants to share information using PPLCDID    
 * Bob (B) receives information and validates the sender    
 * Dave (D) is trusted by Alice (A) and acts as a delegate for her    
 * Eve (E) is a malicious party and tries to manipulate the information exchange unnoticed    
 
-Each step describes a task performed by one of the actors and provides commands (to be run on a command line like bash) demonstrating working with PPLDID.
+Each step describes a task performed by one of the actors and provides commands (to be run on a command line like bash) demonstrating working with PPLCDID.
 
 ### Prerequisites
 
@@ -166,7 +172,7 @@ To execute commands in the steps below make sure to have the following tools ins
 * `pplcdid`: download and installation instructions [available here](https://github.com/peoplecarbon/pplcdid/tree/main/cli)    
 * `jq`: download and installation instructions [available here](https://stedolan.github.io/jq/download/)    
 
-Alternatively, you can use a ready-to-use Docker image with all tools pre-installed: [https://hub.docker.com/r/peoplecarbon/ppld-base](https://hub.docker.com/r/peoplecarbon/ppld-base). Use the following command to start the image:    
+Alternatively, you can use a ready-to-use Docker image with all tools pre-installed: [https://hub.docker.com/r/peoplecarbon/pplc-base](https://hub.docker.com/r/peoplecarbon/pplc-base). Use the following command to start the image:    
 
 ```console
 docker run -it --rm --network host -v ~/.pplcdid:/home/pplcdid peoplecarbon/pplcdid-cli
@@ -228,7 +234,7 @@ pplcdid revoke 456aBz
 
 &nbsp;    
 
-## PPLDID Tutorial
+## PPLCDID Tutorial
 
 Please report bugs and suggestions for new features using the [GitHub Issue-Tracker](https://github.com/peoplecarbon/pplcdid/issues) and follow the [Contributor Guidelines](https://github.com/twbs/ratchet/blob/master/CONTRIBUTING.md).
 

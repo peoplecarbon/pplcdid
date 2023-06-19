@@ -1,4 +1,4 @@
-FROM ruby:2.6.0
+FROM ruby:2.7.1
 
 WORKDIR /usr/src/app
 ENV RAILS_ROOT $WORKDIR
@@ -10,9 +10,6 @@ RUN mkdir -p $RAILS_ROOT/tmp/pids && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY Gemfile $WORKDIR
-
-RUN bundle install
-
 COPY . .
 
 RUN gem update bundler && \

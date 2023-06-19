@@ -1,6 +1,6 @@
-# PPLDID Command Line Tool
+# PPLCDID Command Line Tool
 
-PPLDID (Decentralized IDentifier for People.) provides a self-sustained environment for managing digital identifiers (DIDs). The ppld:did method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document.
+PPLCDID (Decentralized IDentifier for People.) provides a self-sustained environment for managing digital identifiers (DIDs). The ppld:did method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document.
 
 ## Installation
 Run the following command to copy `pplcdid.rb` into `~/bin/pplcdid` (requires Ruby 2.5.7 or higher):
@@ -52,7 +52,7 @@ pplcdid read {use output from above did:pplc:...}
 Read about the concept and examples: [PPLDIDintro.pdf](https://github.com/peoplecarbon/pplcdid/blob/main/docs/ppldidintro.pdf)    
 W3C conform DID Method Specification: https://peoplecarbon.github.io/pplcdid/    
 `pplcdid` commandline tool in a Docker image: https://hub.docker.com/r/peoplecarbon/pplcdid-cli         
-To host DIDs yourself you can use the `peoplecarbon/ppld-base` image on Dockerhub: https://hub.docker.com/r/peoplecarbon/ppld-base    
+To host DIDs yourself you can use the `peoplecarbon/pplc-base` image on Dockerhub: https://hub.docker.com/r/peoplecarbon/pplc-base    
 API documentation is available here: https://api-docs.peoplecarbon.eu/pplcdid/    
 Universal Resolver driver: https://github.com/peoplecarbon/pplcdid/tree/main/uniresolver-plugin    
 JS library for `did-resolver`: https://github.com/peoplecarbon/pplcdid/tree/main/js-resolver    

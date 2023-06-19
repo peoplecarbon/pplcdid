@@ -1,8 +1,8 @@
-docker run -d --name repo -p 3000:3000 peoplecarbon/ppld-base
-docker run -d --name did_repo -e DID_DB=local -p 3000:3000 peoplecarbon/ppld-base:arm64v8
+docker run -d --name repo -p 3000:3000 peoplecarbon/pplc-base
+docker run -d --name did_repo -e DID_DB=local -p 3000:3000 peoplecarbon/pplc-base:arm64v8
 
 docker-compose -f test/docker-compose.yml up -d
-# docker run -d --name did_repo -e DID_DB=external -p 3000:3000 peoplecarbon/ppld-base
+# docker run -d --name did_repo -e DID_DB=external -p 3000:3000 peoplecarbon/pplc-base
 
 
 echo '[5]' | $PPLDIDCMD create --doc-pwd pwd1 --rev-pwd pwd2

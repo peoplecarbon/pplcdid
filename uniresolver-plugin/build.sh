@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER="ppld-resolver"
+CONTAINER="pplc-resolver"
 REPOSITORY="peoplecarbon"
 TAG="latest"
 

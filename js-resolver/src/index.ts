@@ -8,10 +8,10 @@ import axios from "axios";
 
 export function getResolver(
   /**
-   * Base URL of the PPLDID resolver
+   * Base URL of the PPLCDID resolver
    * Resolver implementation can be found at https://github.com/peoplecarbon/pplcdid
    * 
-   * Default: https://ppld-resolver.peoplecarbon.org
+   * Default: https://pplc-resolver.peoplecarbon.org
    */
   baseUrl: string = 'http://pplcdid.peoplecarbon.org:3000',
 ) {

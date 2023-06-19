@@ -7,13 +7,18 @@
 threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 threads threads_count, threads_count
 
-# Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-#
-port        ENV.fetch("PORT") { 3000 }
+# Define paths for SSL certificate and private key
+cert_path = "/etc/letsencrypt/live/pplcdid.peoplecarbon.org/fullchain.pem"
+key_path = "/etc/letsencrypt/live/pplcdid.peoplecarbon.org/privkey.pem"
+
+ssl_bind '0.0.0.0', '3000', {
+    key: key_path,
+    cert: cert_path
+}
 
 # Specifies the `environment` that Puma will run in.
 #
-environment ENV.fetch("RAILS_ENV") { "development" }
+environment ENV.fetch("RAILS_ENV") { "production" }
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
@@ -50,7 +55,6 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 # on_worker_boot do
 #   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 # end
-#
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart

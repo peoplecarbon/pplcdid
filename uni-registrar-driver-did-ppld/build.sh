@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONTAINER="ppld-registrar"
+CONTAINER="pplc-registrar"
 REPOSITORY="peoplecarbon"
 TAG="latest"
 

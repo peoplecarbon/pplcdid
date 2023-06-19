@@ -1,7 +1,7 @@
 version: "3"
 services:
   pplcdid:
-    image: peoplecarbon/pplc-base:latest
+    image: peoplecarbon/pplc-base:1.1.0
     environment:
       DID_DB: "external"
       RAILS_ENV: "production"

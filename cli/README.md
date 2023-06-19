@@ -5,7 +5,7 @@ PPLCDID (Decentralized IDentifier for People.) provides a self-sustained environ
 ## Installation
 Run the following command to copy `pplcdid.rb` into `~/bin/pplcdid` (requires Ruby 2.5.7 or higher):
 ```bash
-sh -c "curl -fsSL https://raw.githubusercontent.com/peoplecarbon/pplcdid/main/cli/install.sh | sh"
+sh -c "curl -fsSL https://raw.githubusercontent.com/peoplecarbon/pplcdid/pplcdid/cli/install.sh | sh"
 ```
 
 ## Run via Docker

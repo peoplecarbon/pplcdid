@@ -12,7 +12,7 @@ info:
 
 servers:
 - url: https://pplcdid.peoplecarbon.org/
-  description: Official production system hosted by Peopledata.
+  description: Official production system hosted by PeopleCarbon.
 security:
   - BearerAuth: []
 paths:
@@ -176,7 +176,7 @@ paths:
           schema:
             type: string
           description: The requested DID method for the operation.
-          example: ppld
+          example: pplc
       requestBody:
         content:
           application/json:

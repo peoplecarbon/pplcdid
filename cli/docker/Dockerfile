@@ -1,4 +1,4 @@
-FROM ruby:2.7.1
+FROM ruby:2.6.0-alpine
 
 
 RUN addgroup -S user && \
@@ -7,7 +7,6 @@ RUN addgroup -S user && \
     gem install httparty ed25519 multibases multihashes multicodecs optparse rbnacl dag uri pplcdid && \
     gem install json-canonicalization -v 0.2.1 && \
     gem install securerandom -v 0.1.1 && \
-    gem update && \
     apk del make gcc musl-dev && \
     apk add --update --no-cache python3 && \
     ln -sf python3 /usr/bin/python && \
@@ -15,10 +14,12 @@ RUN addgroup -S user && \
     pip3 install --no-cache --upgrade pip setuptools pytest requests pytest-subprocess
 COPY pplcdid.rb /usr/local/bin/pplcdid
 COPY ./docker/start.sh /usr/local/bin/start.sh
+COPY docker/local-gem/*.gem /tmp/
 COPY --chown=user:user ./docker ./docker
 COPY docker/welcome.txt /tmp/welcome.txt
 COPY docker/etc/profile /etc/profile
 RUN chmod 755 /usr/local/bin/pplcdid && \
+    gem install /tmp/*.gem && \
     sed -e "s/\${pplcdid}/`pplcdid --version`/" -e "s/\${jq}/`jq --version`/" /tmp/welcome.txt > /etc/motd && \
     mkdir -p /usr/src/pytest
 COPY --chown=user:user pytest /usr/src/pytest

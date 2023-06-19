@@ -11,7 +11,7 @@ sh -c "curl -fsSL https://raw.githubusercontent.com/peoplecarbon/pplcdid/pplcdid
 ## Run via Docker
 To use the dockerized version of pplcdid run:
 ```bash
-docker run -it --rm peoplecarbon/pplc-cli
+docker run -it --rm peoplecarbon/pplcdid-cli
 ```
 
 Often it makes sense to keep private keys and revocation information beyond a Docker session:
@@ -26,11 +26,11 @@ To package pplcdid-cli with additional tools ([jq](https://stedolan.github.io/jq
 ./build.sh
 ```
 
-The current `peoplecarbon/pplc-cli` Docker image is available here: https://hub.docker.com/peoplecarbon/pplcdid-cli
+The current `peoplecarbon/pplcdid-cli` Docker image is available here: https://hub.docker.com/peoplecarbon/pplcdid-cli
 
 ### Verify with automated tests    
 
-Use the following command to run the automated tests in the `peoplecarbon/pplc-cli` Docker image:    
+Use the following command to run the automated tests in the `peoplecarbon/pplcdid-cli` Docker image:    
 
 ```bash
 docker run -it --rm -w /usr/src/pytest -e PPLDIDCMD=pplcdid peoplecarbon/pplcdid-cli pytest

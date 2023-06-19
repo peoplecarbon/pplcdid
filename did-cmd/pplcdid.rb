@@ -11,9 +11,10 @@ require 'optparse'
 require 'rbnacl'
 require 'dag'
 require 'uri'
+require 'delegate'
 
 LOCATION_PREFIX = "@"
-DEFAULT_LOCATION = "http://pplcdid.peoplecarbon.org:3000"
+DEFAULT_LOCATION = "http://localhost:3000"
 
 def ppld_encode(message)
     Multibases.pack("base58btc", message).to_s

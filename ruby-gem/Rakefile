@@ -3,14 +3,14 @@ $:.unshift(File.expand_path(File.join(File.dirname(__FILE__), 'lib')))
 require 'rubygems'
 
 namespace :gem do
-  desc "Build the ppldid-#{File.read('VERSION').chomp}.gem file"
+  desc "Build the pplcdid-#{File.read('VERSION').chomp}.gem file"
   task :build do
-    sh "gem build ppldid.gemspec && mv ppldid-#{File.read('VERSION').chomp}.gem pkg/"
+    sh "gem build pplcdid.gemspec && mv pplcdid-#{File.read('VERSION').chomp}.gem pkg/"
   end
 
-  desc "Release the ppldid-#{File.read('VERSION').chomp}.gem file"
+  desc "Release the pplcdid-#{File.read('VERSION').chomp}.gem file"
   task :release do
-    sh "gem push pkg/ppldid-#{File.read('VERSION').chomp}.gem"
+    sh "gem push pkg/pplcdid-#{File.read('VERSION').chomp}.gem"
   end
 end
 

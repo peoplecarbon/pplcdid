@@ -1,19 +1,19 @@
-docker run -d --name repo -p 3000:3000 peopledataorg/ppld-base
-docker run -d --name did_repo -e DID_DB=local -p 3000:3000 peopledataorg/ppld-base:arm64v8
+docker run -d --name repo -p 3000:3000 peoplecarbon/ppld-base
+docker run -d --name did_repo -e DID_DB=local -p 3000:3000 peoplecarbon/ppld-base:arm64v8
 
 docker-compose -f test/docker-compose.yml up -d
-# docker run -d --name did_repo -e DID_DB=external -p 3000:3000 peopledataorg/ppld-base
+# docker run -d --name did_repo -e DID_DB=external -p 3000:3000 peoplecarbon/ppld-base
 
 
 echo '[5]' | $PPLDIDCMD create --doc-pwd pwd1 --rev-pwd pwd2
-created did:ppld:zQmPyjnkL52gQxBBhPuCFkf167MzpCKquqbu5Qt5ia2JGTr
+created did:pplc:zQmPyjnkL52gQxBBhPuCFkf167MzpCKquqbu5Qt5ia2JGTr
 
-echo '{"identifier":"did:ppld:zQmPyjnkL52gQxBBhPuCFkf167MzpCKquqbu5Qt5ia2JGTr","secret":{"doc_pwd": "pwd1", "rev_pwd":"pwd2"}}' | curl -H "Content-Type: application/json" -d @- -X POST http://localhost:3000/1.0/deactivate
+echo '{"identifier":"did:pplc:zQmPyjnkL52gQxBBhPuCFkf167MzpCKquqbu5Qt5ia2JGTr","secret":{"doc_pwd": "pwd1", "rev_pwd":"pwd2"}}' | curl -H "Content-Type: application/json" -d @- -X POST http://localhost:3000/1.0/deactivate
 
 echo '[9]' | $PPLDIDCMD create --doc-pwd pwd1 --rev-pwd pwd2 --json-output | jq '{identifier: .did, secret:{doc_pwd: "pwd1", rev_pwd:"pwd2"}}' | curl -H "Content-Type: application/json" -d @- -X POST http://localhost:3000/1.0/deactivate
 
 
 echo '{"short": "lived"}' | \
-    ../ppldid.rb create --doc-pwd pwd1 --rev-pwd pwd2 --json-output | \
+    ../pplcdid.rb create --doc-pwd pwd1 --rev-pwd pwd2 --json-output | \
     jq '{identifier: .did, secret:{doc_pwd: "pwd1", rev_pwd:"pwd2"}}' | \
     curl -H "Content-Type: application/json" -d @- -X POST http://localhost:3000/1.0/deactivate

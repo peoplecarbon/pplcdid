@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 # frozen_string_literal: true
 
-class Ppldid
+class Pplcdid
 
     # basic functions ---------------------------
     def self.encode(message, method = "base58btc")
@@ -172,7 +172,7 @@ class Ppldid
                 return [nil, "unsupported key codec"]
             end
             length = private_key.bytesize
-            return [ppldid.encode([code, length, private_key].pack("SCa#{length}")), ""]
+            return [pplcdid.encode([code, length, private_key].pack("SCa#{length}")), ""]
         rescue
             return [nil, "invalid key"]
         end

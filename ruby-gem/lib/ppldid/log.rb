@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 # frozen_string_literal: true
 
-class Ppldid
+class Pplcdid
     # log functions -----------------------------
     def self.add_hash(log)
         log.map do |item|
@@ -79,7 +79,7 @@ class Ppldid
             if el["op"].to_i == 0
                 terminate_indices << i
             end
-            log_hash << ppldid.hash(ppldid.canonical(el))
+            log_hash << pplcdid.hash(pplcdid.canonical(el))
             dag_log << dag.add_vertex(id: i)
             i += 1
         end unless logs.nil?
@@ -155,7 +155,7 @@ class Ppldid
         i = 0
         doc_location = ""
         initial_did = currentDID["did"].to_s.dup
-        initial_did = initial_did.delete_prefix("did:ppld:")
+        initial_did = initial_did.delete_prefix("did:pplc:")
         if initial_did.include?(LOCATION_PREFIX)
             tmp = initial_did.split(LOCATION_PREFIX)
             initial_did = tmp[0] 
@@ -168,7 +168,7 @@ class Ppldid
             when 2,3 # CREATE, UPDATE
                 currentDID["doc_log_id"] = i
                 doc_did = el["doc"]
-                did_hash = doc_did.delete_prefix("did:ppld:")
+                did_hash = doc_did.delete_prefix("did:pplc:")
                 did_hash = did_hash.split(LOCATION_PREFIX).first
                 did10 = did_hash[0,10]
                 doc = retrieve_document_raw(doc_did, did10 + ".doc", doc_location, {})
@@ -202,7 +202,7 @@ class Ppldid
                 #         currentDID["verification"] += "identifier: " + did_hash.to_s + "\n"
                 #         currentDID["verification"] += "⛔ does not match DID Document:" + "\n"
                 #         currentDID["verification"] += JSON.pretty_generate(doc) + "\n"
-                #         currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#calculate_hash)" + "\n\n"
+                #         currentDID["verification"] += "(Details: https://peoplecarbon.github.io/pplcdid/#calculate_hash)" + "\n\n"
                 #     end
                 #     return currentDID
                 # end
@@ -213,7 +213,7 @@ class Ppldid
                     currentDID["verification"] += "identifier: " + did_hash.to_s + "\n"
                     currentDID["verification"] += "✅ is hash of DID Document:" + "\n"
                     currentDID["verification"] += JSON.pretty_generate(doc) + "\n"
-                    currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#calculate_hash)" + "\n\n"
+                    currentDID["verification"] += "(Details: https://peoplecarbon.github.io/pplcdid/#calculate_hash)" + "\n\n"
                 end
                 current_public_doc_key = currentDID["doc"]["key"].split(":").first rescue ""
 
@@ -221,7 +221,7 @@ class Ppldid
                 currentDID["termination_log_id"] = i
 
                 doc_did = currentDID["did"]
-                did_hash = doc_did.delete_prefix("did:ppld:")
+                did_hash = doc_did.delete_prefix("did:pplc:")
                 did_hash = did_hash.split(LOCATION_PREFIX).first
                 did10 = did_hash[0,10]
                 doc = retrieve_document_raw(doc_did, did10 + ".doc", doc_location, {})
@@ -245,7 +245,7 @@ class Ppldid
                         currentDID["verification"] += "'log' reference in DID Document: " + term.to_s + "\n"
                         currentDID["verification"] += "⛔ does not match TERMINATE log record:" + "\n"
                         currentDID["verification"] += JSON.pretty_generate(el) + "\n"
-                        currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#calculate_hash)" + "\n\n"
+                        currentDID["verification"] += "(Details: https://peoplecarbon.github.io/pplcdid/#calculate_hash)" + "\n\n"
                     end
                     return currentDID
                 end
@@ -253,7 +253,7 @@ class Ppldid
                     currentDID["verification"] += "'log' reference in DID Document: " + term.to_s + "\n"
                     currentDID["verification"] += "✅ is hash of TERMINATE log record:" + "\n"
                     currentDID["verification"] += JSON.pretty_generate(el) + "\n"
-                    currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#calculate_hash)" + "\n\n"
+                    currentDID["verification"] += "(Details: https://peoplecarbon.github.io/pplcdid/#calculate_hash)" + "\n\n"
                 end
 
                 # check if there is a revocation entry
@@ -274,7 +274,7 @@ class Ppldid
                             currentDID["verification"] += "'doc' reference in TERMINATE log record: " + revoc_term.to_s + "\n"
                             currentDID["verification"] += "✅ is hash of REVOCATION log record (without 'previous' attribute):" + "\n"
                             currentDID["verification"] += JSON.pretty_generate(log_el) + "\n"
-                            currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#calculate_hash)" + "\n\n"
+                            currentDID["verification"] += "(Details: https://peoplecarbon.github.io/pplcdid/#calculate_hash)" + "\n\n"
                         end
                         break
                     end
@@ -296,7 +296,7 @@ class Ppldid
                 #                 currentDID["verification"] += "'doc' reference in TERMINATE log record: " + revoc_term.to_s + "\n"
                 #                 currentDID["verification"] += "✅ is hash of REVOCATION log record (without 'previous' attribute):" + "\n"
                 #                 currentDID["verification"] += JSON.pretty_generate(log_el) + "\n"
-                #                 currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#calculate_hash)" + "\n\n"
+                #                 currentDID["verification"] += "(Details: https://peoplecarbon.github.io/pplcdid/#calculate_hash)" + "\n\n"
                 #             end
                 #             break
                 #         end
@@ -321,11 +321,11 @@ class Ppldid
                                         currentDID["verification"] += "✅ public key from last DID Document: " + current_public_doc_key.to_s + "\n"
                                         currentDID["verification"] += "verifies 'doc' reference of new DID Document: " + log_el["doc"].to_s + "\n"
                                         currentDID["verification"] += log_el["sig"].to_s + "\n"
-                                        currentDID["verification"] += "of next DID Document (Details: https://peopledata.github.io/ppldid/#verify_signature)" + "\n"
+                                        currentDID["verification"] += "of next DID Document (Details: https://peoplecarbon.github.io/pplcdid/#verify_signature)" + "\n"
 
                                         next_doc_did = log_el["doc"].to_s
                                         next_doc_location = doc_location
-                                        next_did_hash = next_doc_did.delete_prefix("did:ppld:")
+                                        next_did_hash = next_doc_did.delete_prefix("did:pplc:")
                                         next_did_hash = next_did_hash.split(LOCATION_PREFIX).first
                                         next_did10 = next_did_hash[0,10]
                                         next_doc = retrieve_document_raw(next_doc_did, next_did10 + ".doc", next_doc_location, {})
@@ -346,7 +346,7 @@ class Ppldid
                                     if verification_output
                                         new_doc_did = log_el["doc"].to_s
                                         new_doc_location = doc_location
-                                        new_did_hash = new_doc_did.delete_prefix("did:ppld:")
+                                        new_did_hash = new_doc_did.delete_prefix("did:pplc:")
                                         new_did_hash = new_did_hash.split(LOCATION_PREFIX).first
                                         new_did10 = new_did_hash[0,10]
                                         new_doc = retrieve_document(new_doc_did, new_did10 + ".doc", new_doc_location, {}).first
@@ -355,7 +355,7 @@ class Ppldid
                                         currentDID["verification"] += "⛔ public key from last DID Document: " + current_public_doc_key.to_s + "\n"
                                         currentDID["verification"] += "does not verify 'doc' reference of new DID Document: " + log_el["doc"].to_s + "\n"
                                         currentDID["verification"] += log_el["sig"].to_s + "\n"
-                                        currentDID["verification"] += "next DID Document (Details: https://peopledata.github.io/ppldid/#verify_signature)" + "\n"
+                                        currentDID["verification"] += "next DID Document (Details: https://peoplecarbon.github.io/pplcdid/#verify_signature)" + "\n"
                                         currentDID["verification"] += JSON.pretty_generate(new_doc) + "\n\n"
                                     end
                                     return currentDID
@@ -373,7 +373,7 @@ class Ppldid
                         if !options.transform_keys(&:to_s)["log_location"].nil?
                             currentDID["verification"] += "- " + options.transform_keys(&:to_s)["log_location"].to_s + "\n"
                         end
-                        currentDID["verification"] += "(Details: https://peopledata.github.io/ppldid/#retrieve_log)" + "\n\n"
+                        currentDID["verification"] += "(Details: https://peoplecarbon.github.io/pplcdid/#retrieve_log)" + "\n\n"
                     end
                     break
                 end

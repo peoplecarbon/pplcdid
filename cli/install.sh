@@ -13,13 +13,13 @@ if ! hash ruby > /dev/null 2>&1; then
 fi
 
 mkdir -p ~/bin
-wget https://github.com/peopledata/ppldid/blob/main/did-cmd/ppldid.rb -O ~/bin/ppldid
-chmod +x ~/bin/ppldid
+wget https://github.com/peoplecarbon/pplcdid/blob/main/did-cmd/pplcdid.rb -O ~/bin/pplcdid
+chmod +x ~/bin/pplcdid
 
 if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
   export PATH="$PATH:$HOME/bin"
   echo "consider adding ~/bin to your PATH"
   echo "the following libraries and gems need to be installed:"
   echo "$ apt-get install ruby-dev libsodium-dev"
-  echo "$ gem install ppldid securerandom httparty ed25519 multibases multihashes optparse rbnacl dag uri"
+  echo "$ gem install pplcdid securerandom httparty ed25519 multibases multihashes optparse rbnacl dag uri"
 fi

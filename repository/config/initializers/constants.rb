@@ -1,3 +1,3 @@
 LOCATION_PREFIX = "@"
-DEFAULT_LOCATION = "http://ppldid.peopledata.org.cn"
+DEFAULT_LOCATION = "http://pplcdid.peoplecarbon.org"
 VERSION = "1.0.0"

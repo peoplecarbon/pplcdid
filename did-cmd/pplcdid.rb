@@ -13,7 +13,7 @@ require 'dag'
 require 'uri'
 
 LOCATION_PREFIX = "@"
-DEFAULT_LOCATION = "http://ppldid.peopledata.org.cn:3000"
+DEFAULT_LOCATION = "http://pplcdid.peoplecarbon.org:3000"
 
 def ppld_encode(message)
     Multibases.pack("base58btc", message).to_s
@@ -165,7 +165,7 @@ def dag_update(currentDID)
         when 2,3 # CREATE, UPDATE
             doc_did = el["doc"]
             doc_location = get_location(doc_did)
-            did_hash = doc_did.delete_prefix("did:ppld:")
+            did_hash = doc_did.delete_prefix("did:pplc:")
             did10 = did_hash[0,10]
             doc = retrieve_document(doc_did, did10 + ".doc", doc_location, {})
             if match_log_did?(el, doc)
@@ -321,7 +321,7 @@ def retrieve_log(did_hash, log_file, log_location, options)
     return doc
 end
 
-# expected DID format: did:ppld:123
+# expected DID format: did:pplc:123
 def resolve_did(did, options)
     # setup
     currentDID = {
@@ -333,7 +333,7 @@ def resolve_did(did, options)
         "error": 0,
         "message": ""
     }.transform_keys(&:to_s)
-    did_hash = did.delete_prefix("did:ppld:")
+    did_hash = did.delete_prefix("did:pplc:")
     did10 = did_hash[0,10]
 
     # get did location
@@ -435,7 +435,7 @@ def delete_did(did, options)
     if doc_location.to_s == ""
         doc_location = DEFAULT_LOCATION
     end
-    did = did.delete_prefix("did:ppld:")
+    did = did.delete_prefix("did:pplc:")
 
     if options[:doc_key].nil?
         if options[:doc_pwd].nil?
@@ -601,7 +601,7 @@ def write_did(content, did, mode, options)
 
         did = did_info["did"]
         did_old = did
-        did_hash = did.delete_prefix("did:ppld:")
+        did_hash = did.delete_prefix("did:pplc:")
         did10 = did_hash[0,10]
         did10_old = did10
         if doc_location.to_s == ""
@@ -697,7 +697,7 @@ def write_did(content, did, mode, options)
     if !doc_location.nil?
         l1_doc += LOCATION_PREFIX + doc_location.to_s
     end    
-    did = "did:ppld:" + l1_doc
+    did = "did:pplc:" + l1_doc
     did10 = l1_doc[0,10]
     if doc_location.to_s == ""
         doc_location = DEFAULT_LOCATION
@@ -786,11 +786,11 @@ def write_did(content, did, mode, options)
         else
             case mode
             when "create"
-                puts '{"did": "did:ppld:"' + did.to_s + '", "operation": "create"}'
+                puts '{"did": "did:pplc:"' + did.to_s + '", "operation": "create"}'
             when "clone"
-                puts '{"did": "did:ppld:"' + did.to_s + '", "operation": "clone"}'
+                puts '{"did": "did:pplc:"' + did.to_s + '", "operation": "clone"}'
             when "update"
-                puts '{"did": "did:ppld:"' + did.to_s + '", "operation": "update"}'
+                puts '{"did": "did:pplc:"' + did.to_s + '", "operation": "update"}'
             end
         end
     end
@@ -828,7 +828,7 @@ def revoke_did(did, options)
 
     did = did_info["did"]
     did_old = did.dup
-    did_hash = did.delete_prefix("did:ppld:")
+    did_hash = did.delete_prefix("did:pplc:")
     did10 = did_hash[0,10]
     did10_old = did10
     if doc_location.to_s == ""
@@ -930,9 +930,9 @@ def revoke_did(did, options)
     if options[:silent].nil? || !options[:silent]
         # write operations to stdout
         if options[:json].nil? || !options[:json]
-            puts "revoked did:ppld:" + did
+            puts "revoked did:pplc:" + did
         else
-            puts '{"did": "did:ppld:"' + did.to_s + '", "operation": "revoke"}'
+            puts '{"did": "did:pplc:"' + did.to_s + '", "operation": "revoke"}'
         end
     end
     did
@@ -1017,17 +1017,17 @@ def w3c_did(did_info, options)
 
     wd = {}
     wd["@context"] = "https://www.w3.org/ns/did/v1"
-    wd["id"] = "did:ppld:" + did_info["did"]
+    wd["id"] = "did:pplc:" + did_info["did"]
     wd["verificationMethod"] = [{
-        "id": "did:ppld:" + did_info["did"],
+        "id": "did:pplc:" + did_info["did"],
         "type": "Ed25519VerificationKey2018",
-        "controller": "did:ppld:" + did_info["did"],
+        "controller": "did:pplc:" + did_info["did"],
         "publicKeyBase58": pubDocKey
     }]
     wd["keyAgreement"] = [{
-        "id": "did:ppld:" + did_info["did"],
+        "id": "did:pplc:" + did_info["did"],
         "type": "X25519KeyAgreementKey2019",
-        "controller": "did:ppld:" + did_info["did"],
+        "controller": "did:pplc:" + did_info["did"],
         "publicKeyBase58": pubRevKey
     }]
     if did_info["doc"]["doc"].is_a?(Array)
@@ -1126,7 +1126,7 @@ def sc_token(did, options)
     end
 
     # authenticate against container
-    init_url = doc_location + "/api/ppldid/init"
+    init_url = doc_location + "/api/pplcdid/init"
     sid = SecureRandom.hex(20).to_s
 
     response = HTTParty.post(init_url,
@@ -1146,7 +1146,7 @@ def sc_token(did, options)
     challenge = response["challenge"].to_s
 
     # sign challenge and request token
-    token_url = doc_location + "/api/ppldid/token"
+    token_url = doc_location + "/api/pplcdid/token"
     response = HTTParty.post(token_url,
         headers: { 'Content-Type' => 'application/json' },
         body: { "session_id": sid, 
@@ -1208,7 +1208,7 @@ def sc_create(content, did, options)
 end
 
 def print_help()
-    puts "Usage: ppldid [OPERATION] [OPTION]"
+    puts "Usage: pplcdid [OPERATION] [OPTION]"
     puts "manage DIDs using the ppld:did method"
     puts ""
     puts "OPERATION"
@@ -1315,7 +1315,7 @@ opt_parser.parse!
 
 operation = ARGV.shift rescue ""
 input_did = ARGV.shift rescue ""
-if input_did.to_s == "" && operation.to_s.start_with?("did:ppld:")
+if input_did.to_s == "" && operation.to_s.start_with?("did:pplc:")
     input_did = operation
     operation = "read"
 end

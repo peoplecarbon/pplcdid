@@ -7,7 +7,7 @@ identifier: zQmeMnYBBYvddAdgH6Ape2L4FzRty3y69grDZcQd5kR2tQH
   "key": "z6MuvWooepYBxXLdYggPjxfEZCW3DqDhapLCnYDxnQjkoShA:z6Mv2CANJwu6QJfowhyqeFp5VoZUL4RyNZDwRcpgNrLVc5dh",
   "log": "zQmcpkJwKrfaPbUYQfhPtJyMtqEqnm7Ucj4bquAKL1UNt23"
 }
-(Details: https://peopledata.github.io/ppldid/#calculate_hash)
+(Details: https://peoplecarbon.github.io/pplcdid/#calculate_hash)
 
 'log' reference in DID Document: zQmcpkJwKrfaPbUYQfhPtJyMtqEqnm7Ucj4bquAKL1UNt23
 ✅ is hash of TERMINATE log record:
@@ -20,7 +20,7 @@ identifier: zQmeMnYBBYvddAdgH6Ape2L4FzRty3y69grDZcQd5kR2tQH
 
   ]
 }
-(Details: https://peopledata.github.io/ppldid/#calculate_hash)
+(Details: https://peoplecarbon.github.io/pplcdid/#calculate_hash)
 
 'doc' reference in TERMINATE log record: zQmYAosizNkLFCRoHiMaiwGN12TU7rhPwdVSPa3nx9RftEQ
 ✅ is hash of REVOCATION log record (without 'previous' attribute):
@@ -34,7 +34,7 @@ identifier: zQmeMnYBBYvddAdgH6Ape2L4FzRty3y69grDZcQd5kR2tQH
     "zQmcpkJwKrfaPbUYQfhPtJyMtqEqnm7Ucj4bquAKL1UNt23"
   ]
 }
-(Details: https://peopledata.github.io/ppldid/#calculate_hash)
+(Details: https://peoplecarbon.github.io/pplcdid/#calculate_hash)
 
 found UPDATE log record:
 {
@@ -49,7 +49,7 @@ found UPDATE log record:
 ✅ public key from last DID Document: z6MuvWooepYBxXLdYggPjxfEZCW3DqDhapLCnYDxnQjkoShA
 verifies 'doc' reference of new DID Document: zQmf6qRANG6XeKKcrbJ1tz2PZem5pndAG5as99dFaPaYvpi
 z2pnspQruq6iZLWaa3rytuo1qGXhzBUnaEqRU5d8GMQeebVtXW7SiW95KRRXmapRY2i9Py4oE4dTV5P9R8gVwUY6q
-of next DID Document (Details: https://peopledata.github.io/ppldid/#verify_signature)
+of next DID Document (Details: https://peoplecarbon.github.io/pplcdid/#verify_signature)
 ⚠️  no key rotation in updated DID Document
 
 identifier: zQmf6qRANG6XeKKcrbJ1tz2PZem5pndAG5as99dFaPaYvpi
@@ -61,7 +61,7 @@ identifier: zQmf6qRANG6XeKKcrbJ1tz2PZem5pndAG5as99dFaPaYvpi
   "key": "z6MuvWooepYBxXLdYggPjxfEZCW3DqDhapLCnYDxnQjkoShA:z6Mv2CANJwu6QJfowhyqeFp5VoZUL4RyNZDwRcpgNrLVc5dh",
   "log": "zQmZLcZKyZ1pNy5bAZYC3wgAHy9TWnFsfJqFQSHb9keQCoV"
 }
-(Details: https://peopledata.github.io/ppldid/#calculate_hash)
+(Details: https://peoplecarbon.github.io/pplcdid/#calculate_hash)
 
 'log' reference in DID Document: zQmZLcZKyZ1pNy5bAZYC3wgAHy9TWnFsfJqFQSHb9keQCoV
 ✅ is hash of TERMINATE log record:
@@ -74,12 +74,12 @@ identifier: zQmf6qRANG6XeKKcrbJ1tz2PZem5pndAG5as99dFaPaYvpi
 
   ]
 }
-(Details: https://peopledata.github.io/ppldid/#calculate_hash)
+(Details: https://peoplecarbon.github.io/pplcdid/#calculate_hash)
 
 Revocation reference in log record: zQmPp9J8H6ChWRMUWu2MhphuGwPS5YPnbJUo3j9xcqzYXqu
 ✅ cannot find revocation record searching at
-- https://ppldid.ppldid.peopledata.org.cn
-(Details: https://peopledata.github.io/ppldid/#retrieve_log)
+- https://pplcdid.pplcdid.peoplecarbon.org
+(Details: https://peoplecarbon.github.io/pplcdid/#retrieve_log)
 
 === end of verification output ===
 

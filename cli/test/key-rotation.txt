@@ -1,19 +1,19 @@
 Test switching key
 
-echo '{"test": "key-rotation"}' | ppldid create
-created did:ppld:BNj66S5BkZD22maP1C42z9LcA3RaC1gQ9GhmLQ1g3tv
+echo '{"test": "key-rotation"}' | pplcdid create
+created did:pplc:BNj66S5BkZD22maP1C42z9LcA3RaC1gQ9GhmLQ1g3tv
 
-ppldid read BNj66S5BkZD22maP1C42z9LcA3RaC1gQ9GhmLQ1g3tv
+pplcdid read BNj66S5BkZD22maP1C42z9LcA3RaC1gQ9GhmLQ1g3tv
 {"doc":{"test":"key-rotation"},"key":"4TcvsoAwZWp41PJPKgyMFYz89M94qrU79pcUxtb1djWe:62PmQ7qaBCfep3Y1GxwcV3EnmpkAgHC1YkhL6g7AX6WW","log":"6X7B1i3JU8cVBNSXudo4Mag1d3CwAaz3Hx47nhNSdjbB"}
 
-ppldid read BNj66S5BkZD22maP1C42z9LcA3RaC1gQ9GhmLQ1g3tv | jq '."doc"' | ppldid update --doc-pwd "test" BNj66S5BkZD22maP1C42z9LcA3RaC1gQ9GhmLQ1g3tv
-updated did:ppld:berhw1NpkZvYvmS7vS8T1UgLu47zwPWKM1qbQrkBcrpM
+pplcdid read BNj66S5BkZD22maP1C42z9LcA3RaC1gQ9GhmLQ1g3tv | jq '."doc"' | pplcdid update --doc-pwd "test" BNj66S5BkZD22maP1C42z9LcA3RaC1gQ9GhmLQ1g3tv
+updated did:pplc:berhw1NpkZvYvmS7vS8T1UgLu47zwPWKM1qbQrkBcrpM
 
-ppldid read berhw1NpkZvYvmS7vS8T1UgLu47zwPWKM1qbQrkBcrpM
+pplcdid read berhw1NpkZvYvmS7vS8T1UgLu47zwPWKM1qbQrkBcrpM
 {"doc":{"test":"key-rotation"},"key":"7Zieos7j2JMN6byHC1u5eSRMg9KgCK1xaxmbaCdHqZxo:62PmQ7qaBCfep3Y1GxwcV3EnmpkAgHC1YkhL6g7AX6WW","log":"a6Un2eXCFeroKJcLo9xYBAgixWkm1f2XeWjnXeqGUcjP"}
 
-echo '{"test": "key-rotation2"}' | ppldid update berhw1NpkZvYvmS7vS8T1UgLu47zwPWKM1qbQrkBcrpM
-updated did:ppld:dKhrr6MzFiEtZ9WAP6hGuxeVnzq2JKLF2RjkZCmsKytu
+echo '{"test": "key-rotation2"}' | pplcdid update berhw1NpkZvYvmS7vS8T1UgLu47zwPWKM1qbQrkBcrpM
+updated did:pplc:dKhrr6MzFiEtZ9WAP6hGuxeVnzq2JKLF2RjkZCmsKytu
 
-ppldid read dKhrr6MzFiEtZ9WAP6hGuxeVnzq2JKLF2RjkZCmsKytus
+pplcdid read dKhrr6MzFiEtZ9WAP6hGuxeVnzq2JKLF2RjkZCmsKytus
 {"doc":{"test":"key-rotation2"},"key":"7Zieos7j2JMN6byHC1u5eSRMg9KgCK1xaxmbaCdHqZxo:62PmQ7qaBCfep3Y1GxwcV3EnmpkAgHC1YkhL6g7AX6WW","log":"gaJUrc189p6frQU4ra6g3cDExyKhXD2aWfFTTULBNCSh"}

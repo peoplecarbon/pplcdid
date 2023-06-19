@@ -1,1 +1,1 @@
-curl -s -H "Content-Type: application/json" -d @- -X POST https://ppldid-registrar.data-container.net/1.0/update | jq -c 'del(.jobId)'
+curl -s -H "Content-Type: application/json" -d @- -X POST https://pplcdid-registrar.data-container.net/1.0/update | jq -c 'del(.jobId)'

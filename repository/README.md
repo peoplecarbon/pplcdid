@@ -1,10 +1,10 @@
 # PPLDID Repository
 
-The PPLDID repository hosts DID Documents and DID Logs for the [`did:ppld` method](https://github.com/peopledata/ppldid/).
+The PPLDID repository hosts DID Documents and DID Logs for the [`did:pplc` method](https://github.com/peoplecarbon/pplcdid/).
 
-Use the `peopledata/ppld-base` image on Dockerhub: https://hub.docker.com/r/peopledata/ppld-base 
+Use the `peoplecarbon/ppld-base` image on Dockerhub: https://hub.docker.com/r/peoplecarbon/ppld-base 
 
-API documentation is available here: https://peopledata.github.io/ppldid/    
+API documentation is available here: https://peoplecarbon.github.io/pplcdid/    
 
 ## License
 

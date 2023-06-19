@@ -10,18 +10,18 @@ require 'multibases'
 require 'multihashes'
 require 'multicodecs'
 require 'json/canonicalization'
-require './ppldid/basic'
-require './ppldid/log'
-require './ppldid/didcomm'
+require './pplcdid/basic'
+require './pplcdid/log'
+require './pplcdid/didcomm'
 
-class Ppldid
+class Pplcdid
 
-    # ppldid-base server 
+    # pplcdid-base server 
 
     LOCATION_PREFIX = "@"
-    DEFAULT_LOCATION = "http://ppldid.peopledata.org.cn:3000" 
+    DEFAULT_LOCATION = "http://pplcdid.peoplecarbon.org:3000" 
 
-    # expected DID format: did:ppld:123
+    # expected DID format: did:pplc:123
     def self.read(did, options)
         # setup
         currentDID = {
@@ -34,7 +34,7 @@ class Ppldid
             "message": "",
             "verification": ""
         }.transform_keys(&:to_s)
-        did_hash = did.delete_prefix("did:ppld:")
+        did_hash = did.delete_prefix("did:pplc:")
         did10 = did_hash[0,10]
 
         # get did location
@@ -141,7 +141,7 @@ class Ppldid
     end
 
     def self.simulate_did(content, did, mode, options)
-        user_did, didDocument, revoc_log, l1, l2, r1, privateKey, revocationKey, did_old, log_old, msg = ppldid.generate_base(content, did, mode, options)
+        user_did, didDocument, revoc_log, l1, l2, r1, privateKey, revocationKey, did_old, log_old, msg = pplcdid.generate_base(content, did, mode, options)
         return [user_did, msg]
     end
     
@@ -198,7 +198,7 @@ class Ppldid
             end
 
             did = did_info["did"]
-            did_hash = did.delete_prefix("did:ppld:")
+            did_hash = did.delete_prefix("did:pplc:")
             did10 = did_hash[0,10]
             if doc_location.to_s == ""
                 if did_hash.include?(LOCATION_PREFIX)
@@ -337,7 +337,7 @@ class Ppldid
         if !doc_location.nil?
             l1_doc += LOCATION_PREFIX + doc_location.to_s
         end    
-        did = "did:ppld:" + l1_doc
+        did = "did:pplc:" + l1_doc
         did10 = l1_doc[0,10]
 
         if mode == "clone"
@@ -374,7 +374,7 @@ class Ppldid
     end
 
     def self.publish(did, didDocument, logs, options)
-        did_hash = did.delete_prefix("did:ppld:")
+        did_hash = did.delete_prefix("did:pplc:")
         did10 = did_hash[0,10]
 
         doc_location = options[:doc_location]
@@ -421,9 +421,9 @@ class Ppldid
             return [nil, msg]
         end
 
-        did_hash = did.delete_prefix("did:ppld:")
+        did_hash = did.delete_prefix("did:pplc:")
         did10 = did_hash[0,10]
-        did_old_hash = did_old.delete_prefix("did:ppld:") rescue nil
+        did_old_hash = did_old.delete_prefix("did:pplc:") rescue nil
         did10_old = did_old_hash[0,10] rescue nil
 
         doc_location = options[:doc_location]
@@ -492,7 +492,7 @@ class Ppldid
         end
 
         did = did_info["did"]
-        did_hash = did.delete_prefix("did:ppld:")
+        did_hash = did.delete_prefix("did:pplc:")
         did10 = did_hash[0,10]
         if doc_location.to_s == ""
             if did_hash.include?(LOCATION_PREFIX)
@@ -582,7 +582,7 @@ class Ppldid
     end
 
     def self.revoke_publish(did, revoc_log, options)
-        did_hash = did.delete_prefix("did:ppld:")
+        did_hash = did.delete_prefix("did:pplc:")
         did10 = did_hash[0,10]
         doc_location = options[:doc_location]
         if did_hash.include?(LOCATION_PREFIX)
@@ -667,8 +667,8 @@ class Ppldid
 
    def self.w3c(did_info, options)
         did = did_info["did"]
-        if !did.start_with?("did:ppld:")
-            did = "did:ppld:" + did
+        if !did.start_with?("did:pplc:")
+            did = "did:pplc:" + did
         end
 
         didDoc = did_info.transform_keys(&:to_s)["doc"]

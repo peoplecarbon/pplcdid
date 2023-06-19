@@ -7,10 +7,10 @@ import subprocess
 from pathlib import Path
 
 # run in pytest/
-# export PPLDIDCMD='../ppldid.rb'; pytest
+# export PPLDIDCMD='../pplcdid.rb'; pytest
 
-service = "http://ppldid.peopledata.org.cn:3000"
-# service = "https://www.peopledata.org.cn"
+service = "http://pplcdid.peoplecarbon.org:3000"
+# service = "https://www.peoplecarbon.org"
 
 def test_service():
     response = requests.get(service + "/version")

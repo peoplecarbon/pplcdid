@@ -2,7 +2,7 @@
 
 ActiveSupport::Reloader.to_prepare do
    ApplicationController.renderer.defaults.merge!(
-     http_host: 'ppldid.peopledata.org.cn',
+     http_host: 'pplcdid.peoplecarbon.org',
      https: false
    )
  end

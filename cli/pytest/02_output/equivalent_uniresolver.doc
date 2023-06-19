@@ -1,18 +1,18 @@
 {
   "didDocument": {
     "@context": "https://www.w3.org/ns/did/v1",
-    "id": "did:ppld:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR",
+    "id": "did:pplc:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR",
     "verificationMethod": [
       {
-        "id": "did:ppld:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR#key-doc",
+        "id": "did:pplc:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR#key-doc",
         "type": "Ed25519VerificationKey2020",
-        "controller": "did:ppld:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR",
+        "controller": "did:pplc:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR",
         "publicKeyMultibase": "z6Mv4q7EFUKq7p8KKGGfh1UjduMrpNnzdprtaMiFsp9Kq9gD"
       },
       {
-        "id": "did:ppld:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR#key-rev",
+        "id": "did:pplc:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR#key-rev",
         "type": "Ed25519VerificationKey2020",
-        "controller": "did:ppld:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR",
+        "controller": "did:pplc:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR",
         "publicKeyMultibase": "z6MuxmEJYvuo7kre1hXcdVuTm7igpGxi7MkkgrtstRmGVyxY"
       }
     ],
@@ -21,8 +21,8 @@
     }
   },
   "didDocumentMetadata": {
-    "did": "did:ppld:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR",
-    "registry": "https://ppldid.ppldid.peopledata.org.cn",
+    "did": "did:pplc:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR",
+    "registry": "https://pplcdid.pplcdid.peoplecarbon.org",
     "log_hash": "zQmTDrBYmvKTuo5KvW84uvRrGizrPNym1nF15fpBtiHLc6i",
     "log": [
       {
@@ -69,8 +69,8 @@
     "document_log_id": 3,
     "termination_log_id": 4,
     "equivalentId": [
-      "did:ppld:zQmdXNRiMWEYTiYF58a9BaiUkfB2xWUgL7G7ozyCCNPqjKV",
-      "did:ppld:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR"
+      "did:pplc:zQmdXNRiMWEYTiYF58a9BaiUkfB2xWUgL7G7ozyCCNPqjKV",
+      "did:pplc:zQmeArtmfxJ1JB6CXvoFdcQCyxPcYii5DUTBR44g4xYpCLR"
     ]
   }
 }

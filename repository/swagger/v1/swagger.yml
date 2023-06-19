@@ -11,7 +11,7 @@ info:
     url: https://opensource.org/licenses/MIT
 
 servers:
-- url: https://ppldid.peopledata.org.cn/
+- url: https://pplcdid.peoplecarbon.org/
   description: Official production system hosted by Peopledata.
 security:
   - BearerAuth: []
@@ -105,7 +105,7 @@ paths:
           description: The DID to be resolved.
           examples:
             example1:
-              value: did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
+              value: did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh
               description: A DID using the `ppld` method.
         - in: header
           required: false
@@ -408,7 +408,7 @@ components:
           description:
             This input field indicates the DID that is the target of the DID update operation.
           type: string
-          example: "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
+          example: "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
         options:
           description:
             This input field contains an object with various options for the DID update operation.
@@ -450,7 +450,7 @@ components:
           description:
             This input field indicates the DID that is the target of the DID deactivation operation.
           type: string
-          example: "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
+          example: "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
         options:
           description:
             This input field contains an object with various options for the DID deactivate operation.
@@ -519,7 +519,7 @@ components:
           example: "finished"
         did:
           type: string
-          example: "did:ppld:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
+          example: "did:pplc:zQmaBZTghndXTgxNwfbdpVLWdFf6faYE4oeuN2zzXdQt1kh"
         secret:
           type: object
         didDocument:

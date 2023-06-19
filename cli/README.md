@@ -3,59 +3,59 @@
 PPLDID (Decentralized IDentifier for People.) provides a self-sustained environment for managing digital identifiers (DIDs). The ppld:did method links the identifier cryptographically to the DID Document and through also cryptographically linked provenance information in a public log it ensures resolving to the latest valid version of the DID Document.
 
 ## Installation
-Run the following command to copy `ppldid.rb` into `~/bin/ppldid` (requires Ruby 2.5.7 or higher):
+Run the following command to copy `pplcdid.rb` into `~/bin/pplcdid` (requires Ruby 2.5.7 or higher):
 ```bash
-sh -c "curl -fsSL https://raw.githubusercontent.com/peopledata/ppldid/main/cli/install.sh | sh"
+sh -c "curl -fsSL https://raw.githubusercontent.com/peoplecarbon/pplcdid/main/cli/install.sh | sh"
 ```
 
 ## Run via Docker
-To use the dockerized version of ppldid run:
+To use the dockerized version of pplcdid run:
 ```bash
-docker run -it --rm peopledataorg/ppld-cli
+docker run -it --rm peoplecarbon/pplc-cli
 ```
 
 Often it makes sense to keep private keys and revocation information beyond a Docker session:
 
-* create a local directory, e.g., `mkdir ~/.ppldid`
-* mount this directory on startup: `docker run -it --rm -v ~/.ppldid:/home/ppldid peopledataorg/ppldid-cli`
+* create a local directory, e.g., `mkdir ~/.pplcdid`
+* mount this directory on startup: `docker run -it --rm -v ~/.pplcdid:/home/pplcdid peoplecarbon/pplcdid-cli`
 
 ## Build Docker image
 
-To package ppldid-cli with additional tools ([jq](https://stedolan.github.io/jq/)) in a ready-to-use Docker container run the following command in the `cli` directory:    
+To package pplcdid-cli with additional tools ([jq](https://stedolan.github.io/jq/)) in a ready-to-use Docker container run the following command in the `cli` directory:    
 ```bash
 ./build.sh
 ```
 
-The current `peopledataorg/ppld-cli` Docker image is available here: https://hub.docker.com/peopledataorg/ppldid-cli
+The current `peoplecarbon/pplc-cli` Docker image is available here: https://hub.docker.com/peoplecarbon/pplcdid-cli
 
 ### Verify with automated tests    
 
-Use the following command to run the automated tests in the `peopledataorg/ppld-cli` Docker image:    
+Use the following command to run the automated tests in the `peoplecarbon/pplc-cli` Docker image:    
 
 ```bash
-docker run -it --rm -w /usr/src/pytest -e PPLDIDCMD=ppldid peopledataorg/ppldid-cli pytest
+docker run -it --rm -w /usr/src/pytest -e PPLDIDCMD=pplcdid peoplecarbon/pplcdid-cli pytest
 ```
 
 ## Example
 create the most simple DID:
 ```bash
-echo '{"hello":"world"}' | ppldid create
+echo '{"hello":"world"}' | pplcdid create
 ```
 
 read the information:
 ```bash
-ppldid read {use output from above did:ppld:...}
+pplcdid read {use output from above did:pplc:...}
 ```
 
 ## Further Resources
 
-Read about the concept and examples: [PPLDIDintro.pdf](https://github.com/peopledata/ppldid/blob/main/docs/ppldidintro.pdf)    
-W3C conform DID Method Specification: https://peopledata.github.io/ppldid/    
-`ppldid` commandline tool in a Docker image: https://hub.docker.com/r/peopledata/ppldid-cli         
-To host DIDs yourself you can use the `peopledata/ppld-base` image on Dockerhub: https://hub.docker.com/r/peopledata/ppld-base    
-API documentation is available here: https://api-docs.peopledata.eu/ppldid/    
-Universal Resolver driver: https://github.com/peopledata/ppldid/tree/main/uniresolver-plugin    
-JS library for `did-resolver`: https://github.com/peopledata/ppldid/tree/main/js-resolver    
+Read about the concept and examples: [PPLDIDintro.pdf](https://github.com/peoplecarbon/pplcdid/blob/main/docs/ppldidintro.pdf)    
+W3C conform DID Method Specification: https://peoplecarbon.github.io/pplcdid/    
+`pplcdid` commandline tool in a Docker image: https://hub.docker.com/r/peoplecarbon/pplcdid-cli         
+To host DIDs yourself you can use the `peoplecarbon/ppld-base` image on Dockerhub: https://hub.docker.com/r/peoplecarbon/ppld-base    
+API documentation is available here: https://api-docs.peoplecarbon.eu/pplcdid/    
+Universal Resolver driver: https://github.com/peoplecarbon/pplcdid/tree/main/uniresolver-plugin    
+JS library for `did-resolver`: https://github.com/peoplecarbon/pplcdid/tree/main/js-resolver    
 
 
 
